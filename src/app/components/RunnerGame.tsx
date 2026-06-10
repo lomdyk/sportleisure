@@ -249,41 +249,41 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           } else if (!invincible) {
             gameOver = true;
           } else {
-            // Эффект разрушения на кусочки!
+            // Эффект разрушения на 4 куска (разрыв)!
             if (e.node) e.node.remove();
             
-            const numParticles = 6 + Math.floor(Math.random() * 4);
-            for (let i = 0; i < numParticles; i++) {
-              const pNode = document.createElement("div");
-              const size = 16 + Math.random() * 12;
-              pNode.style.position = "absolute";
-              pNode.style.width = `${size}px`;
-              pNode.style.height = `${size}px`;
-              pNode.style.backgroundImage = `url("${e.img}")`;
-              pNode.style.backgroundSize = "contain";
-              pNode.style.backgroundRepeat = "no-repeat";
-              pNode.style.backgroundPosition = "center";
-              pNode.style.left = "0";
-              pNode.style.bottom = `${GROUND_Y}px`;
-              pNode.style.pointerEvents = "none";
-              pNode.style.willChange = "transform, opacity";
-              pNode.style.borderRadius = Math.random() > 0.5 ? "4px" : "50%";
-              
-              entitiesLayerRef.current?.appendChild(pNode);
-              
-              const life = 0.4 + Math.random() * 0.3;
-              particlesRef.current.push({
-                id: ++idRef.current,
-                x: e.x + e.w / 2 - size / 2,
-                y: e.y + e.h / 2 - size / 2,
-                vx: (Math.random() - 0.2) * 600,
-                vy: Math.random() * 600 + 200,
-                life,
-                maxLife: life,
-                node: pNode,
-                rot: Math.random() * 360,
-                vrot: (Math.random() - 0.5) * 1000
-              });
+            for (let r = 0; r < 2; r++) {
+              for (let c = 0; c < 2; c++) {
+                const chunkW = e.w / 2;
+                const chunkH = e.h / 2;
+                const pNode = document.createElement("div");
+                pNode.style.position = "absolute";
+                pNode.style.width = `${chunkW}px`;
+                pNode.style.height = `${chunkH}px`;
+                pNode.style.backgroundImage = `url("${e.img}")`;
+                pNode.style.backgroundSize = `${e.w}px ${e.h}px`;
+                pNode.style.backgroundPosition = `${c * 100}% ${r * 100}%`;
+                pNode.style.left = "0";
+                pNode.style.bottom = `${GROUND_Y}px`;
+                pNode.style.pointerEvents = "none";
+                pNode.style.willChange = "transform, opacity";
+                
+                entitiesLayerRef.current?.appendChild(pNode);
+                
+                const life = 0.4 + Math.random() * 0.3;
+                particlesRef.current.push({
+                  id: ++idRef.current,
+                  x: e.x + c * chunkW,
+                  y: e.y + (1 - r) * chunkH,
+                  vx: (c === 0 ? -1 : 1) * (150 + Math.random() * 200),
+                  vy: (r === 0 ? 1 : 0.5) * (300 + Math.random() * 300),
+                  life,
+                  maxLife: life,
+                  node: pNode,
+                  rot: 0,
+                  vrot: (c === 0 ? -1 : 1) * (400 + Math.random() * 400)
+                });
+              }
             }
             continue;
           }
