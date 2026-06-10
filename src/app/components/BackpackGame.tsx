@@ -12,6 +12,8 @@ import formulaImg from "../../imports/Untitled.png";
 import pizzaImg from "../../imports/Untitled_(1).png";
 import closedBackpackImg from "../../imports/closed.png";
 import openedBackpackImg from "../../imports/opened.png";
+import closedBoxImg from "../../imports/closedbox.png";
+import openedBoxImg from "../../imports/openedbox.png";
 
 type FoodType = "safe" | "unsafe";
 
@@ -48,6 +50,7 @@ export const BackpackGame = ({
   const [backpackGlow, setBackpackGlow] = useState<"neutral" | "success" | "warning">("neutral");
   const [backpackHovered, setBackpackHovered] = useState(false);
   const [quarantineGlow, setQuarantineGlow] = useState<"neutral" | "success">("neutral");
+  const [quarantineHovered, setQuarantineHovered] = useState(false);
   const { t } = useLang();
 
   useEffect(() => {
@@ -248,16 +251,21 @@ export const BackpackGame = ({
 
           <motion.button
             onClick={handleDropToQuarantine}
-            onDragOver={(e) => e.preventDefault()}
+            onDragOver={(e) => { e.preventDefault(); setQuarantineHovered(true); }}
+            onDragLeave={() => setQuarantineHovered(false)}
             onDrop={(e) => {
               e.preventDefault();
+              setQuarantineHovered(false);
               const id = e.dataTransfer.getData("text/plain");
               if (id) handleDropItemToQuarantine(id);
             }}
+            onMouseEnter={() => setQuarantineHovered(true)}
+            onMouseLeave={() => setQuarantineHovered(false)}
             className={`
               relative flex flex-col items-center justify-center
               w-40 h-40 md:w-56 md:h-56 rounded-2xl md:rounded-3xl
               border-2 transition-all duration-300 cursor-pointer
+              ${quarantineHovered ? "scale-105 border-amber-400 bg-amber-500/10" : ""}
               ${quarantineGlow === "success"
                 ? "border-emerald-400 bg-emerald-500/15 shadow-[0_0_50px_rgba(16,185,129,0.4)]"
                 : "border-amber-500/30 bg-amber-500/5 shadow-[0_0_30px_rgba(245,158,11,0.1)] hover:border-amber-400 hover:bg-amber-500/10"
@@ -266,7 +274,11 @@ export const BackpackGame = ({
             `}
           >
             <div className="absolute inset-3 rounded-xl md:rounded-2xl border border-dashed border-amber-400/20 animate-[spin_25s_linear_infinite_reverse]" />
-            <Shield className={`w-10 h-10 md:w-14 md:h-14 mb-2 ${quarantineGlow === "success" ? "text-emerald-400" : "text-amber-400"}`} />
+            <img 
+              src={quarantineHovered || quarantineGlow === "success" ? openedBoxImg : closedBoxImg} 
+              alt="Lockbox"
+              className={`w-16 h-16 md:w-20 md:h-20 mb-2 object-contain transition-transform duration-300 ${quarantineGlow === "success" ? "scale-110 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" : ""}`}
+            />
             <span className="font-['Space_Grotesk'] text-white text-sm md:text-base tracking-wider" style={{ fontWeight: 700 }}>LOCKBOX</span>
             <span className="font-['Space_Grotesk'] text-[10px] text-amber-300/60 mt-1 tracking-wider">HIGH PROTEIN</span>
           </motion.button>
