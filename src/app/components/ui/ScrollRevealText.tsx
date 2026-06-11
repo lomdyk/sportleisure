@@ -13,15 +13,16 @@ export const ScrollRevealText: React.FC<Props> = ({
   accentColor, 
   className = "" 
 }) => {
-  const [cooledDownProgress, setCooledDownProgress] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
+    setIsScrolling(true);
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     
     timeoutRef.current = setTimeout(() => {
-      setCooledDownProgress(progress);
-    }, 200);
+      setIsScrolling(false);
+    }, 150);
 
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -52,13 +53,19 @@ export const ScrollRevealText: React.FC<Props> = ({
             
             let color = "rgba(255,255,255,0.15)";
             let textShadow = "none";
+            let transition = "color 0.15s ease-out, text-shadow 0.15s ease-out";
             
             if (diff > 0) {
-              if (progress >= 0.99 || p <= cooledDownProgress || diff >= 0.15) {
+              if (progress >= 0.99) {
                 color = "#ffffff";
+              } else if (diff < 0.3 && isScrolling) {
+                const intensity = Math.max(0, 1 - (diff / 0.3));
+                color = `color-mix(in srgb, ${accentColor} ${intensity * 100}%, #ffffff)`;
+                textShadow = `0 0 ${16 * intensity}px ${accentColor}`;
+                transition = "color 0.1s linear, text-shadow 0.1s linear";
               } else {
-                color = accentColor;
-                textShadow = `0 0 16px ${accentColor}`;
+                color = "#ffffff";
+                transition = "color 0.6s ease-out, text-shadow 0.6s ease-out";
               }
             }
 
@@ -69,7 +76,7 @@ export const ScrollRevealText: React.FC<Props> = ({
                 style={{ 
                   color, 
                   textShadow, 
-                  transition: "color 0.15s ease-out, text-shadow 0.15s ease-out",
+                  transition,
                   willChange: "color, text-shadow"
                 }}
               >
