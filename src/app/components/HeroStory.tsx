@@ -211,22 +211,17 @@ export const HeroStory = () => {
     // Zoom into engine — smaller values on mobile
     const zoomStart = 0.08 + (STORY_PANELS.length - 1) * panelDur + 0.05;
 
-    // Auto-scroll through the zoom moment so user doesn't need to scroll manually
-    const st = tl.scrollTrigger!;
-    function checkZoomZone() {
-      if (!st || autoScrolledRef.current) return;
-      if (st.progress >= zoomStart - 0.02) {
-        autoScrolledRef.current = true;
-        gsap.ticker.remove(checkZoomZone);
-        // Use lenis directly to teleport instantly, bypassing any conflicts
+    // Auto-scroll instantly when zoom animation finishes (only when scrolling forward)
+    tl.add(() => {
+      const trigger = tl.scrollTrigger;
+      if (trigger && trigger.direction === 1) {
         if ((window as any).lenis) {
           (window as any).lenis.scrollTo("#crew-greeting", { immediate: true });
         } else {
           document.getElementById("crew-greeting")?.scrollIntoView(true);
         }
       }
-    }
-    gsap.ticker.add(checkZoomZone);
+    }, zoomStart + 0.12);
 
     tl.to(
       shipRef.current,
@@ -260,7 +255,6 @@ export const HeroStory = () => {
     );
     tl.to(overlayRef.current, { opacity: 0, duration: 0.03 }, zoomStart + 0.13);
 
-    return () => gsap.ticker.remove(checkZoomZone);
   }, { scope: containerRef, dependencies: [] });
 
   return (
