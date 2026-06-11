@@ -83,9 +83,6 @@ export const MissionPrologue: React.FC<Props> = ({
           const offset = 50.265 * (1 - progressInStep1);
           gsap.set(progressCircleRef.current, { strokeDashoffset: offset });
         }
-        if (progressContainerRef.current) {
-          progressContainerRef.current.style.opacity = (self.progress >= 0.99 || self.progress < 0.4) ? "0" : "1";
-        }
         
         // Trigger overlay only at the very end of the section
         if (self.progress >= 0.95 && !isCompletedRef.current && !overlayShownRef.current) {
@@ -192,16 +189,25 @@ export const MissionPrologue: React.FC<Props> = ({
       </div>
       
       <div className="pt-2 w-full max-w-sm relative min-h-[60px] flex items-center">
-        {step === 0 ? null : (
-          <GhostButton
-            tone={tone}
-            size="lg"
-            icon={<Gamepad2 className="w-5 h-5" />}
-            onClick={onStart}
-          >
-            {t(ctaKey)}
-          </GhostButton>
-        )}
+        <AnimatePresence>
+          {scrollProgress > 0.85 && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <GhostButton
+                tone={tone}
+                size="lg"
+                icon={<Gamepad2 className="w-5 h-5" />}
+                onClick={onStart}
+              >
+                {t(ctaKey)}
+              </GhostButton>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.div>
   );

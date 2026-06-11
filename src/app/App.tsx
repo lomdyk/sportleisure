@@ -14,6 +14,11 @@ import { CrewGreeting } from "./components/CrewGreeting";
 import { LanguageProvider, useLang } from "./utils/i18n";
 import { GhostButton } from "./components/ui/GhostButton";
 import { SoundToggle } from "./components/ui/SoundToggle";
+import Lenis from "lenis";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 import sortingImg from "../imports/sorting.png";
 import talkImg from "../imports/talk.png";
@@ -42,6 +47,30 @@ function AppInner() {
   }, [activeScene]);
 
   // Handle scrolling to a target when returning to main scene
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+    });
+
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   useEffect(() => {
     if (activeScene === "main" && scrollTarget) {
       // Small delay to ensure overlay animation started exiting
