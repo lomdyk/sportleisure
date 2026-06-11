@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 
 interface Props {
   text: string;
@@ -13,6 +13,20 @@ export const ScrollRevealText: React.FC<Props> = ({
   accentColor, 
   className = "" 
 }) => {
+  const [cooledDownProgress, setCooledDownProgress] = useState(0);
+  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  useEffect(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    
+    timeoutRef.current = setTimeout(() => {
+      setCooledDownProgress(progress);
+    }, 200);
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [progress]);
   const { charsMap, totalLength } = useMemo(() => {
     const words = text.split(" ");
     let totalChars = 0;
@@ -38,18 +52,14 @@ export const ScrollRevealText: React.FC<Props> = ({
             
             let color = "rgba(255,255,255,0.15)";
             let textShadow = "none";
-            let scale = 1;
             
-            // Tighter flash window for per-character smoothness
-            if (progress >= 0.99) {
-              color = "#ffffff";
-              textShadow = "none";
-            } else if (diff > 0 && diff < 0.1) {
-              color = accentColor;
-              textShadow = `0 0 16px ${accentColor}`;
-            } 
-            else if (diff >= 0.1) {
-              color = "#ffffff";
+            if (diff > 0) {
+              if (progress >= 0.99 || p <= cooledDownProgress || diff >= 0.15) {
+                color = "#ffffff";
+              } else {
+                color = accentColor;
+                textShadow = `0 0 16px ${accentColor}`;
+              }
             }
 
             return (
