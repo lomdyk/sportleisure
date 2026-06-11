@@ -22,7 +22,7 @@ export const ScrollRevealText: React.FC<Props> = ({
     
     timeoutRef.current = setTimeout(() => {
       setIsScrolling(false);
-    }, 150);
+    }, 60);
 
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -58,15 +58,20 @@ export const ScrollRevealText: React.FC<Props> = ({
             if (diff > 0) {
               if (progress >= 0.99) {
                 color = "#ffffff";
-              } else if (diff < 0.2 && isScrolling) {
+              } else if (diff < 0.2) {
                 const intensity = Math.max(0, 1 - (diff / 0.2));
-                color = `color-mix(in srgb, ${accentColor} ${intensity * 100}%, #ffffff)`;
-                textShadow = `0 0 ${16 * intensity}px ${accentColor}`;
-                // CRITICAL: Zero transition while syncing with GSAP progress to prevent massive render lag
-                transition = "none";
+                if (isScrolling) {
+                  color = `color-mix(in srgb, ${accentColor} ${intensity * 100}%, #ffffff)`;
+                  textShadow = `0 0 ${16 * intensity}px ${accentColor}`;
+                  transition = "none";
+                } else {
+                  color = "#ffffff";
+                  const duration = 0.1 + (intensity * 0.6);
+                  transition = `color ${duration}s ease-out, text-shadow ${duration}s ease-out`;
+                }
               } else {
                 color = "#ffffff";
-                transition = "color 0.8s ease-out, text-shadow 0.8s ease-out";
+                transition = "color 0.1s ease-out, text-shadow 0.1s ease-out";
               }
             }
 
