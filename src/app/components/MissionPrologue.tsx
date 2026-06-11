@@ -66,6 +66,7 @@ export const MissionPrologue: React.FC<Props> = ({
   const progressContainerRef = useRef<HTMLDivElement>(null);
   const overlayShownRef = useRef(false);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [step, setStep] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
 
   const isCompletedRef = useRef(isCompleted);
@@ -80,6 +81,8 @@ export const MissionPrologue: React.FC<Props> = ({
       scrub: true,
       onUpdate: (self) => {
         setScrollProgress(self.progress);
+        const newStep = self.progress < 0.55 ? 0 : 1;
+        setStep(prev => prev !== newStep ? newStep : prev);
 
         if (progressCircleRef.current) {
           const skipProgress = Math.max(0, (self.progress - 0.8) / 0.2);
@@ -142,40 +145,59 @@ export const MissionPrologue: React.FC<Props> = ({
         </h2>
       </div>
 
-      <div className="flex flex-col gap-6 md:gap-8 mt-6 md:mt-8">
-        <div className="pl-0">
-          {speakerKey && (
-            <span className="text-xs uppercase tracking-[0.2em] font-bold mb-2 block" style={{ color: a.color }}>
-              {t(speakerKey)}
-            </span>
+      <div className="grid grid-cols-1 grid-rows-1 w-full min-h-[140px]">
+        <AnimatePresence mode="wait">
+          {step === 0 ? (
+            <motion.div
+              key="step-0"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ duration: 0.3 }}
+              className="col-start-1 row-start-1 w-full"
+            >
+              <div className="pl-0">
+                {speakerKey && (
+                  <span className="text-xs uppercase tracking-[0.2em] font-bold mb-2 block" style={{ color: a.color }}>
+                    {t(speakerKey)}
+                  </span>
+                )}
+                <ScrollRevealText 
+                  text={`"${t(dialogueKey)}"`}
+                  progress={Math.min(1, scrollProgress / 0.4)}
+                  accentColor={a.color}
+                  className="text-[18px] md:text-[22px] font-['Space_Grotesk'] leading-[1.6] italic"
+                />
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="step-1"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ duration: 0.3 }}
+              className="col-start-1 row-start-1 w-full"
+            >
+              <div className="pl-0">
+                <span className="text-xs uppercase tracking-[0.2em] font-bold text-white/30 mb-2 block">
+                  Objective
+                </span>
+                <ScrollRevealText 
+                  text={t(objectiveKey)}
+                  progress={Math.min(1, Math.max(0, scrollProgress - 0.55) / 0.25)}
+                  accentColor={a.color}
+                  className="text-[18px] md:text-[22px] font-['Space_Grotesk'] leading-[1.6] text-white/80"
+                />
+              </div>
+            </motion.div>
           )}
-          <ScrollRevealText 
-            text={`"${t(dialogueKey)}"`}
-            progress={Math.min(1, scrollProgress / 0.4)}
-            accentColor={a.color}
-            className="text-[18px] md:text-[22px] font-['Space_Grotesk'] leading-[1.6] italic"
-          />
-        </div>
-
-        <div className="pl-0">
-          <span 
-            className="text-xs uppercase tracking-[0.2em] font-bold text-white/30 mb-2 block transition-opacity duration-500"
-            style={{ opacity: scrollProgress > 0.35 ? 1 : 0 }}
-          >
-            Objective
-          </span>
-          <ScrollRevealText 
-            text={t(objectiveKey)}
-            progress={Math.min(1, Math.max(0, scrollProgress - 0.4) / 0.4)}
-            accentColor={a.color}
-            className="text-[18px] md:text-[22px] font-['Space_Grotesk'] leading-[1.6] text-white/80"
-          />
-        </div>
+        </AnimatePresence>
       </div>
       
       <div className="pt-2 w-full max-w-sm relative min-h-[60px] flex items-center">
         <AnimatePresence>
-          {scrollProgress >= 0.8 && (
+          {step === 1 && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
