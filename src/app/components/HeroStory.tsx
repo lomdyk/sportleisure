@@ -140,6 +140,17 @@ export const HeroStory = () => {
   useGSAP(() => {
     const isMobile = window.innerWidth < 768;
 
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "+=550%",
+        pin: true,
+        scrub: 1,
+        refreshPriority: 10,
+      },
+    });
+
     // Giant 'Scroll to begin' shrinks and moves to bottom
     tl.to(scrollHintRef.current, {
       top: "90%",
@@ -175,18 +186,18 @@ export const HeroStory = () => {
           // Вираж влево, отдаление
           shipAnim = { x: isMobile ? -30 : -100, y: isMobile ? -10 : -30, rotation: -15, scale: 0.85, duration: panelDur, ease: "sine.inOut" };
           break;
-          case 2:
-            // Подлет вправо, крупнее
-            shipAnim = { x: isMobile ? 40 : 120, y: isMobile ? 20 : 50, rotation: 20, scale: 1.15, duration: panelDur, ease: "sine.inOut" };
-            break;
-          case 3:
-            // Мертвая петля в центре (360 градусов), отдаление
-            shipAnim = { x: 0, y: isMobile ? -30 : -60, rotation: 360, scale: 0.6, duration: panelDur, ease: "power1.inOut" };
-            break;
-          case 4:
-            // Возврат в исходную для гиперпрыжка
-            shipAnim = { x: 0, y: 0, rotation: 360, scale: 1, duration: panelDur, ease: "back.out(1.2)" };
-            break;
+        case 1:
+          // Подлет вправо, крупнее
+          shipAnim = { x: isMobile ? 40 : 120, y: isMobile ? 20 : 50, rotation: 20, scale: 1.15, duration: panelDur, ease: "sine.inOut" };
+          break;
+        case 2:
+          // Мертвая петля в центре (360 градусов), отдаление
+          shipAnim = { x: 0, y: isMobile ? -30 : -60, rotation: 360, scale: 0.6, duration: panelDur, ease: "power1.inOut" };
+          break;
+        case 3:
+          // Возврат в исходную для гиперпрыжка
+          shipAnim = { x: 0, y: 0, rotation: 360, scale: 1, duration: panelDur, ease: "back.out(1.2)" };
+          break;
         default:
           shipAnim = { y: i % 2 === 0 ? -bobAmt : bobAmt, duration: panelDur, ease: "sine.inOut" };
       }
