@@ -50,53 +50,65 @@ export const Preloader = () => {
   if (!show) return null;
 
   const COLUMNS = 5;
+  const STAGE_COLORS = ["#22d3ee", "#a78bfa", "#34d399", "#fbbf24", "#f472b6"];
 
   return (
     <div className="fixed inset-0 z-[9999] flex pointer-events-none overflow-hidden">
       
       {/* Trailing Colorful Columns Layer (Underneath) */}
       <div className="absolute inset-0 flex z-0 w-[105vw] -ml-[2.5vw]">
-        {Array.from({ length: COLUMNS }).map((_, i) => (
-          <motion.div
-            key={`color-${i}`}
-            initial={{ y: 0 }}
-            animate={isDone ? { y: "-100%" } : { y: 0 }}
-            transition={{
-              duration: 1.2,
-              ease: [0.76, 0, 0.24, 1],
-              delay: i * 0.08 + 0.12, // Delayed so it follows the dark layer
-            }}
-            className="flex-1 h-[120vh] bg-gradient-to-b from-cyan-400 to-blue-600 rounded-b-[60px] md:rounded-b-[100px]"
-            style={{ 
-              marginLeft: i !== 0 ? "-2px" : "0",
-              marginRight: "-2px",
-            }}
-          />
-        ))}
+        {Array.from({ length: COLUMNS }).map((_, i) => {
+          // Delay based on distance from center (index 2 is center)
+          // The center column has delay 0, spreading outward
+          const delayFromCenter = Math.abs(i - 2) * 0.1;
+          
+          return (
+            <motion.div
+              key={`color-${i}`}
+              initial={{ y: 0 }}
+              animate={isDone ? { y: "-100%" } : { y: 0 }}
+              transition={{
+                duration: 1.2,
+                ease: [0.76, 0, 0.24, 1],
+                delay: delayFromCenter + 0.12, // Delayed so it follows the dark layer
+              }}
+              className="flex-1 h-[120vh] rounded-b-[60px] md:rounded-b-[100px]"
+              style={{ 
+                backgroundColor: STAGE_COLORS[i],
+                marginLeft: i !== 0 ? "-2px" : "0",
+                marginRight: "-2px",
+              }}
+            />
+          );
+        })}
       </div>
 
       {/* Main Dark Background Columns Layer (Top) */}
       <div className="absolute inset-0 flex z-[1] w-[105vw] -ml-[2.5vw]">
-        {Array.from({ length: COLUMNS }).map((_, i) => (
-          <motion.div
-            key={`dark-${i}`}
-            initial={{ y: 0 }}
-            animate={isDone ? { y: "-100%" } : { y: 0 }}
-            transition={{
-              duration: 1.2,
-              ease: [0.76, 0, 0.24, 1], // Smooth custom cubic bezier
-              delay: i * 0.08, // Asynchronous stagger
-            }}
-            // h-[120vh] so the rounded bottom is off-screen initially
-            // rounded-b-[40px] creates the roundness at the bottom edge as it slides up
-            className="flex-1 h-[120vh] bg-[#050a18] rounded-b-[60px] md:rounded-b-[100px]"
-            style={{ 
-              // A slight negative margin prevents 1px gaps between columns sometimes seen in browsers
-              marginLeft: i !== 0 ? "-2px" : "0",
-              marginRight: "-2px",
-            }}
-          />
-        ))}
+        {Array.from({ length: COLUMNS }).map((_, i) => {
+          const delayFromCenter = Math.abs(i - 2) * 0.1;
+
+          return (
+            <motion.div
+              key={`dark-${i}`}
+              initial={{ y: 0 }}
+              animate={isDone ? { y: "-100%" } : { y: 0 }}
+              transition={{
+                duration: 1.2,
+                ease: [0.76, 0, 0.24, 1], // Smooth custom cubic bezier
+                delay: delayFromCenter, // Asynchronous stagger from center
+              }}
+              // h-[120vh] so the rounded bottom is off-screen initially
+              // rounded-b-[40px] creates the roundness at the bottom edge as it slides up
+              className="flex-1 h-[120vh] bg-[#050a18] rounded-b-[60px] md:rounded-b-[100px]"
+              style={{ 
+                // A slight negative margin prevents 1px gaps between columns sometimes seen in browsers
+                marginLeft: i !== 0 ? "-2px" : "0",
+                marginRight: "-2px",
+              }}
+            />
+          );
+        })}
       </div>
 
       {/* Content Layer (Numbers and Orbs) */}
