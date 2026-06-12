@@ -174,17 +174,12 @@ function AnimatedModel() {
     }
 
     // Vectors and lerping
-    const posX = THREE.MathUtils.lerp(k1.position[0], k2.position[0], t);
-    const posY = THREE.MathUtils.lerp(k1.position[1], k2.position[1], t);
-    const posZ = THREE.MathUtils.lerp(k1.position[2], k2.position[2], t);
+    const pos1 = new THREE.Vector3(...k1.position);
+    const pos2 = new THREE.Vector3(...k2.position);
+    const targetPos = pos1.lerp(pos2, t);
 
-    // Apply scale dynamically
-    target.scale.setScalar(baseScale * 4);
-
-    // Use damp for smooth interpolation
-    THREE.MathUtils.damp(target.position, 'x', posX, 4, delta);
-    THREE.MathUtils.damp(target.position, 'y', posY, 4, delta);
-    THREE.MathUtils.damp(target.position, 'z', posZ, 4, delta);
+    // Apply scale dynamically (only baseScale for the group)
+    target.scale.setScalar(baseScale);
 
     // Quaternions and slerping
     const q1 = new THREE.Quaternion().setFromEuler(new THREE.Euler(...k1.rotation));
@@ -192,13 +187,14 @@ function AnimatedModel() {
     const targetQuat = q1.slerp(q2, t);
 
     // Smooth dampening during real scroll
+    target.position.lerp(targetPos, 5 * delta);
     target.quaternion.slerp(targetQuat, 5 * delta);
   });
 
   return (
     <group ref={setTarget}>
       <Float speed={2.5} rotationIntensity={0.2} floatIntensity={0.4}>
-        <primitive object={scene} position={[0, -1, 0]} rotation={[0, 0, Math.PI / 2]} />
+        <primitive object={scene} scale={4} position={[0, -1, 0]} rotation={[0, 0, Math.PI / 2]} />
         <ThrusterFlames />
       </Float>
     </group>
