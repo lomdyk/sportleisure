@@ -72,10 +72,12 @@ export const MissionPrologue: React.FC<Props> = ({
   const isCompletedRef = useRef(isCompleted);
   isCompletedRef.current = isCompleted;
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   useGSAP(() => {
     ScrollTrigger.create({
       trigger: sectionRef.current,
-      start: "center center",
+      start: isMobile ? "top 80px" : "center center",
       end: "+=120%",
       pin: true,
       scrub: true,
