@@ -124,8 +124,8 @@ export const MissionPrologue: React.FC<Props> = ({
         draggable={false}
         animate={{ y: [0, -15, 0] }}
         transition={{ duration: 5, ease: "easeInOut", repeat: Infinity }}
-        className="block w-full h-auto select-none drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-        style={{ objectFit: "contain", maxHeight: "450px" }}
+        className="block w-full h-[35vh] md:h-[450px] select-none drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+        style={{ objectFit: "contain" }}
         onLoad={() => ScrollTrigger.refresh()}
       />
     </motion.div>
@@ -281,10 +281,10 @@ export const MissionPrologue: React.FC<Props> = ({
               animate={{ y: 0, scale: 1, opacity: 1 }}
               exit={{ y: 50, scale: 0.95, opacity: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              className="absolute inset-0 w-full h-full flex flex-row items-center justify-center max-w-6xl mx-auto px-4"
+              className="absolute inset-0 w-full h-full flex flex-col md:flex-row items-center justify-center max-w-6xl mx-auto px-4"
             >
-              {/* Character Image (Left) */}
-              <div className="relative w-[240px] md:w-[350px] flex-shrink-0 z-20 translate-y-16 md:translate-y-24">
+              {/* Character Image (Top on mobile, Left on desktop) */}
+              <div className="relative w-[180px] sm:w-[240px] md:w-[350px] flex-shrink-0 z-20 translate-y-8 md:translate-y-24">
                 <img 
                   src={warningImg} 
                   alt="Alert Character" 
@@ -292,8 +292,8 @@ export const MissionPrologue: React.FC<Props> = ({
                 />
               </div>
 
-              {/* Speech Bubble (Right) */}
-              <div className="relative z-10 w-full max-w-sm md:max-w-xl -ml-12 md:-ml-20 -translate-y-16 md:-translate-y-24">
+              {/* Speech Bubble (Bottom on mobile, Right on desktop) */}
+              <div className="relative z-10 w-full max-w-sm md:max-w-xl mt-4 md:mt-0 md:-ml-20 -translate-y-4 md:-translate-y-24">
                 <div 
                   className="relative p-6 md:p-10 rounded-[32px] md:rounded-[40px] shadow-2xl flex flex-col items-center text-center border backdrop-blur-md"
                   style={{
@@ -328,11 +328,10 @@ export const MissionPrologue: React.FC<Props> = ({
                   
                   {/* Tail of speech bubble */}
                   <div 
-                    className="absolute bottom-16 md:bottom-20 -left-3 md:-left-4 w-6 h-6 md:w-8 md:h-8 border-t border-l rounded-tl-sm"
+                    className="absolute -top-3 md:-top-auto md:bottom-20 left-1/2 md:left-auto md:-left-4 w-6 h-6 md:w-8 md:h-8 border-t border-l rounded-tl-sm -translate-x-1/2 md:translate-x-0 rotate-45 md:-rotate-45"
                     style={{ 
                       borderColor: a.rgba,
                       background: "rgba(15,23,42,0.9)",
-                      transform: "rotate(-45deg)",
                       zIndex: -1
                     }}
                   />
