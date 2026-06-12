@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ThreeScene } from "./ThreeScene";
+import { AnimatedShip } from "./AnimatedShip";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -136,6 +137,16 @@ export const HeroStory = () => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const scrollHintRef = useRef<HTMLDivElement>(null);
 
+  const [isMobileScreen, setIsMobileScreen] = React.useState(
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  );
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobileScreen(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useGSAP(() => {
     const isMobile = window.innerWidth < 768;
 
@@ -220,9 +231,9 @@ export const HeroStory = () => {
   }, { scope: containerRef, dependencies: [] });
 
   return (
-    <div ref={containerRef} className="relative w-full h-screen overflow-hidden">
-      {/* 3D Scene Background */}
-      <ThreeScene />
+    <div ref={containerRef} className="relative w-full h-screen overflow-hidden bg-[#050a18]">
+      {/* 3D Scene Background on Desktop, 2D on Mobile */}
+      {!isMobileScreen && <ThreeScene />}
 
       {/* Nebula glows */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
@@ -261,6 +272,18 @@ export const HeroStory = () => {
             </div>
           ))}
         </div>
+
+        {/* 2D Ship specifically for mobile to save battery */}
+        {isMobileScreen && (
+          <div className="absolute inset-0 flex items-center justify-center top-[-20%] pointer-events-none z-[5]">
+            <AnimatedShip
+              className="relative w-48 sm:w-64 aspect-square opacity-80"
+              style={{
+                filter: "drop-shadow(0 0 40px rgba(56,189,248,0.35))",
+              }}
+            />
+          </div>
+        )}
       </div>
 
       {/* Engine glow */}
