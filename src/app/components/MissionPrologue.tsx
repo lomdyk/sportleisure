@@ -330,7 +330,7 @@ export const MissionPrologue: React.FC<Props> = ({
                   
                   {/* Tail of speech bubble */}
                   <div 
-                    className="absolute -top-3 md:-top-auto md:bottom-20 left-1/2 md:left-auto md:-left-4 w-6 h-6 md:w-8 md:h-8 border-t border-l rounded-tl-sm -translate-x-1/2 md:translate-x-0 rotate-45 md:-rotate-45"
+                    className="absolute w-6 h-6 md:w-8 md:h-8 border-t border-l rounded-tl-sm rotate-45 md:-rotate-45 -top-3 md:top-auto md:bottom-20 left-1/2 md:left-[-16px] -translate-x-1/2 md:translate-x-0"
                     style={{ 
                       borderColor: a.rgba,
                       background: "rgba(15,23,42,0.9)",

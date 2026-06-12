@@ -50,7 +50,8 @@ export const Preloader = () => {
   if (!show) return null;
 
   const COLUMNS = 5;
-  const STAGE_COLORS = ["#22d3ee", "#a78bfa", "#34d399", "#fbbf24", "#f472b6"];
+  // Deep space cyber gradient: Cyan -> Light Blue -> Blue -> Indigo -> Violet
+  const STAGE_COLORS = ["#22d3ee", "#0ea5e9", "#3b82f6", "#6366f1", "#8b5cf6"];
 
   return (
     <div className="fixed inset-0 z-[9999] flex pointer-events-none overflow-hidden">
