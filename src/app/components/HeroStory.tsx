@@ -2,11 +2,12 @@ import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { AnimatedShip } from "./AnimatedShip";
+import { ThreeScene } from "./ThreeScene";
 
 gsap.registerPlugin(ScrollTrigger);
 
 import { useLang } from "../utils/i18n";
+import { scrollState } from "../store/rocketAnimation";
 
 // ─── Per-panel creative titles ────────────────────────────────────────────────
 export const HeroStory = () => {
@@ -102,13 +103,13 @@ export const HeroStory = () => {
       accent: "#22d3ee",
       titleEl: (
         <>
-          Time to{" "}
+          {t("ui.timeTo")}{" "}
           <span style={{
             color: "#22d3ee",
             textShadow: "0 0 30px rgba(34,211,238,1)",
             letterSpacing: "0.02em",
           }}>
-            Train
+            {t("ui.train")}
           </span>
           {" "}
           <span style={{
@@ -130,12 +131,10 @@ export const HeroStory = () => {
   ];
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const shipRef = useRef<HTMLDivElement>(null);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const engineGlowRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const scrollHintRef = useRef<HTMLDivElement>(null);
-  const autoScrolledRef = useRef(false);
 
   useGSAP(() => {
     const isMobile = window.innerWidth < 768;
@@ -148,6 +147,9 @@ export const HeroStory = () => {
         pin: true,
         scrub: 1,
         refreshPriority: 10,
+        onUpdate: (self) => {
+          scrollState.progress = self.progress;
+        }
       },
     });
 
@@ -160,48 +162,11 @@ export const HeroStory = () => {
       ease: "power2.inOut"
     }, 0);
 
-    // Ship flies in — from below on mobile, from side on desktop
-    tl.fromTo(
-      shipRef.current,
-      {
-        x: isMobile ? 0 : 400,
-        y: isMobile ? 180 : 260,
-        scale: 0.2,
-        opacity: 0,
-      },
-      { x: 0, y: 0, scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" },
-      0
-    );
-
     // Story panels
     const panelDur = 0.11;
     panelRefs.current.forEach((panel, i) => {
       if (!panel) return;
       const start = 0.08 + i * panelDur;
-      const bobAmt = isMobile ? 7 : 13;
-
-      let shipAnim = {};
-      switch(i) {
-        case 0:
-          // Вираж влево, отдаление
-          shipAnim = { x: isMobile ? -30 : -100, y: isMobile ? -10 : -30, rotation: -15, scale: 0.85, duration: panelDur, ease: "sine.inOut" };
-          break;
-        case 1:
-          // Подлет вправо, крупнее
-          shipAnim = { x: isMobile ? 40 : 120, y: isMobile ? 20 : 50, rotation: 20, scale: 1.15, duration: panelDur, ease: "sine.inOut" };
-          break;
-        case 2:
-          // Мертвая петля в центре (360 градусов), отдаление
-          shipAnim = { x: 0, y: isMobile ? -30 : -60, rotation: 360, scale: 0.6, duration: panelDur, ease: "power1.inOut" };
-          break;
-        case 3:
-          // Возврат в исходную для гиперпрыжка
-          shipAnim = { x: 0, y: 0, rotation: 360, scale: 1, duration: panelDur, ease: "back.out(1.2)" };
-          break;
-        default:
-          shipAnim = { y: i % 2 === 0 ? -bobAmt : bobAmt, duration: panelDur, ease: "sine.inOut" };
-      }
-      tl.to(shipRef.current, shipAnim, start);
 
       tl.fromTo(
         panel,
@@ -219,7 +184,6 @@ export const HeroStory = () => {
       }
     });
 
-    // Zoom into engine — smaller values on mobile
     const zoomStart = 0.08 + (STORY_PANELS.length - 1) * panelDur + 0.05;
 
     // Auto-scroll instantly when zoom animation finishes (only when scrolling forward)
@@ -234,19 +198,6 @@ export const HeroStory = () => {
       }
     }, zoomStart + 0.12);
 
-    tl.to(
-      shipRef.current,
-      {
-        scale: isMobile ? 12 : 20,
-        x: isMobile ? 0 : -300,
-        y: isMobile ? -80 : -100,
-        opacity: 0,
-        rotation: 0,
-        duration: 0.12,
-        ease: "power2.in",
-      },
-      zoomStart
-    );
     tl.to(
       panelRefs.current[STORY_PANELS.length - 1],
       { opacity: 0, duration: 0.06 },
@@ -270,21 +221,18 @@ export const HeroStory = () => {
 
   return (
     <div ref={containerRef} className="relative w-full h-screen overflow-hidden">
+      {/* 3D Scene Background */}
+      <ThreeScene />
+
       {/* Nebula glows */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none z-[1]">
         <div className="absolute top-1/4 left-[16%] w-[400px] h-[400px] bg-blue-600/[0.04] rounded-full blur-[130px]" />
         <div className="absolute bottom-1/4 right-[16%] w-[350px] h-[350px] bg-violet-600/[0.04] rounded-full blur-[110px]" />
       </div>
 
-
-      {/* ── RESPONSIVE LAYOUT ──────────────────────────────────────
-          Mobile  (flex-col): ship on top, panels below
-          Desktop (flex-row): panels left, ship right
-      ──────────────────────────────────────────────────────────── */}
-      <div className="absolute inset-0 z-10 flex flex-col md:flex-row items-center justify-center md:justify-between px-6 md:px-14 lg:px-24 pt-16 pb-10 md:py-0 gap-4 md:gap-0">
-
-        {/* Text panels — bottom on mobile (order-2), left on desktop (md:order-1) */}
-        <div className="relative w-full md:w-1/2 order-2 md:order-1 flex items-center min-h-[200px] sm:min-h-[220px] md:min-h-0 md:h-full">
+      <div className="absolute inset-0 z-[10] flex flex-col justify-end md:justify-center items-center md:items-start px-6 md:px-14 lg:px-24 pt-16 pb-24 md:py-0 pointer-events-none">
+        {/* Text panels — bottom on mobile, left on desktop */}
+        <div className="relative w-full md:w-1/2 flex items-center min-h-[200px] sm:min-h-[220px] md:min-h-0 md:h-full justify-center md:justify-start text-center md:text-left">
           {STORY_PANELS.map((panel, i) => (
             <div
               key={i}
@@ -313,19 +261,6 @@ export const HeroStory = () => {
             </div>
           ))}
         </div>
-
-        {/* Ship — top on mobile (order-1), right on desktop (md:order-2) */}
-        <div className="w-full md:w-1/2 order-1 md:order-2 flex items-center justify-center flex-shrink-0">
-          <AnimatedShip
-            ref={shipRef}
-            className="relative w-36 sm:w-44 md:w-64 lg:w-80 xl:w-96 aspect-square"
-            style={{ 
-              opacity: 0,
-              filter: "drop-shadow(0 0 40px rgba(56,189,248,0.35))",
-              willChange: "transform, opacity, filter" 
-            }}
-          />
-        </div>
       </div>
 
       {/* Engine glow */}
@@ -340,18 +275,18 @@ export const HeroStory = () => {
       {/* White flash */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 z-50 bg-cyan-200 pointer-events-none"
+        className="absolute inset-0 z-[50] bg-cyan-200 pointer-events-none"
         style={{ opacity: 0 }}
       />
 
       {/* Scroll hint */}
       <div 
         ref={scrollHintRef}
-        className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-4"
+        className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-[30] flex flex-col items-center gap-4"
         style={{ top: "50%" }}
       >
         <p className="text-3xl sm:text-5xl text-white font-bold uppercase tracking-widest text-center" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-          Scroll to begin
+          {t("ui.scrollBegin")}
         </p>
         <svg className="animate-bounce" width="40" height="40" viewBox="0 0 20 20" fill="none">
           <path d="M10 4v12m0 0l-4-4m4 4l4-4" stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

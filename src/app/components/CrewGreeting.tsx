@@ -166,6 +166,7 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
                     alt={t(c.nameKey)}
                     draggable={false}
                     className="block w-full h-full object-cover select-none"
+                    onLoad={() => ScrollTrigger.refresh()}
                   />
                 </div>
 

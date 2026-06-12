@@ -131,6 +131,11 @@ export const TRANSLATIONS: Dict = {
     en: "Messages from other star athletes. Read their tips for staying fast and strong!",
     de: "Nachrichten von anderen Star-Athleten. Lies ihre Tipps, um schnell und stark zu bleiben!"
   },
+  "ui.scrollBegin": { en: "Scroll to begin", de: "Scrolle, um zu beginnen" },
+  "ui.objective": { en: "Objective", de: "Ziel" },
+  "ui.scrollSkip": { en: "Scroll to skip to next section", de: "Scrolle, um zum nächsten Abschnitt zu springen" },
+  "ui.timeTo": { en: "Time to", de: "Zeit zu" },
+  "ui.train": { en: "Train", de: "Trainieren" },
   "log.1.author": { en: "Captain Nova", de: "Kapitän Nova" },
   "log.1.text": {
     en: "Always drink your formula before a big match. It is the best way to get instant energy! Never skip it if you want to win.",

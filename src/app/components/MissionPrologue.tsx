@@ -126,6 +126,7 @@ export const MissionPrologue: React.FC<Props> = ({
         transition={{ duration: 5, ease: "easeInOut", repeat: Infinity }}
         className="block w-full h-auto select-none drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
         style={{ objectFit: "contain", maxHeight: "450px" }}
+        onLoad={() => ScrollTrigger.refresh()}
       />
     </motion.div>
   );
@@ -181,7 +182,7 @@ export const MissionPrologue: React.FC<Props> = ({
             >
               <div className="pl-0">
                 <span className="text-xs uppercase tracking-[0.2em] font-bold text-white/30 mb-2 block">
-                  Objective
+                  {t("ui.objective")}
                 </span>
                 <ScrollRevealText 
                   text={t(objectiveKey)}
@@ -243,7 +244,7 @@ export const MissionPrologue: React.FC<Props> = ({
           style={{ opacity: scrollProgress >= 0.8 && scrollProgress < 0.99 ? 1 : 0 }}
         >
           <div className="text-[10px] uppercase tracking-widest text-white/40">
-            Scroll to skip to next section
+            {t("ui.scrollSkip")}
           </div>
           <svg className="w-4 h-4 -rotate-90 transform" viewBox="0 0 20 20">
             <circle
