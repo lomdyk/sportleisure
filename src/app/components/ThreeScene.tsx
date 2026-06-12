@@ -21,7 +21,7 @@ function ThrusterFlames() {
       angle: Math.random() * Math.PI * 2,
       radius: Math.random() * 0.5, 
     }));
-  }, []);
+  }, [count]);
 
   useFrame((_, delta) => {
     if (!meshRef.current) return;
@@ -50,15 +50,15 @@ function ThrusterFlames() {
       }
 
       // Widen slightly as it falls
-      const spread = 1 + pItem.t * 3;
+      const spread = 1 + pItem.t * 5; // Increased spread for a wider cone that covers the screen
       const x = Math.cos(pItem.angle) * pItem.radius * spread;
       const z = Math.sin(pItem.angle) * pItem.radius * spread;
       // Downwards velocity - limit the stretch so particles don't create gaps
       const yMultiplier = 1 + Math.log(Math.max(1, hyperjumpMultiplier)) * 1.5;
-      const y = -pItem.t * 5 * ignition * yMultiplier; 
+      const y = -pItem.t * 6 * ignition * yMultiplier; 
 
       // Shrink scale so it tapers off like real fire
-      const scaleInit = 0.6;
+      const scaleInit = 0.8; // Increased from 0.6 for fuller coverage
       // Boost base scale slightly during hyperjump, but keep tapering
       const scale = Math.max(0, (1 - pItem.t) * scaleInit * ignition * (1 + (hyperjumpMultiplier - 1) * 0.1));
 
