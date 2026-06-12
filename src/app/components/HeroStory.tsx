@@ -231,7 +231,7 @@ export const HeroStory = () => {
   }, { scope: containerRef, dependencies: [] });
 
   return (
-    <div ref={containerRef} className="relative w-full h-screen overflow-hidden bg-[#050a18]">
+    <div ref={containerRef} className="relative w-full h-screen overflow-hidden">
       {/* 3D Scene Background on Desktop, 2D on Mobile */}
       {!isMobileScreen && <ThreeScene />}
 
