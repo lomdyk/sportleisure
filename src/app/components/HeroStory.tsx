@@ -298,7 +298,7 @@ export const HeroStory = () => {
       {/* White flash */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 z-[50] bg-cyan-200 pointer-events-none"
+        className="absolute inset-0 z-[50] bg-white pointer-events-none"
         style={{ opacity: 0 }}
       />
 
