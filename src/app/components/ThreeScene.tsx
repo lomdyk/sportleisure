@@ -8,7 +8,7 @@ import { useSnapshot } from 'valtio';
 import { scrollState, keyframes } from "../store/rocketAnimation";
 
 function ThrusterFlames() {
-  const count = 250;
+  const count = 800;
   const meshRef = useRef<THREE.InstancedMesh>(null);
   
   const dummy = useMemo(() => new THREE.Object3D(), []);
@@ -53,17 +53,22 @@ function ThrusterFlames() {
       const spread = 1 + pItem.t * 3;
       const x = Math.cos(pItem.angle) * pItem.radius * spread;
       const z = Math.sin(pItem.angle) * pItem.radius * spread;
-      // Downwards velocity
-      const y = -pItem.t * 5 * ignition * hyperjumpMultiplier; 
+      // Downwards velocity - limit the stretch so particles don't create gaps
+      const yMultiplier = 1 + Math.log(Math.max(1, hyperjumpMultiplier)) * 1.5;
+      const y = -pItem.t * 5 * ignition * yMultiplier; 
 
-      // Shrink scale
-      const scaleInit = 0.8;
-      const scale = Math.max(0, (1 - pItem.t) * scaleInit * ignition * Math.max(1, hyperjumpMultiplier * 0.3));
+      // Shrink scale so it tapers off like real fire
+      const scaleInit = 0.6;
+      // Boost base scale slightly during hyperjump, but keep tapering
+      const scale = Math.max(0, (1 - pItem.t) * scaleInit * ignition * (1 + (hyperjumpMultiplier - 1) * 0.1));
 
       dummy.position.set(x, y, z);
-      // add a bit of rotation to the particles
-      dummy.rotation.set(pItem.t * Math.PI, pItem.t * Math.PI * 2, 0);
-      dummy.scale.setScalar(scale);
+      
+      // Keep rotation mostly upright so vertical stretching works
+      dummy.rotation.set(0, pItem.t * Math.PI * 2, 0);
+      
+      // Stretch the particles vertically to fill in any gaps in the trail
+      dummy.scale.set(scale, scale * 2.5, scale);
       dummy.updateMatrix();
       
       meshRef.current!.setMatrixAt(i, dummy.matrix);
