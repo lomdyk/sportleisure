@@ -13,6 +13,7 @@ import { MissionPrologue } from "./components/MissionPrologue";
 import { CrewGreeting } from "./components/CrewGreeting";
 import { LanguageProvider, useLang } from "./utils/i18n";
 import { GhostButton } from "./components/ui/GhostButton";
+import { Preloader } from "./components/Preloader";
 import { SoundToggle } from "./components/ui/SoundToggle";
 import Lenis from "lenis";
 import gsap from "gsap";
@@ -164,6 +165,7 @@ function AppInner() {
       className="bg-[#050a18] min-h-screen text-white selection:bg-cyan-500/30 selection:text-cyan-200 relative"
       style={{ fontFamily: "'Space Grotesk', sans-serif" }}
     >
+      <Preloader />
       <StarField />
 
       {/* Main Content ALWAYS mounted to preserve GSAP ScrollTriggers */}
