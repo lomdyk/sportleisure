@@ -60,10 +60,10 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
       
       const start = 0.5 + i * cardDur * overlap;
 
-      // New card flies in from below
+      // New card flies in from below without fading (opacity is always 1)
       tl.fromTo(card, 
-        { opacity: 0, y: 300, scale: 0.8 },
-        { opacity: 1, y: 0, scale: 1, duration: cardDur, ease: "back.out(1.2)" },
+        { y: window.innerHeight * 1.5, scale: 0.8 },
+        { y: 0, scale: 1, duration: cardDur, ease: "back.out(1.2)" },
         start
       );
 
@@ -76,7 +76,7 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
         tl.to(card, {
           y: -pushDistance * 40,    // Move up
           scale: 1 - pushDistance * 0.05, // Scale down slightly
-          opacity: 1 - pushDistance * 0.15, // Dim slightly but remain visible
+          // Keep opacity at 1 so there's absolutely no semi-transparency anywhere
           duration: cardDur,
           ease: "power2.inOut"
         }, nextStart);
@@ -148,7 +148,7 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
                 ref={(el) => { cardsRef.current[i] = el; }}
                 className="absolute flex flex-col md:flex-row items-center justify-center gap-10 md:gap-14 p-8 md:p-12 rounded-[40px] border pointer-events-none w-[90%] md:w-full"
                 style={{
-                  opacity: 0,
+                  transform: "translateY(200vh)", // Hidden below screen initially
                   // SOLID dark background with high blur prevents text bleed-through!
                   backgroundColor: "rgba(5, 12, 30, 0.85)",
                   backdropFilter: "blur(24px)",
@@ -159,12 +159,12 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
                 }}
               >
                 {/* GIANT Character GIF */}
-                <div className="relative w-56 h-56 md:w-80 md:h-80 shrink-0">
+                <div className="relative w-56 h-56 md:w-80 md:h-80 shrink-0 flex items-center justify-center">
                   <img
                     src={c.gif}
                     alt={t(c.nameKey)}
                     draggable={false}
-                    className="block w-full h-full object-contain select-none filter drop-shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+                    className="block w-full h-full object-contain select-none filter drop-shadow-[0_0_25px_rgba(255,255,255,0.2)] scale-[1.6] md:scale-[1.8]"
                     onLoad={() => ScrollTrigger.refresh()}
                   />
                 </div>
