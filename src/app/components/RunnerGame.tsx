@@ -480,7 +480,7 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           <AnimatePresence>
             {state === "idle" && (
               <Overlay key="idle">
-                <h3 className="text-white mb-2" style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: "28px" }}>
+                <h3 className="text-white mb-2" style={{ fontWeight: 700, fontSize: "28px" }}>
                   {t("runner.ready")}
                 </h3>
                 <p className="text-white/60 mb-5 text-center max-w-sm px-4" style={{ fontSize: "14px" }}>
@@ -499,7 +499,7 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             {state === "over" && (
               <Overlay key="over">
                 <div className="text-emerald-300 uppercase tracking-[0.3em] text-xs mb-2">{encouragement}</div>
-                <h3 className="text-white mb-1" style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: "32px" }}>
+                <h3 className="text-white mb-1" style={{ fontWeight: 700, fontSize: "32px" }}>
                   {t("runner.distanceLabel")}: <span className="text-cyan-300 tabular-nums">{score}</span>
                 </h3>
                 <p className="text-white/50 mb-3 text-sm">{t("runner.bestRun")}: <span className="text-amber-200 tabular-nums">{best}</span></p>

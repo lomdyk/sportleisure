@@ -345,10 +345,10 @@ export const CommunicationGame = ({
         className="text-center mb-10 md:mb-14"
       >
         <h2 className="text-2xl sm:text-3xl md:text-5xl tracking-tight mb-3 text-white"
-          style={{ fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif" }}>
+          style={{ fontWeight: 700, }}>
           {copy.titleA} <span className="text-violet-400" style={{ textShadow: "0 0 24px rgba(167,139,250,0.7)" }}>{copy.titleB}</span>
         </h2>
-        <p className="text-slate-400 max-w-lg mx-auto" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <p className="text-slate-400 max-w-lg mx-auto" >
           {copy.subtitle}
         </p>
       </motion.div>
@@ -385,7 +385,7 @@ export const CommunicationGame = ({
                       <GifImg src={c.gif} alt={c.name} imgKey={imgKey}
                         className="w-full h-full object-cover object-center" />
                     </div>
-                    <span style={{ color: c.color, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: 13 }}>
+                    <span style={{ color: c.color, fontWeight: 600, fontSize: 13 }}>
                       {c.name}
                     </span>
                   </motion.div>
@@ -407,10 +407,10 @@ export const CommunicationGame = ({
                     className="w-full h-full object-cover object-center" />
                 </div>
                 <div>
-                  <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: 15, color: "#fcd34d" }}>
+                  <p style={{ fontWeight: 600, fontSize: 15, color: "#fcd34d" }}>
                     Nebula Nick
                   </p>
-                  <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 12, color: "rgba(148,163,184,0.8)" }}>
+                  <p style={{ fontSize: 12, color: "rgba(148,163,184,0.8)" }}>
                     {copy.nickRole}
                   </p>
                 </div>
@@ -418,7 +418,7 @@ export const CommunicationGame = ({
 
               <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
                 className="text-center text-slate-300 px-4"
-                style={{ fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1.7 }}>
+                style={{ lineHeight: 1.7 }}>
                 {copy.intro1}<br />
                 <span className="text-violet-300">{copy.intro2}</span>
               </motion.p>
@@ -454,7 +454,7 @@ export const CommunicationGame = ({
                       boxShadow: i === scenarioIdx ? `0 0 8px ${scenario.captainColor}` : "none",
                     }} />
                   ))}
-                  <span className="text-xs text-slate-400 ml-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  <span className="text-xs text-slate-400 ml-1" >
                     {scenarioIdx + 1}/{localizedScenarios.length}
                   </span>
                 </div>
@@ -465,10 +465,10 @@ export const CommunicationGame = ({
                       className="w-full h-full object-cover object-center" />
                   </div>
                   <div>
-                    <p style={{ color: scenario.captainColor, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: 13 }}>
+                    <p style={{ color: scenario.captainColor, fontWeight: 600, fontSize: 13 }}>
                       {scenario.captainName}
                     </p>
-                    <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 11, color: "rgba(148,163,184,0.6)" }}>
+                    <p style={{ fontSize: 11, color: "rgba(148,163,184,0.6)" }}>
                       {scenario.contextEmoji} {scenario.context}
                     </p>
                   </div>
@@ -483,10 +483,10 @@ export const CommunicationGame = ({
                     <GifImg src={npcGif} alt="Nick" imgKey={imgKey} className="w-full h-full object-cover object-center" />
                   </div>
                   <div>
-                    <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: 14, color: "#fff" }}>Nebula Nick</p>
+                    <p style={{ fontWeight: 600, fontSize: 14, color: "#fff" }}>Nebula Nick</p>
                     <div className="flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 11, color: "rgba(52,211,153,0.7)" }}>online</span>
+                      <span style={{ fontSize: 11, color: "rgba(52,211,153,0.7)" }}>online</span>
                     </div>
                   </div>
                 </div>
@@ -514,7 +514,6 @@ export const CommunicationGame = ({
                           border: msg.from === "npc" ? "1px solid rgba(255,255,255,0.08)" : `1px solid ${scenario.captainColor}40`,
                           borderBottomLeftRadius: msg.from === "npc" ? 6 : 16,
                           borderBottomRightRadius: msg.from === "player" ? 6 : 16,
-                          fontFamily: "'Space Grotesk', sans-serif",
                           fontSize: 14, lineHeight: 1.6,
                           color: msg.from === "npc" ? "rgba(226,232,240,0.9)" : "#fff",
                         }}>
@@ -547,7 +546,7 @@ export const CommunicationGame = ({
                   <motion.div key="choosing" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
                     className="flex flex-col gap-2">
                     <p className="text-[11px] text-slate-500 tracking-[0.2em] uppercase px-1 mb-1"
-                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{copy.choose}</p>
+                      >{copy.choose}</p>
                     {scenario.options.map((opt, i) => (
                       <motion.button key={i}
                         initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
@@ -555,7 +554,7 @@ export const CommunicationGame = ({
                         whileTap={{ scale: 0.98 }}
                         onClick={() => handleAnswer(i)}
                         className="w-full text-left px-5 py-4 rounded-2xl border transition-all duration-200"
-                        style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)", fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, lineHeight: 1.6, color: "rgba(226,232,240,0.85)" }}
+                        style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)", fontSize: 14, lineHeight: 1.6, color: "rgba(226,232,240,0.85)" }}
                         onMouseEnter={(e) => {
                           (e.currentTarget as HTMLButtonElement).style.borderColor = scenario.captainColor + "55";
                           (e.currentTarget as HTMLButtonElement).style.background = `${scenario.captainColor}09`;
@@ -565,7 +564,7 @@ export const CommunicationGame = ({
                           (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.03)";
                         }}
                       >
-                        <span className="mr-2 opacity-40" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                        <span className="mr-2 opacity-40" >
                           {String.fromCharCode(65 + i)})
                         </span>
                         {opt.text}
@@ -586,10 +585,10 @@ export const CommunicationGame = ({
                           <gradeConf.icon className="w-5 h-5" style={{ color: gradeConf.color }} />
                         </div>
                         <div className="flex-1">
-                          <p className="mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 15, color: gradeConf.color }}>
+                          <p className="mb-1" style={{ fontWeight: 700, fontSize: 15, color: gradeConf.color }}>
                             {gradeConf.label}
                           </p>
-                          <p className="text-slate-300" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 13, lineHeight: 1.7 }}>
+                          <p className="text-slate-300" style={{ fontSize: 13, lineHeight: 1.7 }}>
                             {selOpt.feedback}
                           </p>
                         </div>
@@ -598,8 +597,8 @@ export const CommunicationGame = ({
                         <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }}
                           transition={{ delay: 0.3 }} className="mt-4 pt-4 border-t border-white/[0.08]">
                           <p className="text-xs uppercase tracking-wider mb-1"
-                            style={{ color: gradeConf.color + "80", fontFamily: "'Space Grotesk', sans-serif" }}>{copy.why}</p>
-                          <p className="text-slate-400 text-sm" style={{ fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1.7 }}>
+                            style={{ color: gradeConf.color + "80", }}>{copy.why}</p>
+                          <p className="text-slate-400 text-sm" style={{ lineHeight: 1.7 }}>
                             {scenario.bossExplain}
                           </p>
                         </motion.div>
@@ -608,9 +607,9 @@ export const CommunicationGame = ({
                         <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }}
                           transition={{ delay: 0.3 }} className="mt-4 pt-4 border-t border-white/[0.08]">
                           <p className="text-xs uppercase tracking-wider mb-2"
-                            style={{ color: "#22d3ee80", fontFamily: "'Space Grotesk', sans-serif" }}>{copy.bossAnswer}</p>
+                            style={{ color: "#22d3ee80", }}>{copy.bossAnswer}</p>
                           <p className="text-slate-300 text-sm italic"
-                            style={{ fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1.7 }}>
+                            style={{ lineHeight: 1.7 }}>
                             "{scenario.options.find((o) => o.grade === "boss")?.text}"
                           </p>
                         </motion.div>
@@ -643,11 +642,11 @@ export const CommunicationGame = ({
               </div>
               <div>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl tracking-tight mb-3 text-white"
-                  style={{ fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif" }}>
+                  style={{ fontWeight: 700, }}>
                   {copy.doneA} <span className="text-violet-400" style={{ textShadow: "0 0 20px rgba(167,139,250,0.6)" }}>{copy.doneB}</span>
                 </h3>
                 <p className="text-slate-300 max-w-sm mx-auto mb-4"
-                  style={{ fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1.8 }}>
+                  style={{ lineHeight: 1.8 }}>
                   {copy.doneText}
                 </p>
                 <p className="text-white/60 mb-8 font-['Space_Grotesk']">

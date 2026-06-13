@@ -139,17 +139,14 @@ const FlipCard = ({
       >
         {/* ── FRONT ── */}
         <div
+          className="glass-panel"
           style={{
             position: "absolute",
             inset: 0,
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
-            backgroundColor: "rgba(5, 12, 30, 0.6)",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
             backgroundImage: "linear-gradient(160deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)",
-            border: `1px solid ${fact.color}25`,
-            borderRadius: "16px",
+            borderColor: `${fact.color}25`,
             padding: "20px",
             display: "flex",
             flexDirection: "column",
@@ -183,7 +180,7 @@ const FlipCard = ({
             {/* Title */}
             <h4
               className="text-white mb-1"
-              style={{ fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif", fontSize: 15 }}
+              style={{ fontWeight: 700, fontSize: 15 }}
             >
               {fact.title}
             </h4>
@@ -193,7 +190,6 @@ const FlipCard = ({
               className="text-xs"
               style={{
                 color: fact.color,
-                fontFamily: "'Space Grotesk', sans-serif",
                 fontWeight: 500,
               }}
             >
@@ -206,7 +202,7 @@ const FlipCard = ({
             <RotateCcw className="w-3 h-3" style={{ color: fact.color + "70" }} />
             <span
               className="text-[10px] uppercase tracking-wider"
-              style={{ color: fact.color + "60", fontFamily: "'Space Grotesk', sans-serif" }}
+              style={{ color: fact.color + "60", }}
             >
               tap to read
             </span>
@@ -215,18 +211,15 @@ const FlipCard = ({
 
         {/* ── BACK ── */}
         <div
+          className="glass-panel"
           style={{
             position: "absolute",
             inset: 0,
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
-            backgroundColor: "rgba(5, 12, 30, 0.6)",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
             backgroundImage: `linear-gradient(160deg, ${fact.color}15 0%, ${fact.color}05 100%)`,
-            border: `1px solid ${fact.color}45`,
-            borderRadius: "16px",
+            borderColor: `${fact.color}45`,
             padding: "20px",
             display: "flex",
             flexDirection: "column",
@@ -237,14 +230,13 @@ const FlipCard = ({
           <div>
             <p
               className="text-xs uppercase tracking-wider mb-3"
-              style={{ color: fact.color, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600 }}
+              style={{ color: fact.color, fontWeight: 600 }}
             >
               {fact.title}
             </p>
             <p
               className="text-slate-200"
               style={{
-                fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: 13,
                 lineHeight: 1.7,
               }}
@@ -258,7 +250,7 @@ const FlipCard = ({
             <RotateCcw className="w-3 h-3" style={{ color: fact.color + "70" }} />
             <span
               className="text-[10px] uppercase tracking-wider"
-              style={{ color: fact.color + "60", fontFamily: "'Space Grotesk', sans-serif" }}
+              style={{ color: fact.color + "60", }}
             >
               tap to flip back
             </span>
@@ -292,7 +284,7 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
           </div>
           <h2
             className="text-3xl md:text-5xl tracking-tight text-white"
-            style={{ fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif" }}
+            style={{ fontWeight: 700, }}
           >
             Mission{" "}
             <span className="text-cyan-400" style={{ textShadow: "0 0 28px rgba(34,211,238,0.7)" }}>
@@ -301,7 +293,7 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
           </h2>
           <p
             className="text-slate-300 text-lg max-w-xl"
-            style={{ lineHeight: 1.8, fontFamily: "'Space Grotesk', sans-serif" }}
+            style={{ lineHeight: 1.8, }}
           >
             You've proven yourself as a skilled sports champion.
             But the journey doesn't end here — there's so much more to learn about PKU.
@@ -316,7 +308,7 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
             <RevealText>
               <h3
                 className="text-2xl md:text-4xl tracking-tight text-white mb-3"
-                style={{ fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif" }}
+                style={{ fontWeight: 700, }}
               >
                 Your Sports{" "}
                 <span className="text-cyan-400" style={{ textShadow: "0 0 20px rgba(34,211,238,0.5)" }}>
@@ -330,7 +322,7 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
               className="text-slate-400"
-              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              
             >
               Tap any card to flip it and learn more
             </motion.p>
@@ -351,7 +343,7 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
             <RevealText>
               <h3
                 className="text-2xl md:text-4xl tracking-tight text-white mb-3"
-                style={{ fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif" }}
+                style={{ fontWeight: 700, }}
               >
                 Captain's{" "}
                 <span className="text-violet-400" style={{ textShadow: "0 0 20px rgba(167,139,250,0.5)" }}>
@@ -365,7 +357,7 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
               className="text-slate-400"
-              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              
             >
               Messages from fellow travelers on the same journey
             </motion.p>
@@ -393,11 +385,8 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
                 }}
               >
                 <div
-                  className="p-6 sm:p-8 rounded-2xl border transition-all duration-300"
+                  className="glass-panel p-6 sm:p-8 transition-all duration-300"
                   style={{
-                    backgroundColor: "rgba(5, 12, 30, 0.7)",
-                    backdropFilter: "blur(20px)",
-                    WebkitBackdropFilter: "blur(20px)",
                     backgroundImage: `linear-gradient(135deg, ${color}10, rgba(255,255,255,0.02))`,
                     borderColor: `${color}25`,
                     boxShadow: `0 4px 24px ${color}12`,
@@ -426,7 +415,6 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
                       className="text-sm sm:text-base tracking-wide"
                       style={{
                         color: `${color}`,
-                        fontFamily: "'Space Grotesk', sans-serif",
                         fontWeight: 600
                       }}
                     >
@@ -437,8 +425,7 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
                     className="text-slate-200 text-base sm:text-lg italic leading-relaxed"
                     style={{
                       lineHeight: 1.8,
-                      fontFamily: "'Space Grotesk', sans-serif"
-                    }}
+                      }}
                   >
                     "{story.quote}"
                   </p>
@@ -463,7 +450,7 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
             <RevealText>
               <h3
                 className="text-2xl md:text-4xl tracking-tight text-white mb-3"
-                style={{ fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif" }}
+                style={{ fontWeight: 700, }}
               >
                 Captain's{" "}
                 <span className="text-emerald-400" style={{ textShadow: "0 0 20px rgba(52,211,153,0.5)" }}>
@@ -484,7 +471,7 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
                 style={{ background: "rgba(52,211,153,0.04)", borderColor: "rgba(52,211,153,0.12)" }}
               >
                 <ChevronRight className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <p className="text-sm text-slate-300" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                <p className="text-sm text-slate-300" >
                   {tip}
                 </p>
               </motion.div>
@@ -500,7 +487,7 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
             <RevealText>
               <h3
                 className="text-2xl md:text-4xl tracking-tight text-white mb-6"
-                style={{ fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif" }}
+                style={{ fontWeight: 700, }}
               >
                 You Are{" "}
                 <span className="text-cyan-400" style={{ textShadow: "0 0 24px rgba(34,211,238,0.65)" }}>
@@ -508,7 +495,7 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
                 </span>
               </h3>
             </RevealText>
-            <div className="space-y-4 text-slate-300" style={{ lineHeight: 1.8, fontFamily: "'Space Grotesk', sans-serif" }}>
+            <div className="space-y-4 text-slate-300" style={{ lineHeight: 1.8, }}>
               {[
                 "Having PKU doesn't limit who you can become. Athletes, artists, scientists, and explorers with PKU are out there right now, living amazing lives.",
                 "Your discipline with diet is a superpower most people don't have. Every time you choose the right food, you're training yourself to be stronger, smarter, and more resilient.",
@@ -573,12 +560,12 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
           </motion.div>
 
           <div className="border-t border-white/[0.05] pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-slate-500 text-xs" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            <div className="flex items-center gap-2 text-slate-500 text-xs" >
               <span>&copy; {new Date().getFullYear()}</span>
               <span className="text-white/10">|</span>
               <span>PKU Academy — Educational Project</span>
             </div>
-            <div className="flex items-center gap-1 text-slate-500 text-xs" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            <div className="flex items-center gap-1 text-slate-500 text-xs" >
               Made with <Heart className="w-3 h-3 text-red-400/60 mx-1" /> for young athletes with PKU
             </div>
           </div>

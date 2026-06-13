@@ -66,7 +66,6 @@ export const SlideNavArrow: React.FC<Props> = ({
             transition={{ duration: 0.25 }}
             className="hidden sm:inline-block text-[10px] uppercase tracking-[0.28em] px-3 py-1.5 rounded-full border backdrop-blur-md"
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
               fontWeight: 600,
               color: palette.color,
               borderColor: palette.rgba(0.45),

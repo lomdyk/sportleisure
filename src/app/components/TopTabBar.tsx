@@ -82,7 +82,7 @@ export const TopTabBar: React.FC<Props> = () => {
           />
           <span
             className="text-[10px] uppercase tracking-[0.28em] text-white/55"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            
           >
             PKU
           </span>
@@ -124,7 +124,6 @@ export const TopTabBar: React.FC<Props> = () => {
                   transition={{ duration: 0.3 }}
                   className="text-[11px] md:text-xs truncate"
                   style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
                     fontWeight: 600,
                     color: "#fff",
                     letterSpacing: "0.02em",
@@ -135,7 +134,7 @@ export const TopTabBar: React.FC<Props> = () => {
               </AnimatePresence>
               <span
                 className="hidden sm:inline text-[10px] uppercase tracking-[0.22em] tabular-nums shrink-0"
-                style={{ color: `${accent}cc`, fontFamily: "'Space Grotesk', sans-serif" }}
+                style={{ color: `${accent}cc`, }}
               >
                 {t("nav.title")}
               </span>
@@ -172,7 +171,6 @@ export const TopTabBar: React.FC<Props> = () => {
                 onMouseEnter={() => soundEngine.hoverNote()}
                 className="px-2.5 py-1 rounded-full uppercase tracking-[0.18em] text-[10px] transition-colors"
                 style={{
-                  fontFamily: "'Space Grotesk', sans-serif",
                   fontWeight: 700,
                   color: is ? "#050a18" : "rgba(255,255,255,0.7)",
                   background: is ? "#22d3ee" : "transparent",

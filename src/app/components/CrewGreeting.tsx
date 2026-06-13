@@ -110,7 +110,7 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
             <Users className="w-3 h-3" style={{ color: "#22d3ee" }} />
             <span
               className="text-[10px] uppercase tracking-[0.28em]"
-              style={{ color: "#22d3ee", fontFamily: "'Space Grotesk', sans-serif" }}
+              style={{ color: "#22d3ee", }}
             >
               {t("crew.tag")}
             </span>
@@ -118,7 +118,6 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
           <h2
             className="text-white mb-3"
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
               fontWeight: 700,
               fontSize: "clamp(28px, 5vw, 48px)",
               lineHeight: 1.1,
@@ -129,7 +128,6 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
           <p
             className="text-white/60 max-w-xl mx-auto"
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
               fontSize: "16px",
               lineHeight: 1.6,
             }}
@@ -146,13 +144,9 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
               <div
                 key={c.index}
                 ref={(el) => { cardsRef.current[i] = el; }}
-                className="absolute flex flex-col md:flex-row items-center justify-center gap-10 md:gap-14 p-8 md:p-12 rounded-[40px] border pointer-events-none w-[90%] md:w-full will-change-transform"
+                className="glass-panel absolute flex flex-col md:flex-row items-center justify-center gap-10 md:gap-14 p-8 md:p-12 pointer-events-none w-[90%] md:w-full will-change-transform"
                 style={{
                   transform: "translateY(150vh)", // Hidden below screen initially
-                  // SOLID dark background with high blur prevents text bleed-through!
-                  backgroundColor: "rgba(5, 12, 30, 0.85)",
-                  backdropFilter: "blur(24px)",
-                  WebkitBackdropFilter: "blur(24px)",
                   borderColor: a.rgba(0.4),
                   boxShadow: `0 30px 60px -15px rgba(0,0,0,0.8), inset 0 0 40px ${a.rgba(0.1)}`,
                   zIndex: i, // Higher index means it renders ON TOP of previous cards
@@ -173,14 +167,13 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
                 <div className="text-center md:text-left flex flex-col items-center md:items-start flex-1">
                   <span
                     className="relative text-sm uppercase tracking-[0.3em] mb-4 font-bold"
-                    style={{ color: a.color, fontFamily: "'Space Grotesk', sans-serif" }}
+                    style={{ color: a.color, }}
                   >
                     {t(c.roleKey)}
                   </span>
                   <h3
                     className="text-5xl md:text-7xl text-white mb-6 tracking-tight"
                     style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
                       fontWeight: 800,
                       lineHeight: 1.1,
                       textShadow: `0 0 24px ${a.rgba(0.5)}`
@@ -190,7 +183,7 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
                   </h3>
                   <p
                     className="text-white/80 text-lg md:text-2xl leading-relaxed"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    
                   >
                     "{t(c.lineKey)}"
                   </p>

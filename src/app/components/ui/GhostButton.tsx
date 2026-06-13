@@ -82,7 +82,6 @@ export const GhostButton: React.FC<Props> = ({
       }}
       className={`relative inline-flex items-center gap-2 rounded-full transition-[box-shadow,background-color,border-color,color] duration-200 ${padding} ${textSize} ${caseCls} ${className}`}
       style={{
-        fontFamily: "'Space Grotesk', sans-serif",
         fontWeight: 600,
         border: `1px solid ${hover ? t.glow : t.border}`,
         color: hover ? "#ffffff" : t.text,
@@ -143,7 +142,7 @@ export const SkipMissionButton: React.FC<SkipProps> = ({
           </GhostButton>
           <span
             className="text-[9px] uppercase tracking-[0.22em] text-white/35"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            
           >
             {hintText}
           </span>

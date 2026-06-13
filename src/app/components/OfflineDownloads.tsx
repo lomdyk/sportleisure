@@ -45,10 +45,9 @@ const Card: React.FC<CardProps> = ({ index, icon: Icon, tone, titleKey, descKey,
         }}
       />
       <div
-        className="relative h-full flex flex-col p-6 md:p-7 rounded-[24px] border backdrop-blur-xl overflow-hidden"
+        className="glass-panel relative h-full flex flex-col p-6 md:p-7 overflow-hidden"
         style={{
           borderColor: `${color}33`,
-          backgroundColor: "rgba(5, 12, 30, 0.6)",
           backgroundImage:
             "linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%)",
         }}
@@ -82,7 +81,7 @@ const Card: React.FC<CardProps> = ({ index, icon: Icon, tone, titleKey, descKey,
           </div>
           <span
             className="text-[10px] uppercase tracking-[0.28em]"
-            style={{ color: `${color}cc`, fontFamily: "'Space Grotesk', sans-serif" }}
+            style={{ color: `${color}cc`, }}
           >
             PDF · {String(index + 1).padStart(2, "0")}
           </span>
@@ -91,7 +90,6 @@ const Card: React.FC<CardProps> = ({ index, icon: Icon, tone, titleKey, descKey,
         <h3
           className="relative text-white mb-2"
           style={{
-            fontFamily: "'Space Grotesk', sans-serif",
             fontWeight: 700,
             fontSize: "22px",
             lineHeight: 1.2,
@@ -102,7 +100,6 @@ const Card: React.FC<CardProps> = ({ index, icon: Icon, tone, titleKey, descKey,
         <p
           className="relative text-white/60 mb-6 flex-1"
           style={{
-            fontFamily: "'Space Grotesk', sans-serif",
             fontSize: "14px",
             lineHeight: 1.6,
           }}
@@ -129,7 +126,6 @@ const Card: React.FC<CardProps> = ({ index, icon: Icon, tone, titleKey, descKey,
                 borderColor: `${color}33`,
                 background: `${color}0d`,
                 color: `${color}aa`,
-                fontFamily: "'Space Grotesk', sans-serif",
                 fontWeight: 600,
                 fontSize: "13px",
               }}
@@ -169,7 +165,7 @@ export const OfflineDownloads: React.FC = () => {
             />
             <span
               className="text-[10px] uppercase tracking-[0.28em]"
-              style={{ color: "#fbbf24", fontFamily: "'Space Grotesk', sans-serif" }}
+              style={{ color: "#fbbf24", }}
             >
               {t("stage.downloads")}
             </span>
@@ -177,7 +173,6 @@ export const OfflineDownloads: React.FC = () => {
           <h2
             className="text-white mb-3"
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
               fontWeight: 700,
               fontSize: "clamp(28px, 5vw, 48px)",
               lineHeight: 1.1,
@@ -188,7 +183,6 @@ export const OfflineDownloads: React.FC = () => {
           <p
             className="text-white/60 max-w-xl mx-auto"
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
               fontSize: "16px",
               lineHeight: 1.6,
             }}

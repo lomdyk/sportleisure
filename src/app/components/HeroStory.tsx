@@ -256,7 +256,6 @@ export const HeroStory = () => {
                   className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl mb-4 tracking-tight text-white"
                   style={{
                     fontWeight: 700,
-                    fontFamily: "'Space Grotesk', sans-serif",
                     textShadow: `0 0 40px ${panel.accent}66`,
                   }}
                 >
@@ -264,7 +263,7 @@ export const HeroStory = () => {
                 </h2>
                 <p
                   className="text-sm sm:text-base md:text-lg text-slate-300/80 max-w-md"
-                  style={{ lineHeight: 1.8, fontFamily: "'Space Grotesk', sans-serif" }}
+                  style={{ lineHeight: 1.8, }}
                 >
                   {panel.text}
                 </p>
@@ -308,7 +307,7 @@ export const HeroStory = () => {
         className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-[30] flex flex-col items-center gap-4"
         style={{ top: "50%" }}
       >
-        <p className="text-3xl sm:text-5xl text-white font-bold uppercase tracking-widest text-center" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <p className="text-3xl sm:text-5xl text-white font-bold uppercase tracking-widest text-center" >
           {t("ui.scrollBegin")}
         </p>
         <svg className="animate-bounce" width="40" height="40" viewBox="0 0 20 20" fill="none">

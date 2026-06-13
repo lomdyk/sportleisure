@@ -41,7 +41,7 @@ export const SectionDivider: React.FC<{ tone?: Tone; label?: string }> = ({
           {label && (
             <span
               className="uppercase tracking-[0.32em] text-[10px]"
-              style={{ fontFamily: "'Space Grotesk', sans-serif", color: c }}
+              style={{ color: c }}
             >
               {label}
             </span>

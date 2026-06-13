@@ -128,12 +128,12 @@ export const Preloader = () => {
           {/* Solid Number Countdown */}
           <h1
             className="text-[120px] md:text-[200px] font-bold text-white leading-none select-none drop-shadow-[0_0_30px_rgba(34,211,238,0.4)]"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            
           >
             {Math.round(progress)}
           </h1>
 
-          <div className="mt-4 text-cyan-400 text-sm tracking-[0.3em] font-bold uppercase" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <div className="mt-4 text-cyan-400 text-sm tracking-[0.3em] font-bold uppercase" >
             {isDone ? "Systems Online" : "Loading Assets"}
           </div>
         </div>
