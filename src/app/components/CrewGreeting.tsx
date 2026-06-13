@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { ChevronDown, Users, Gamepad2 } from "lucide-react";
+import { Users, Gamepad2, Scan } from "lucide-react";
 import { GhostButton } from "./ui/GhostButton";
 import { useLang } from "../utils/i18n";
 import { useGSAP } from "@gsap/react";
@@ -21,9 +21,9 @@ const ACCENT: Record<Tone, { color: string; rgba: (a: number) => string }> = {
 };
 
 const CREW = [
-  { index: 0, gif: lunaGif, nameKey: "crew.luna.name", roleKey: "crew.luna.role", lineKey: "crew.luna.line", tone: "cyan" as Tone },
-  { index: 1, gif: boGif, nameKey: "crew.bo.name", roleKey: "crew.bo.role", lineKey: "crew.bo.line", tone: "violet" as Tone },
-  { index: 2, gif: elaGif, nameKey: "crew.ela.name", roleKey: "crew.ela.role", lineKey: "crew.ela.line", tone: "emerald" as Tone },
+  { index: 0, gif: lunaGif, nameKey: "crew.luna.name", roleKey: "crew.luna.role", lineKey: "crew.luna.line", tone: "cyan" as Tone, id: "PKU-7734" },
+  { index: 1, gif: boGif, nameKey: "crew.bo.name", roleKey: "crew.bo.role", lineKey: "crew.bo.line", tone: "violet" as Tone, id: "PKU-2291" },
+  { index: 2, gif: elaGif, nameKey: "crew.ela.name", roleKey: "crew.ela.role", lineKey: "crew.ela.line", tone: "emerald" as Tone, id: "PKU-8842" },
 ];
 
 interface Props {
@@ -33,71 +33,93 @@ interface Props {
 export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
   const { t } = useLang();
   const containerRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const ctaRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     const isMobile = window.innerWidth < 768;
 
+    // Initial positioning to prevent flash
+    cardsRef.current.forEach((card, i) => {
+      if (!card) return;
+      const tDist = i; 
+      gsap.set(card, {
+        x: `${tDist * (isMobile ? 90 : 60)}%`,
+        z: -Math.abs(tDist) * 400,
+        rotateY: -tDist * 35,
+        scale: 1 - Math.abs(tDist) * 0.2,
+        opacity: 1 - Math.abs(tDist) * 0.6,
+        zIndex: Math.round(100 - Math.abs(tDist) * 10)
+      });
+    });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
-        end: "+=400%", // 4 screens to scroll through 3 characters + CTA
+        end: "+=300%", // 3 screens for 3 cards
         pin: true,
         scrub: 1,
+        onUpdate: (self) => {
+           const progress = self.progress; 
+           const totalCards = CREW.length;
+           const activeIndexFloat = progress * (totalCards - 1);
+           
+           cardsRef.current.forEach((card, i) => {
+              if (!card) return;
+              const tDist = i - activeIndexFloat; 
+              
+              const x = tDist * (isMobile ? 90 : 60); 
+              const z = -Math.abs(tDist) * (isMobile ? 200 : 400); 
+              const rotateY = -tDist * 40; 
+              const scale = 1 - Math.abs(tDist) * 0.15;
+              const opacity = 1 - Math.abs(tDist) * 0.5;
+              const zIndex = Math.round(100 - Math.abs(tDist) * 10);
+              
+              gsap.set(card, {
+                 x: `${x}%`,
+                 z: z,
+                 rotateY: rotateY,
+                 scale: scale,
+                 opacity: Math.max(0, opacity),
+                 zIndex: zIndex
+              });
+           });
+
+           if (ctaRef.current) {
+              // CTA fades in at the very end
+              const ctaOpacity = Math.max(0, (progress - 0.8) * 5); 
+              const ctaY = (1 - ctaOpacity) * 50;
+              gsap.set(ctaRef.current, { 
+                opacity: ctaOpacity, 
+                y: ctaY, 
+                pointerEvents: ctaOpacity > 0.5 ? 'auto' : 'none' 
+              });
+           }
+        }
       }
     });
 
-    // Fade out title
-    tl.to(titleRef.current, { opacity: 0, y: -20, duration: 0.5, ease: "power2.inOut" }, 0);
-
-    // Sequence the cards
-    const cardDur = 1;
-    CREW.forEach((_, i) => {
-      const card = cardsRef.current[i];
-      if (!card) return;
-      const start = 0.5 + i * (cardDur + 0.2);
-
-      // Card flies in
-      tl.fromTo(card, 
-        { opacity: 0, scale: 0.8, y: 50, x: isMobile ? 0 : (i % 2 === 0 ? 100 : -100) },
-        { opacity: 1, scale: 1, y: 0, x: 0, duration: cardDur, ease: "back.out(1.5)" },
-        start
-      );
-
-      // Card stays for a bit, then fades out to make room for next (unless it's the last one? No, let's keep the last one or show them all stacked)
-      if (i < CREW.length - 1) {
-        tl.to(card, { opacity: 0, scale: 0.9, y: -50, duration: cardDur * 0.8, ease: "power2.in" }, start + cardDur + 0.2);
-      } else {
-        // Last card moves up slightly to make room for CTA
-        tl.to(card, { y: -80, duration: 0.8, ease: "power2.inOut" }, start + cardDur + 0.2);
-      }
-    });
-
-    // Bring in CTA at the end
-    const ctaStart = 0.5 + (CREW.length - 1) * (cardDur + 0.2) + cardDur + 0.2;
-    tl.fromTo(ctaRef.current,
-      { opacity: 0, y: 50, scale: 0.8 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(2)" },
-      ctaStart
-    );
-
+    return () => {
+      tl.kill();
+    }
   }, { scope: containerRef });
 
+  const heights = [30, 80, 50, 90, 40, 100, 60, 30, 70, 50, 100, 40, 80, 20, 60];
+  const widths = [2, 4, 2, 2, 4, 2, 4, 4, 2, 2, 4, 2, 4, 2, 2];
+
   return (
-    <section ref={containerRef} className="relative w-full h-screen overflow-hidden flex items-center justify-center">
+    <section ref={containerRef} className="relative w-full h-screen overflow-hidden flex items-center justify-center pointer-events-none" style={{ perspective: "1500px" }}>
       
       {/* Background ambient glow */}
-      <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-        <div className="w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] rounded-full bg-indigo-500/5 blur-[120px]" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-[100vw] h-[100vw] md:w-[60vw] md:h-[60vw] rounded-full bg-blue-500/5 blur-[150px]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-5xl px-4 flex flex-col items-center justify-center h-full">
+      <div className="relative z-10 w-full h-full flex flex-col items-center justify-center">
         
         {/* Title */}
-        <div ref={titleRef} className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+        <div className="absolute top-12 left-0 right-0 flex flex-col items-center justify-center text-center">
           <div
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border backdrop-blur-md mb-4"
             style={{
@@ -114,51 +136,54 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
             </span>
           </div>
           <h2
-            className="text-white mb-3"
+            className="text-white"
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
               fontWeight: 700,
-              fontSize: "clamp(28px, 5vw, 48px)",
+              fontSize: "clamp(24px, 4vw, 36px)",
               lineHeight: 1.1,
             }}
           >
             {t("crew.title")}
           </h2>
-          <p
-            className="text-white/60 max-w-xl mx-auto"
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "16px",
-              lineHeight: 1.6,
-            }}
-          >
-            {t("crew.sub")}
-          </p>
         </div>
 
-        {/* Cards container - absolutely positioned to overlay each other */}
-        <div className="relative w-full max-w-md aspect-square md:aspect-video flex items-center justify-center mt-10">
+        {/* 3D Carousel Container */}
+        <div 
+          className="relative w-full max-w-[340px] md:max-w-[420px] aspect-[3/4] flex items-center justify-center mt-8"
+          style={{ transformStyle: "preserve-3d" }}
+        >
           {CREW.map((c, i) => {
             const a = ACCENT[c.tone];
             return (
               <div
                 key={c.index}
                 ref={(el) => { cardsRef.current[i] = el; }}
-                className="absolute inset-0 flex flex-col md:flex-row items-center justify-center gap-6 p-6 rounded-[32px] border backdrop-blur-xl pointer-events-none"
+                className="absolute inset-0 flex flex-col items-center p-6 rounded-[32px] border backdrop-blur-2xl"
                 style={{
-                  opacity: 0, // GSAP will animate this
-                  borderColor: a.rgba(0.25),
-                  background: "linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
-                  boxShadow: `0 20px 40px -10px rgba(0,0,0,0.5), inset 0 0 20px ${a.rgba(0.1)}`,
+                  transformStyle: "preserve-3d",
+                  borderColor: a.rgba(0.4),
+                  background: `linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.01) 100%), ${a.rgba(0.02)}`,
+                  boxShadow: `0 30px 60px -15px rgba(0,0,0,0.8), inset 0 0 30px ${a.rgba(0.15)}`,
+                  willChange: "transform, opacity",
                 }}
               >
+                {/* ID Badge Tech Accents */}
+                <div className="absolute top-6 left-6 w-8 h-8 flex items-center justify-center rounded-full border" style={{ background: a.rgba(0.1), color: a.color, borderColor: a.rgba(0.3) }}>
+                  <Scan className="w-4 h-4" />
+                </div>
+                <div className="absolute top-8 right-6 text-[10px] tracking-widest font-mono opacity-50" style={{ color: a.color }}>
+                  {c.id}
+                </div>
+
                 {/* GIF */}
                 <div
-                  className="relative w-32 h-32 md:w-48 md:h-48 rounded-[24px] overflow-hidden shrink-0"
+                  className="relative w-full aspect-square rounded-[20px] overflow-hidden mt-14 mb-6"
                   style={{
-                    borderColor: a.rgba(0.5),
-                    background: a.rgba(0.08),
-                    boxShadow: `0 0 30px ${a.rgba(0.4)}, inset 0 0 20px ${a.rgba(0.1)}`,
+                    borderColor: a.rgba(0.3),
+                    background: a.rgba(0.05),
+                    boxShadow: `0 0 40px ${a.rgba(0.2)}`,
+                    transform: "translateZ(40px)", // Pop out in 3D
                   }}
                 >
                   <img
@@ -166,43 +191,64 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
                     alt={t(c.nameKey)}
                     draggable={false}
                     className="block w-full h-full object-cover select-none"
-                    onLoad={() => ScrollTrigger.refresh()}
                   />
+                  {/* Glare overlay on image */}
+                  <div className="absolute inset-0 pointer-events-none" style={{
+                    background: "linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 40%)"
+                  }} />
                 </div>
 
-                {/* Text */}
-                <div className="text-center md:text-left flex flex-col items-center md:items-start">
+                {/* Text Content */}
+                <div className="text-center w-full" style={{ transform: "translateZ(60px)" }}>
                   <span
-                    className="relative text-[10px] uppercase tracking-[0.3em] mb-2"
+                    className="relative block text-[11px] uppercase tracking-[0.3em] mb-2 font-bold"
                     style={{ color: a.color, fontFamily: "'Space Grotesk', sans-serif" }}
                   >
                     {t(c.roleKey)}
                   </span>
                   <h3
-                    className="text-2xl md:text-4xl text-white mb-3"
+                    className="text-3xl md:text-5xl text-white mb-4 tracking-tight"
                     style={{
                       fontFamily: "'Space Grotesk', sans-serif",
-                      fontWeight: 700,
-                      lineHeight: 1.1,
-                      textShadow: `0 0 20px ${a.rgba(0.5)}`
+                      fontWeight: 800,
+                      lineHeight: 1,
+                      textShadow: `0 0 30px ${a.rgba(0.4)}`
                     }}
                   >
                     {t(c.nameKey)}
                   </h3>
                   <p
-                    className="text-white/80 text-sm md:text-base leading-relaxed max-w-[280px]"
+                    className="text-white/70 text-sm md:text-base leading-relaxed px-2"
                     style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                   >
-                    {t(c.lineKey)}
+                    "{t(c.lineKey)}"
                   </p>
                 </div>
+                
+                {/* Tech Barcode bottom */}
+                <div className="absolute bottom-6 left-0 right-0 flex justify-center opacity-30" style={{ transform: "translateZ(20px)" }}>
+                  <div className="h-6 w-3/4 flex gap-1 items-end justify-center">
+                    {heights.map((h, j) => (
+                       <div key={j} className="bg-white" style={{ width: `${widths[j]}px`, height: `${h}%` }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Glass Glare */}
+                <div className="absolute inset-0 pointer-events-none rounded-[32px] overflow-hidden">
+                  <div className="w-[150%] h-[150%] absolute -top-[25%] -left-[25%] -rotate-45" style={{
+                    background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%)",
+                    transform: "translateZ(80px)"
+                  }} />
+                </div>
+
               </div>
             );
           })}
         </div>
 
         {/* CTA */}
-        <div ref={ctaRef} className="absolute bottom-16 left-1/2 -translate-x-1/2" style={{ opacity: 0 }}>
+        <div ref={ctaRef} className="absolute bottom-12 left-1/2 -translate-x-1/2" style={{ opacity: 0 }}>
           <GhostButton tone="cyan" size="lg" icon={<Gamepad2 className="w-5 h-5" />} onClick={onContinue}>
             Enter Locker Room
           </GhostButton>
