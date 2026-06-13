@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { motion, animate, useMotionValue, useTransform } from "motion/react";
 import { useProgress } from "@react-three/drei";
 
 export const Preloader = () => {
@@ -10,12 +10,24 @@ export const Preloader = () => {
   // We want to ensure the preloader shows for at least a minimum time (e.g. 1.5s)
   const [minTimeElapsed, setMinTimeElapsed] = useState(false);
 
+  const animatedProgress = useMotionValue(0);
+  const roundedProgress = useTransform(animatedProgress, (latest) => Math.round(latest));
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setMinTimeElapsed(true);
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    // Smoothly animate to the actual progress value
+    const controls = animate(animatedProgress, progress, {
+      duration: 0.8,
+      ease: "easeOut",
+    });
+    return controls.stop;
+  }, [progress, animatedProgress]);
 
   useEffect(() => {
     // If progress is 100% AND min time has passed, we are done
@@ -126,12 +138,12 @@ export const Preloader = () => {
 
         <div className="relative z-10 flex flex-col items-center">
           {/* Solid Number Countdown */}
-          <h1
+          <motion.h1
             className="text-[120px] md:text-[200px] font-bold text-white leading-none select-none drop-shadow-[0_0_30px_rgba(34,211,238,0.4)]"
             
           >
-            {Math.round(progress)}
-          </h1>
+            {roundedProgress}
+          </motion.h1>
 
           <div className="mt-4 text-cyan-400 text-sm tracking-[0.3em] font-bold uppercase" >
             {isDone ? "Systems Online" : "Loading Assets"}
