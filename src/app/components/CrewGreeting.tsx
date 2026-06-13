@@ -54,30 +54,34 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
     tl.to(titleRef.current, { opacity: 0, y: -20, duration: 0.5, ease: "power2.inOut" }, 0);
 
     // Sequence the cards
-    const cardDur = 1;
+    const enterDur = 0.8;
+    const holdDur = 0.8;
+    const exitDur = 0.6;
+    const totalCycle = enterDur + holdDur + exitDur;
+
     CREW.forEach((_, i) => {
       const card = cardsRef.current[i];
       if (!card) return;
-      const start = 0.5 + i * (cardDur + 0.2);
+      const start = 0.5 + i * totalCycle;
 
       // Card flies in
       tl.fromTo(card, 
         { opacity: 0, scale: 0.8, y: 50, x: isMobile ? 0 : (i % 2 === 0 ? 100 : -100) },
-        { opacity: 1, scale: 1, y: 0, x: 0, duration: cardDur, ease: "back.out(1.5)" },
+        { opacity: 1, scale: 1, y: 0, x: 0, duration: enterDur, ease: "back.out(1.5)" },
         start
       );
 
-      // Card fades out and scales down smoothly to make room for next
+      // Card fades out completely before the next one starts entering
       if (i < CREW.length - 1) {
-        tl.to(card, { opacity: 0, scale: 0.9, y: -50, duration: cardDur * 0.8, ease: "power2.in" }, start + cardDur + 0.2);
+        tl.to(card, { opacity: 0, scale: 0.9, y: -50, duration: exitDur, ease: "power2.in" }, start + enterDur + holdDur);
       } else {
         // Last card moves up slightly to make room for CTA
-        tl.to(card, { y: -80, duration: 0.8, ease: "power2.inOut" }, start + cardDur + 0.2);
+        tl.to(card, { y: -80, duration: 0.8, ease: "power2.inOut" }, start + enterDur + holdDur);
       }
     });
 
     // Bring in CTA at the end
-    const ctaStart = 0.5 + (CREW.length - 1) * (cardDur + 0.2) + cardDur + 0.2;
+    const ctaStart = 0.5 + (CREW.length - 1) * totalCycle + enterDur + holdDur;
     tl.fromTo(ctaRef.current,
       { opacity: 0, y: 50, scale: 0.8 },
       { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(2)", pointerEvents: "auto" },
@@ -134,23 +138,23 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
         </div>
 
         {/* Cards container - absolutely positioned to overlay each other */}
-        <div className="relative w-full max-w-2xl aspect-[16/9] flex items-center justify-center mt-10">
+        <div className="relative w-full max-w-4xl aspect-[21/9] flex items-center justify-center mt-10">
           {CREW.map((c, i) => {
             const a = ACCENT[c.tone];
             return (
               <div
                 key={c.index}
                 ref={(el) => { cardsRef.current[i] = el; }}
-                className="absolute flex flex-col md:flex-row items-center justify-center gap-8 p-8 md:p-10 rounded-[40px] border backdrop-blur-2xl pointer-events-none w-[90%] md:w-full"
+                className="absolute flex flex-col md:flex-row items-center justify-center gap-10 p-10 md:p-14 rounded-[40px] border backdrop-blur-2xl pointer-events-none w-[90%] md:w-full"
                 style={{
                   opacity: 0, // GSAP will animate this
-                  borderColor: a.rgba(0.25),
-                  background: `linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)`,
-                  boxShadow: `0 20px 40px -10px rgba(0,0,0,0.5), inset 0 0 20px ${a.rgba(0.1)}`,
+                  borderColor: a.rgba(0.4),
+                  background: `linear-gradient(160deg, rgba(10, 15, 30, 0.85) 0%, rgba(5, 10, 20, 0.95) 100%)`,
+                  boxShadow: `0 30px 60px -15px rgba(0,0,0,0.8), inset 0 0 30px ${a.rgba(0.15)}`,
                 }}
               >
                 {/* GIF */}
-                <div className="relative w-40 h-40 md:w-64 md:h-64 shrink-0">
+                <div className="relative w-48 h-48 md:w-80 md:h-80 shrink-0">
                   <img
                     src={c.gif}
                     alt={t(c.nameKey)}
@@ -169,7 +173,7 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
                     {t(c.roleKey)}
                   </span>
                   <h3
-                    className="text-4xl md:text-5xl text-white mb-4 tracking-tight"
+                    className="text-5xl md:text-7xl text-white mb-6 tracking-tight"
                     style={{
                       fontFamily: "'Space Grotesk', sans-serif",
                       fontWeight: 800,
@@ -180,7 +184,7 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
                     {t(c.nameKey)}
                   </h3>
                   <p
-                    className="text-white/80 text-base md:text-lg leading-relaxed"
+                    className="text-white/80 text-lg md:text-2xl leading-relaxed"
                     style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                   >
                     "{t(c.lineKey)}"
