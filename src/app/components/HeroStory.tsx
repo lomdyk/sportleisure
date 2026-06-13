@@ -164,13 +164,13 @@ export const HeroStory = () => {
       },
     });
 
-    // Giant 'Scroll to begin' shrinks and moves to bottom
+    // Giant 'Scroll to begin' shrinks and fades out completely as user scrolls past hero
     tl.to(scrollHintRef.current, {
       top: "90%",
       scale: 0.3,
-      opacity: 0.4,
-      duration: 0.08,
-      ease: "power2.inOut"
+      opacity: 0,
+      duration: 0.15,
+      ease: "power2.out",
     }, 0);
 
     // Story panels
@@ -237,8 +237,7 @@ export const HeroStory = () => {
 
       {/* Nebula glows */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
-        <div className="absolute top-1/4 left-[16%] w-[400px] h-[400px] bg-blue-600/[0.04] rounded-full blur-[130px]" />
-        <div className="absolute bottom-1/4 right-[16%] w-[350px] h-[350px] bg-violet-600/[0.04] rounded-full blur-[110px]" />
+        {/* Glows removed to prevent seams with next sections */}
       </div>
 
       <div className="absolute inset-0 z-[10] flex flex-col justify-end md:justify-center items-center md:items-start px-6 md:px-14 lg:px-24 pt-16 pb-24 md:py-0 pointer-events-none">
