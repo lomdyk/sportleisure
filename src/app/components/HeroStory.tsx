@@ -227,6 +227,7 @@ export const HeroStory = () => {
       zoomStart + 0.1
     );
     tl.to(overlayRef.current, { opacity: 0, duration: 0.03 }, zoomStart + 0.13);
+    tl.to(engineGlowRef.current, { opacity: 0, duration: 0.05 }, zoomStart + 0.13);
 
   }, { scope: containerRef, dependencies: [] });
 

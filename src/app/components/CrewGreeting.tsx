@@ -38,6 +38,8 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
   const ctaRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    const isMobile = window.innerWidth < 768;
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
@@ -49,53 +51,33 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
     });
 
     // Fade out title
-    tl.to(titleRef.current, { opacity: 0, y: -30, filter: "blur(10px)", duration: 0.6, ease: "power2.inOut" }, 0);
+    tl.to(titleRef.current, { opacity: 0, y: -20, duration: 0.5, ease: "power2.inOut" }, 0);
 
-    // Sequence the cards in a "Deck Stacking" animation
-    const cardDur = 1.0;
-    const overlap = 0.5; // Next card starts when current card is 50% done entering
-
+    // Sequence the cards
+    const cardDur = 1;
     CREW.forEach((_, i) => {
       const card = cardsRef.current[i];
       if (!card) return;
-      const start = 0.6 + i * cardDur * overlap;
+      const start = 0.5 + i * (cardDur + 0.2);
 
-      // Card flies in from below
+      // Card flies in
       tl.fromTo(card, 
-        { opacity: 0, scale: 0.8, y: 150, rotateX: 10 },
-        { opacity: 1, scale: 1, y: 0, rotateX: 0, duration: cardDur, ease: "power3.out" },
+        { opacity: 0, scale: 0.8, y: 50, x: isMobile ? 0 : (i % 2 === 0 ? 100 : -100) },
+        { opacity: 1, scale: 1, y: 0, x: 0, duration: cardDur, ease: "back.out(1.5)" },
         start
       );
 
-      // As SUBSEQUENT cards come in, push this card BACK and UP
-      for (let j = i + 1; j <= CREW.length; j++) {
-        const nextStart = 0.6 + j * cardDur * overlap;
-        const dist = j - i;
-        
-        if (j < CREW.length) {
-          // Pushed back by another card
-          tl.to(card, {
-            scale: 1 - dist * 0.08,
-            y: -dist * 50,
-            opacity: 1 - dist * 0.25,
-            filter: `blur(${dist * 3}px)`,
-            duration: cardDur,
-            ease: "power3.out"
-          }, nextStart);
-        } else {
-          // Final move when CTA appears (everyone moves up)
-          tl.to(card, {
-            y: -dist * 50 - 60, // push up extra for CTA
-            opacity: 0,
-            duration: cardDur * 0.8,
-            ease: "power2.inOut"
-          }, nextStart);
-        }
+      // Card fades out and scales down smoothly to make room for next
+      if (i < CREW.length - 1) {
+        tl.to(card, { opacity: 0, scale: 0.9, y: -50, duration: cardDur * 0.8, ease: "power2.in" }, start + cardDur + 0.2);
+      } else {
+        // Last card moves up slightly to make room for CTA
+        tl.to(card, { y: -80, duration: 0.8, ease: "power2.inOut" }, start + cardDur + 0.2);
       }
     });
 
     // Bring in CTA at the end
-    const ctaStart = 0.6 + CREW.length * cardDur * overlap;
+    const ctaStart = 0.5 + (CREW.length - 1) * (cardDur + 0.2) + cardDur + 0.2;
     tl.fromTo(ctaRef.current,
       { opacity: 0, y: 50, scale: 0.8 },
       { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(2)", pointerEvents: "auto" },
@@ -105,7 +87,7 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative w-full h-screen overflow-hidden flex items-center justify-center pointer-events-none" style={{ perspective: "1000px" }}>
+    <section ref={containerRef} className="relative w-full h-screen overflow-hidden flex items-center justify-center pointer-events-none">
       
       {/* NO background ambient glow to prevent seams with HeroStory */}
 
@@ -152,7 +134,7 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
         </div>
 
         {/* Cards container - absolutely positioned to overlay each other */}
-        <div className="relative w-full max-w-2xl aspect-[16/9] flex items-center justify-center mt-10" style={{ transformStyle: "preserve-3d" }}>
+        <div className="relative w-full max-w-2xl aspect-[16/9] flex items-center justify-center mt-10">
           {CREW.map((c, i) => {
             const a = ACCENT[c.tone];
             return (
@@ -162,33 +144,20 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
                 className="absolute flex flex-col md:flex-row items-center justify-center gap-8 p-8 md:p-10 rounded-[40px] border backdrop-blur-2xl pointer-events-none w-[90%] md:w-full"
                 style={{
                   opacity: 0, // GSAP will animate this
-                  borderColor: a.rgba(0.3),
-                  background: `linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%), ${a.rgba(0.02)}`,
-                  boxShadow: `0 30px 60px -15px rgba(0,0,0,0.6), inset 0 0 30px ${a.rgba(0.1)}`,
-                  transformOrigin: "center top",
-                  zIndex: CREW.length - i,
+                  borderColor: a.rgba(0.25),
+                  background: `linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)`,
+                  boxShadow: `0 20px 40px -10px rgba(0,0,0,0.5), inset 0 0 20px ${a.rgba(0.1)}`,
                 }}
               >
                 {/* GIF */}
-                <div
-                  className="relative w-40 h-40 md:w-64 md:h-64 rounded-[32px] overflow-hidden shrink-0"
-                  style={{
-                    borderColor: a.rgba(0.5),
-                    background: a.rgba(0.08),
-                    boxShadow: `0 0 40px ${a.rgba(0.3)}, inset 0 0 20px ${a.rgba(0.15)}`,
-                  }}
-                >
+                <div className="relative w-40 h-40 md:w-64 md:h-64 shrink-0">
                   <img
                     src={c.gif}
                     alt={t(c.nameKey)}
                     draggable={false}
-                    className="block w-full h-full object-cover select-none"
+                    className="block w-full h-full object-contain select-none filter drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                     onLoad={() => ScrollTrigger.refresh()}
                   />
-                  {/* Subtle glare */}
-                  <div className="absolute inset-0 pointer-events-none" style={{
-                    background: "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%)"
-                  }} />
                 </div>
 
                 {/* Text */}
