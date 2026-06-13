@@ -144,7 +144,10 @@ const FlipCard = ({
             inset: 0,
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
-            background: "rgba(255,255,255,0.025)",
+            backgroundColor: "rgba(5, 12, 30, 0.6)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+            backgroundImage: "linear-gradient(160deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)",
             border: `1px solid ${fact.color}25`,
             borderRadius: "16px",
             padding: "20px",
@@ -218,7 +221,10 @@ const FlipCard = ({
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
-            background: fact.color + "12",
+            backgroundColor: "rgba(5, 12, 30, 0.6)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+            backgroundImage: `linear-gradient(160deg, ${fact.color}15 0%, ${fact.color}05 100%)`,
             border: `1px solid ${fact.color}45`,
             borderRadius: "16px",
             padding: "20px",
@@ -387,9 +393,12 @@ export const Footer = ({ onRestart }: { onRestart?: () => void }) => {
                 }}
               >
                 <div
-                  className="p-6 sm:p-8 rounded-2xl border backdrop-blur-md transition-all duration-300"
+                  className="p-6 sm:p-8 rounded-2xl border transition-all duration-300"
                   style={{
-                    background: `linear-gradient(135deg, ${color}08, rgba(255,255,255,0.02))`,
+                    backgroundColor: "rgba(5, 12, 30, 0.7)",
+                    backdropFilter: "blur(20px)",
+                    WebkitBackdropFilter: "blur(20px)",
+                    backgroundImage: `linear-gradient(135deg, ${color}10, rgba(255,255,255,0.02))`,
                     borderColor: `${color}25`,
                     boxShadow: `0 4px 24px ${color}12`,
                   }}

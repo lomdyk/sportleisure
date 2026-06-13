@@ -48,7 +48,8 @@ const Card: React.FC<CardProps> = ({ index, icon: Icon, tone, titleKey, descKey,
         className="relative h-full flex flex-col p-6 md:p-7 rounded-[24px] border backdrop-blur-xl overflow-hidden"
         style={{
           borderColor: `${color}33`,
-          background:
+          backgroundColor: "rgba(5, 12, 30, 0.6)",
+          backgroundImage:
             "linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%)",
         }}
       >
