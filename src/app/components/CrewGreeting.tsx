@@ -144,7 +144,7 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
               <div
                 key={c.index}
                 ref={(el) => { cardsRef.current[i] = el; }}
-                className="glass-panel !transition-none absolute flex flex-col md:flex-row items-center justify-center gap-10 md:gap-14 p-8 md:p-12 pointer-events-none w-[90%] md:w-full will-change-transform"
+                className="glass-panel !transition-none absolute flex flex-col md:flex-row items-center justify-center gap-6 md:gap-14 p-6 md:p-12 pointer-events-none w-[90%] md:w-full will-change-transform"
                 style={{
                   transform: "translateY(150vh)", // Hidden below screen initially
                   borderColor: a.rgba(0.4),
@@ -153,12 +153,12 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
                 }}
               >
                 {/* GIANT Character GIF */}
-                <div className="relative w-56 h-56 md:w-80 md:h-80 shrink-0 flex items-center justify-center">
+                <div className="relative w-48 h-48 md:w-80 md:h-80 shrink-0 flex items-center justify-center">
                   <img
                     src={c.gif}
                     alt={t(c.nameKey)}
                     draggable={false}
-                    className="block w-full h-full object-contain select-none filter drop-shadow-[0_0_25px_rgba(255,255,255,0.2)] scale-[1.6] md:scale-[1.8]"
+                    className="block w-full h-full object-contain select-none filter drop-shadow-[0_0_25px_rgba(255,255,255,0.2)] scale-[1.4] md:scale-[1.8]"
                     onLoad={() => ScrollTrigger.refresh()}
                   />
                 </div>
@@ -194,7 +194,7 @@ export const CrewGreeting: React.FC<Props> = ({ onContinue }) => {
         </div>
 
         {/* CTA */}
-        <div ref={ctaRef} className="absolute bottom-12 left-1/2 -translate-x-1/2 pointer-events-none" style={{ opacity: 0 }}>
+        <div ref={ctaRef} className="absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 pointer-events-none z-[20]" style={{ opacity: 0 }}>
           <GhostButton tone="cyan" size="lg" icon={<Gamepad2 className="w-5 h-5" />} onClick={onContinue}>
             Enter Locker Room
           </GhostButton>
