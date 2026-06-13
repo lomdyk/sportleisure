@@ -164,12 +164,12 @@ export const HeroStory = () => {
       },
     });
 
-    // Giant 'Scroll to begin' shrinks and fades out completely as user scrolls past hero
+    // Move the 'Scroll to begin' down and shrink it so it stays visible as an indicator
     tl.to(scrollHintRef.current, {
       top: "90%",
-      scale: 0.3,
-      opacity: 0,
-      duration: 0.15,
+      scale: 0.5,
+      opacity: 0.5,
+      duration: 0.1,
       ease: "power2.out",
     }, 0);
 
@@ -214,6 +214,9 @@ export const HeroStory = () => {
       { opacity: 0, duration: 0.06 },
       zoomStart
     );
+    
+    // Completely fade out the scroll hint at the end
+    tl.to(scrollHintRef.current, { opacity: 0, scale: 0, duration: 0.06 }, zoomStart);
     tl.fromTo(
       engineGlowRef.current,
       { opacity: 0, scale: 0.3 },
