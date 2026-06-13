@@ -164,11 +164,11 @@ export const HeroStory = () => {
       },
     });
 
-    // Move the 'Scroll to begin' down and fade it so it stays visible as a subtle indicator
+    // Move the 'Scroll to begin' down and shrink it so it stays visible as an indicator
     tl.to(scrollHintRef.current, {
       top: "90%",
-      scale: 0.8,
-      opacity: 0.3,
+      scale: 0.5,
+      opacity: 0.5,
       duration: 0.1,
       ease: "power2.out",
     }, 0);
@@ -307,14 +307,14 @@ export const HeroStory = () => {
       {/* Scroll hint */}
       <div 
         ref={scrollHintRef}
-        className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-[30] flex flex-col items-center gap-3"
-        style={{ top: "80%" }}
+        className="absolute left-0 w-full px-4 -translate-y-1/2 z-[30] flex flex-col items-center gap-4"
+        style={{ top: "50%" }}
       >
-        <p className="text-xs sm:text-sm text-white/70 font-semibold uppercase tracking-[0.4em] text-center" >
+        <p className="text-3xl sm:text-5xl text-white font-bold uppercase tracking-widest text-center leading-tight" >
           {t("ui.scrollBegin")}
         </p>
-        <svg className="animate-bounce" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 5v14m0 0l-6-6m6 6l6-6" />
+        <svg className="animate-bounce" width="40" height="40" viewBox="0 0 20 20" fill="none">
+          <path d="M10 4v12m0 0l-4-4m4 4l4-4" stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
     </div>
