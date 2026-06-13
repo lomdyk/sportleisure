@@ -3,9 +3,15 @@ import { motion, animate, useMotionValue, useTransform } from "motion/react";
 import { useProgress } from "@react-three/drei";
 
 export const Preloader = () => {
-  const { progress } = useProgress();
+  const { progress: realProgress } = useProgress();
   const [show, setShow] = useState(true);
   const [isDone, setIsDone] = useState(false);
+  const [isMobileScreen, setIsMobileScreen] = useState(false);
+  const [simulatedProgress, setSimulatedProgress] = useState(0);
+
+  useEffect(() => {
+    setIsMobileScreen(window.innerWidth < 768);
+  }, []);
 
   // We want to ensure the preloader shows for at least a minimum time (e.g. 1.5s)
   const [minTimeElapsed, setMinTimeElapsed] = useState(false);
@@ -20,18 +26,35 @@ export const Preloader = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Simulate progress on mobile because 3D assets are not loaded
+  useEffect(() => {
+    if (!isMobileScreen) return;
+    let val = 0;
+    const interval = setInterval(() => {
+      val += Math.random() * 15 + 5;
+      if (val >= 100) {
+        val = 100;
+        clearInterval(interval);
+      }
+      setSimulatedProgress(val);
+    }, 150);
+    return () => clearInterval(interval);
+  }, [isMobileScreen]);
+
+  const activeProgress = isMobileScreen ? simulatedProgress : realProgress;
+
   useEffect(() => {
     // Smoothly animate to the actual progress value
-    const controls = animate(animatedProgress, progress, {
+    const controls = animate(animatedProgress, activeProgress, {
       duration: 0.8,
       ease: "easeOut",
     });
     return controls.stop;
-  }, [progress, animatedProgress]);
+  }, [activeProgress, animatedProgress]);
 
   useEffect(() => {
     // If progress is 100% AND min time has passed, we are done
-    if (progress === 100 && minTimeElapsed) {
+    if (activeProgress === 100 && minTimeElapsed) {
       setIsDone(true);
       // Wait for column slide animation to finish before unmounting completely
       const timer = setTimeout(() => {
@@ -39,7 +62,7 @@ export const Preloader = () => {
       }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [progress, minTimeElapsed]);
+  }, [activeProgress, minTimeElapsed]);
 
   // Lock body scroll while loading
   useEffect(() => {
