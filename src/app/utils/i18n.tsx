@@ -68,8 +68,8 @@ export const TRANSLATIONS: Dict = {
   },
   "fuel.clean": { en: "Super-Fuel", de: "Super-Treibstoff" },
   "fuel.cleanDesc": { 
-    en: "Fruits, veggies, and your PKU formula are your Super-Fuel. They give your body the power to stay active!", 
-    de: "Obst, Gemüse und deine PKU-Formel sind dein Super-Treibstoff. Sie geben deinem Körper die Kraft, um aktiv zu bleiben!" 
+    en: "Fruits, veggies, and your PKU formula are your Super-Fuel. Your formula is like a magic potion—no toxic Phe, but packed with Tyrosine to keep your muscles strong!", 
+    de: "Obst, Gemüse und deine PKU-Formel sind dein Super-Treibstoff. Deine Formel ist wie ein Zaubertrank — ohne giftiges Phe, aber voller Tyrosin, um deine Muskeln stark zu halten!" 
   },
   "fuel.heavy": { en: "Heavy Food", de: "Schweres Essen" },
   "fuel.heavyDesc": { 
@@ -100,8 +100,8 @@ export const TRANSLATIONS: Dict = {
   "m2.tag": { en: "Mission 02 - The Stadium Tunnel", de: "Mission 02 - Der Stadiontunnel" },
   "m2.title": { en: "Social Trial", de: "Soziale Herausforderung" },
   "m2.dialogue": {
-    en: "You arrive at the stadium with Luna. As you walk through the stadium tunnel, a stranger from another team offers you a heavy, high-protein snack.",
-    de: "Du kommst mit Luna am Stadion an. Als du durch den Stadiontunnel gehst, bietet dir ein Fremder aus einem anderen Team einen schweren, proteinreichen Snack an.",
+    en: "\"Hey Captain, we are at the stadium! Watch out, a stranger from another team is walking through the tunnel offering heavy, high-protein snacks.\"",
+    de: "\"Hey Kapitän, wir sind am Stadion! Pass auf, ein Fremder aus einem anderen Team geht durch den Tunnel und bietet schwere, proteinreiche Snacks an.\"",
   },
   "m2.objective": {
     en: "You need to practice saying 'no, thank you'. Learn how to confidently explain that you have a special sports diet to stay fast!",
@@ -135,8 +135,8 @@ export const TRANSLATIONS: Dict = {
   "ui.scrollBegin": { en: "Scroll to begin", de: "Scrolle, um zu beginnen" },
   "ui.objective": { en: "Objective", de: "Ziel" },
   "ui.scrollSkip": { en: "Scroll to skip to next section", de: "Scrolle, um zum nächsten Abschnitt zu springen" },
-  "ui.timeTo": { en: "Time to", de: "Zeit zu" },
-  "ui.train": { en: "Train", de: "Trainieren" },
+  "ui.timeTo": { en: "Time for", de: "Zeit fürs" },
+  "ui.train": { en: "Training", de: "Training" },
   "log.1.author": { en: "Captain Nova", de: "Kapitän Nova" },
   "log.1.text": {
     en: "Always drink your formula before a big match. It is the best way to get instant energy! Never skip it if you want to win.",
@@ -252,18 +252,18 @@ export const TRANSLATIONS: Dict = {
   "app.title": { en: "PKU Academy - Interactive Space Adventure and Dietary Training", de: "PKU Akademie - Interaktives Weltraumabenteuer und Diättraining" },
 
   // Footer Facts
-  "fact.0.title": { en: "What Happens Inside", de: "Was im Körper passiert" },
-  "fact.0.short": { en: "Your body's engine works differently.", de: "Der Motor deines Körpers funktioniert anders." },
-  "fact.0.text": { en: "In PKU, your body is missing a part of its engine. It can't process an amino acid called Phe found in regular protein. That's why managing your sports fuel is so important!", de: "Bei PKU fehlt deinem Körper ein Teil seines Motors. Er kann eine Aminosäure namens Phe, die in normalem Protein vorkommt, nicht verarbeiten. Deshalb ist es so wichtig, deinen Sport-Treibstoff zu kontrollieren!" },
-  "fact.1.title": { en: "Early Detection", de: "Frühe Erkennung" },
-  "fact.1.short": { en: "Caught from the start.", de: "Von Anfang an entdeckt." },
-  "fact.1.text": { en: "PKU is detected early on. This means you get to start your special sports diet right away, giving you the best chance to become a strong athlete.", de: "PKU wird frühzeitig erkannt. Das bedeutet, dass du sofort mit deiner speziellen Sportdiät beginnen kannst, was dir die besten Chancen gibt, ein starker Athlet zu werden." },
-  "fact.2.title": { en: "Your Special Diet", de: "Deine spezielle Diät" },
-  "fact.2.short": { en: "Fruits, veggies, formula = power.", de: "Obst, Gemüse, Formel = Kraft." },
-  "fact.2.text": { en: "Most fruits, vegetables, and special low-protein foods are your safe energy. PKU formula gives you all the essential building blocks for sports without the heavy Phe.", de: "Die meisten Obst- und Gemüsesorten sowie spezielle eiweißarme Lebensmittel sind deine sichere Energiequelle. Die PKU-Formel liefert dir alle wichtigen Bausteine für den Sport ohne das schwere Phe." },
-  "fact.3.title": { en: "A Global Community", de: "Eine weltweite Gemeinschaft" },
-  "fact.3.short": { en: "1 in 10,000 — you are not alone.", de: "1 von 10.000 — du bist nicht allein." },
-  "fact.3.text": { en: "About 1 in 10,000 babies worldwide are born with PKU. You are part of a massive team of athletes training every day!", de: "Etwa 1 von 10.000 Babys weltweit wird mit PKU geboren. Du bist Teil eines riesigen Teams von Athleten, die jeden Tag trainieren!" },
+  "fact.0.title": { en: "Your Body's Construction Site", de: "Die Baustelle deines Körpers" },
+  "fact.0.short": { en: "The missing hammer.", de: "Der fehlende Hammer." },
+  "fact.0.text": { en: "In PKU, your body is like a construction site missing a specific 'hammer' (enzyme) to break down protein. It can't process an amino acid called Phe. That's why managing your sports fuel is so important!", de: "Bei PKU ist dein Körper wie eine Baustelle, der ein bestimmter 'Hammer' (Enzym) fehlt, um Protein abzubauen. Er kann eine Aminosäure namens Phe nicht verarbeiten. Deshalb ist dein spezieller Sport-Treibstoff so wichtig!" },
+  "fact.1.title": { en: "Never Fly on Empty!", de: "Niemals mit leerem Tank fliegen!" },
+  "fact.1.short": { en: "Skipping meals is dangerous.", de: "Mahlzeiten auslassen ist gefährlich." },
+  "fact.1.text": { en: "If you skip breakfast, your body burns its own muscle for energy. Muscle contains Phe, so fasting actually raises your toxic Phe levels! Always fuel up before training.", de: "Wenn du das Frühstück auslässt, verbrennt dein Körper eigene Muskeln für Energie. Muskeln enthalten Phe, also erhöht Fasten deine giftigen Phe-Werte! Tanke vor dem Training immer auf." },
+  "fact.2.title": { en: "Protect the Command Center", de: "Schütze das Kommandozentrum" },
+  "fact.2.short": { en: "Avoid the Phe fog.", de: "Vermeide den Phe-Nebel." },
+  "fact.2.text": { en: "If too much Phe builds up from heavy foods, it travels to your brain like space dust. This causes brain fog, anger, and loss of focus—the biggest enemies of any athlete.", de: "Wenn sich zu viel Phe aus schwerem Essen ansammelt, wandert es wie Weltraumstaub ins Gehirn. Das verursacht Gehirnnebel, Wut und Konzentrationsverlust — die größten Feinde eines jeden Athleten." },
+  "fact.3.title": { en: "The Missing Building Block", de: "Der fehlende Baustein" },
+  "fact.3.short": { en: "Tyrosine gives you power.", de: "Tyrosin gibt dir Kraft." },
+  "fact.3.text": { en: "Because the 'hammer' is missing, your body doesn't produce Tyrosine, a vital building block for athletes. That's exactly why your Super-Fuel (amino acid mix) is packed with it!", de: "Weil der 'Hammer' fehlt, produziert dein Körper kein Tyrosin, einen wichtigen Baustein für Sportler. Genau deshalb ist dein Super-Treibstoff (Aminosäurenmischung) voll davon!" },
   "fact.4.title": { en: "Science is Helping", de: "Wissenschaft hilft" },
   "fact.4.short": { en: "New discoveries every year.", de: "Jedes Jahr neue Entdeckungen." },
   "fact.4.text": { en: "Sports scientists and researchers are always finding new ways to help athletes with PKU get the best out of their training!", de: "Sportwissenschaftler und Forscher finden ständig neue Wege, um Athleten mit PKU zu helfen, das Beste aus ihrem Training herauszuholen!" },
@@ -311,6 +311,59 @@ export const TRANSLATIONS: Dict = {
   "footer.madeWith": { en: "Made with", de: "Gemacht mit" },
   "footer.forAthletes": { en: "for young athletes with PKU", de: "für junge Athleten mit PKU" },
   "footer.eduProject": { en: "PKU Academy — Educational Project", de: "PKU Akademie — Bildungsprojekt" },
+
+  // Pre-Test
+  "pretest.title": { en: "Academic Research", de: "Akademische Forschung" },
+  "pretest.intro": { 
+    en: "Welcome to the PKU Academy Simulation! This is an interactive educational project designed to raise awareness about Phenylketonuria (PKU). Before you begin your mission, please answer three quick questions to help us with our academic research.", 
+    de: "Willkommen zur PKU-Akademie-Simulation! Dies ist ein interaktives Bildungsprojekt, das das Bewusstsein für Phenylketonurie (PKU) schärfen soll. Bevor du deine Mission beginnst, beantworte bitte drei kurze Fragen, um uns bei unserer akademischen Forschung zu helfen." 
+  },
+  "pretest.age": { en: "1. What is your age group?", de: "1. Was ist deine Altersgruppe?" },
+  "pretest.age.u18": { en: "Under 18", de: "Unter 18" },
+  "pretest.age.18_25": { en: "18-25", de: "18-25" },
+  "pretest.age.26_35": { en: "26-35", de: "26-35" },
+  "pretest.age.35p": { en: "35+", de: "35+" },
+  
+  "pretest.pku": { en: "2. Did you know about PKU before this site?", de: "2. Wusstest du vor dieser Website über PKU Bescheid?" },
+  "pretest.pku.yes": { en: "Yes", de: "Ja" },
+  "pretest.pku.heard": { en: "I've heard of it", de: "Ich habe davon gehört" },
+  "pretest.pku.no": { en: "No", de: "Nein" },
+
+  "pretest.diet": { en: "3. Do you have any food allergies or special dietary restrictions?", de: "3. Hast du Lebensmittelallergien oder spezielle diätetische Einschränkungen?" },
+  "pretest.diet.yes": { en: "Yes", de: "Ja" },
+  "pretest.diet.no": { en: "No", de: "Nein" },
+  "pretest.start": { en: "Start Mission", de: "Mission starten" },
+  "pretest.note": { en: "Note: Take your time to explore the site, there is a lot of hidden information. When you reach the very bottom, click the 'Finish Simulation & Evaluate' button.", de: "Hinweis: Nimm dir Zeit, die Seite zu erkunden, es gibt viele versteckte Informationen. Wenn du ganz unten angelangt bist, klicke auf die Schaltfläche 'Simulation beenden & Bewerten'." },
+
+  // Post-Test
+  "posttest.title": { en: "Mission Evaluation", de: "Missionsbewertung" },
+  "posttest.intro": { en: "Thank you for completing the simulation! Please answer a few questions about your experience.", de: "Vielen Dank für den Abschluss der Simulation! Bitte beantworte ein paar Fragen zu deiner Erfahrung." },
+  
+  "posttest.design": { en: "1. Rate the visual design and 3D graphics:", de: "1. Bewerte das visuelle Design und die 3D-Grafik:" },
+  "posttest.clarity": { en: "2. How clear and understandable were the minigames?", de: "2. Wie klar und verständlich waren die Minispiele?" },
+  
+  "posttest.knowledge": { en: "3. What is the most critical dietary restriction for someone with PKU?", de: "3. Was ist die wichtigste diätetische Einschränkung für jemanden mit PKU?" },
+  "posttest.know.sugar": { en: "A) Avoiding sugar", de: "A) Vermeidung von Zucker" },
+  "posttest.know.protein": { en: "B) Avoiding high-protein foods", de: "B) Vermeidung von proteinreichen Lebensmitteln" },
+  "posttest.know.gluten": { en: "C) Avoiding gluten", de: "C) Vermeidung von Gluten" },
+  "posttest.know.dk": { en: "D) I don't know", de: "D) Ich weiß es nicht" },
+  
+  "posttest.empathy": { en: "4. Did the Sports Academy and 'Super-Fuel' theme make it easier to understand PKU?", de: "4. Hat das Thema 'Sport-Akademie' und 'Super-Treibstoff' geholfen, PKU besser zu verstehen?" },
+  "posttest.emp.yes": { en: "🤩 Yes, much more engaging", de: "🤩 Ja, viel spannender" },
+  "posttest.emp.somewhat": { en: "🙂 It was okay", de: "🙂 Es war in Ordnung" },
+  "posttest.emp.no": { en: "😐 No, prefer medical texts", de: "😐 Nein, bevorzuge medizinische Texte" },
+
+  "posttest.impact": { en: "5. Do you believe people with PKU can be successful athletes?", de: "5. Glaubst du, dass Menschen mit PKU erfolgreiche Sportler sein können?" },
+  "posttest.imp.yes": { en: "✅ Yes, with the right diet", de: "✅ Ja, mit der richtigen Diät" },
+  "posttest.imp.maybe": { en: "🤔 Maybe, but it's hard", de: "🤔 Vielleicht, aber es ist schwer" },
+  "posttest.imp.no": { en: "❌ No", de: "❌ Nein" },
+
+  "posttest.feedback": { en: "6. Any feedback or thoughts? (Optional)", de: "6. Irgendwelche Rückmeldungen oder Gedanken? (Optional)" },
+  "posttest.placeholder": { en: "I would like to change...", de: "Ich möchte ändern..." },
+  "posttest.submit": { en: "Submit Report", de: "Bericht absenden" },
+  "posttest.cancel": { en: "Cancel", de: "Abbrechen" },
+  "posttest.success": { en: "Mission Accomplished!", de: "Mission erfüllt!" },
+  "posttest.successSub": { en: "Your data has been sent to the research lab. Thank you!", de: "Deine Daten wurden an das Forschungslabor gesendet. Vielen Dank!" },
 
 };
 

@@ -4,6 +4,7 @@ import { Play, RotateCcw, Zap, Trophy } from "lucide-react";
 import { GhostButton } from "./ui/GhostButton";
 import { useLang } from "../utils/i18n";
 import { soundEngine } from "../utils/audioEngine";
+import { metricsActions } from "../store/metricsStore";
 
 import runnerGif from "../../imports/ezgif.com-crop.gif";
 import cheeseImg from "../../imports/сыр_ОНА_ДОЛЖНА_202604161846_(1).png";
@@ -107,6 +108,7 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   };
 
   const startGame = useCallback(() => {
+    metricsActions.incrementAttempt('m3');
     clearEntities();
     playerYRef.current = 0;
     velYRef.current = 0;
@@ -244,6 +246,7 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             continue;
           } else if (!invincible) {
             gameOver = true;
+            metricsActions.recordMistake('m3');
             soundEngine.clickThunk();
           } else {
             // Эффект разрушения на 4 куска (разрыв)!

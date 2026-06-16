@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useLang } from "../utils/i18n";
 import { soundEngine } from "../utils/audioEngine";
+import { metricsActions } from "../store/metricsStore";
 
 // ─── PKU Facts ────────────────────────────────────────────────────────────────
 
@@ -76,7 +77,11 @@ const FlipCard = ({
       // Height stays fixed so the card doesn't collapse
       style={{ perspective: "800px", height: "200px" }}
       className="w-full cursor-pointer"
-      onClick={() => { setFlipped((f) => !f); soundEngine.clickSwitch(); }}
+      onClick={() => {
+        if (!flipped) metricsActions.recordCardFlip();
+        setFlipped((f) => !f);
+        soundEngine.clickSwitch();
+      }}
     >
       {/* Inner rotating container */}
       <div

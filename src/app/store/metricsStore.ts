@@ -9,6 +9,7 @@ export interface TestSession {
   // Pre-test
   age_group: string;
   pku_knowledge: string;
+  dietary_restrictions: string; // "yes" or "no"
   
   // Metrics
   language: string;
@@ -20,11 +21,21 @@ export interface TestSession {
   max_scroll_depth: string;
   games_completed: string[];
   game_start_method: Record<string, string>; // e.g. { m1: 'overlay', m2: 'button' }
+  m1_attempts: number;
+  m2_attempts: number;
+  m3_attempts: number;
+  m1_mistakes: number;
+  m3_collisions: number;
+  footer_cards_flipped: number;
+  downloaded_pdf: boolean;
+  downloaded_game: boolean;
   
   // Post-test
   rating_design: number;
   rating_clarity: number;
-  learned_new: boolean | null;
+  knowledge_check: string; // The selected answer option
+  empathy_impact: string;
+  behavioral_intent: string;
   feedback: string;
 }
 
@@ -33,6 +44,7 @@ const initialState: TestSession = {
   completed: false,
   age_group: '',
   pku_knowledge: '',
+  dietary_restrictions: '',
   language: 'en',
   is_mobile: false,
   time_spent_total: 0,
@@ -42,9 +54,19 @@ const initialState: TestSession = {
   max_scroll_depth: 'hero',
   games_completed: [],
   game_start_method: {},
+  m1_attempts: 0,
+  m2_attempts: 0,
+  m3_attempts: 0,
+  m1_mistakes: 0,
+  m3_collisions: 0,
+  footer_cards_flipped: 0,
+  downloaded_pdf: false,
+  downloaded_game: false,
   rating_design: 0,
   rating_clarity: 0,
-  learned_new: null,
+  knowledge_check: '',
+  empathy_impact: '',
+  behavioral_intent: '',
   feedback: '',
 };
 
@@ -57,10 +79,11 @@ export const metricsActions = {
     activeMissionId = mission;
   },
 
-  initSession(ageGroup: string, pkuKnowledge: string, language: string) {
+  initSession(ageGroup: string, pkuKnowledge: string, restrictions: string, language: string) {
     metricsState.id = uuidv4();
     metricsState.age_group = ageGroup;
     metricsState.pku_knowledge = pkuKnowledge;
+    metricsState.dietary_restrictions = restrictions;
     metricsState.language = language;
     metricsState.is_mobile = window.innerWidth < 768;
     
@@ -91,12 +114,39 @@ export const metricsActions = {
       this.syncToDb(); // sync whenever they finish a game
     }
   },
+
+  incrementAttempt(missionId: 'm1' | 'm2' | 'm3') {
+    if (missionId === 'm1') metricsState.m1_attempts += 1;
+    if (missionId === 'm2') metricsState.m2_attempts += 1;
+    if (missionId === 'm3') metricsState.m3_attempts += 1;
+    this.syncToDb();
+  },
+
+  recordMistake(missionId: 'm1' | 'm3', amount: number = 1) {
+    if (missionId === 'm1') metricsState.m1_mistakes += amount;
+    if (missionId === 'm3') metricsState.m3_collisions += amount;
+  },
+
+  recordCardFlip() {
+    metricsState.footer_cards_flipped += 1;
+  },
   
   addTime(category: 'total' | 'm1' | 'm2' | 'm3', seconds: number) {
     if (category === 'total') metricsState.time_spent_total += seconds;
     if (category === 'm1') metricsState.time_spent_m1 += seconds;
     if (category === 'm2') metricsState.time_spent_m2 += seconds;
     if (category === 'm3') metricsState.time_spent_m3 += seconds;
+  },
+
+  recordDownload(type: 'pdf' | 'game') {
+    if (type === 'pdf' && !metricsState.downloaded_pdf) {
+      metricsState.downloaded_pdf = true;
+      this.syncToDb();
+    }
+    if (type === 'game' && !metricsState.downloaded_game) {
+      metricsState.downloaded_game = true;
+      this.syncToDb();
+    }
   },
 
   async syncToDb(isInitial = false) {
@@ -112,6 +162,7 @@ export const metricsActions = {
             id: state.id,
             age_group: state.age_group,
             pku_knowledge: state.pku_knowledge,
+            dietary_restrictions: state.dietary_restrictions,
             language: state.language,
             is_mobile: state.is_mobile,
             max_scroll_depth: state.max_scroll_depth,
@@ -127,17 +178,28 @@ export const metricsActions = {
           max_scroll_depth: state.max_scroll_depth,
           games_completed: [...state.games_completed],
           game_start_method: state.game_start_method,
+          m1_attempts: state.m1_attempts,
+          m2_attempts: state.m2_attempts,
+          m3_attempts: state.m3_attempts,
+          m1_mistakes: state.m1_mistakes,
+          m3_collisions: state.m3_collisions,
+          footer_cards_flipped: state.footer_cards_flipped,
+          downloaded_pdf: state.downloaded_pdf,
+          downloaded_game: state.downloaded_game,
           completed: state.completed,
           rating_design: state.rating_design,
           rating_clarity: state.rating_clarity,
-          learned_new: state.learned_new,
+          knowledge_check: state.knowledge_check,
+          empathy_impact: state.empathy_impact,
+          behavioral_intent: state.behavioral_intent,
           feedback: state.feedback,
         }).eq('id', state.id);
         
         if (error) {
           console.error("Update error:", error);
-          // Only alert once so it doesn't spam every 5 seconds
-          if (!metricsState.completed && state.time_spent_total < 15) {
+          if (state.completed) {
+            alert("Failed to submit final report: " + error.message);
+          } else if (state.time_spent_total < 15) {
             alert("Database Error: " + error.message);
           }
         }
@@ -147,10 +209,12 @@ export const metricsActions = {
     }
   },
 
-  finishSession(design: number, clarity: number, learned: boolean, feedback: string) {
+  finishSession(design: number, clarity: number, knowledgeCheck: string, empathyImpact: string, behavioralIntent: string, feedback: string) {
     metricsState.rating_design = design;
     metricsState.rating_clarity = clarity;
-    metricsState.learned_new = learned;
+    metricsState.knowledge_check = knowledgeCheck;
+    metricsState.empathy_impact = empathyImpact;
+    metricsState.behavioral_intent = behavioralIntent;
     metricsState.feedback = feedback;
     metricsState.completed = true;
     

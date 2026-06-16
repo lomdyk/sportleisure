@@ -39,12 +39,12 @@ function AppInner() {
   const [completed, setCompleted] = useState({ m1: false, m2: false, m3: false });
   const [scrollTarget, setScrollTarget] = useState<{ id: string; behavior: ScrollBehavior } | null>(null);
   const [showPostTest, setShowPostTest] = useState(false);
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const session = useSnapshot(metricsState);
 
   // Lock body scroll when a game is active or Pre-test is active
   useEffect(() => {
-    const isOverlayActive = activeScene !== "main" || !session.id;
+    const isOverlayActive = activeScene !== "main" || !session.id || showPostTest;
     scrollState.isGameActive = isOverlayActive;
     
     if (isOverlayActive) {
@@ -58,7 +58,7 @@ function AppInner() {
       document.body.style.overflow = "";
       if ((window as any).lenis) (window as any).lenis.start();
     };
-  }, [activeScene, session.id]);
+  }, [activeScene, session.id, showPostTest]);
 
   // Handle scrolling to a target when returning to main scene
   useEffect(() => {
@@ -73,6 +73,11 @@ function AppInner() {
     });
     
     (window as any).lenis = lenis;
+
+    // Immediately stop lenis if overlay is active on mount
+    if (session.id === '') {
+      lenis.stop();
+    }
 
     lenis.on('scroll', ScrollTrigger.update);
 
@@ -155,12 +160,14 @@ function AppInner() {
 
   const handleStartGame1 = useCallback((method: 'overlay' | 'text_button') => {
     metricsActions.recordGameStart('m1', method);
+    metricsActions.incrementAttempt('m1');
     setGameKey((k) => k + 1);
     setActiveScene("backpack");
   }, []);
 
   const handleStartGame2 = useCallback((method: 'overlay' | 'text_button') => {
     metricsActions.recordGameStart('m2', method);
+    metricsActions.incrementAttempt('m2');
     setGameKey((k) => k + 1);
     setActiveScene("communication");
   }, []);
@@ -219,11 +226,10 @@ function AppInner() {
       
       <AnimatePresence>
         {!session.id && (
-          <PreTestModal 
-            key="pretest"
-            onSubmit={(age, knowledge) => {
-              metricsActions.initSession(age, knowledge, navigator.language || 'en');
-            }} 
+          <PreTestModal
+            onSubmit={(age, knowledge, restrictions) => {
+              metricsActions.initSession(age, knowledge, restrictions, lang);
+            }}
           />
         )}
         
@@ -231,8 +237,8 @@ function AppInner() {
           <PostTestModal 
             key="posttest"
             onClose={() => setShowPostTest(false)}
-            onSubmit={async (design, clarity, learned, feedback) => {
-              await metricsActions.finishSession(design, clarity, learned, feedback);
+            onSubmit={async (design, clarity, knowledge, empathy, impact, feedback) => {
+              await metricsActions.finishSession(design, clarity, knowledge, empathy, impact, feedback);
             }}
           />
         )}

@@ -15,6 +15,7 @@ interface CardProps {
   descKey: string;
   pdfHref?: string;
   image?: string;
+  downloadType: 'pdf' | 'game';
 }
 
 const TONE_HEX: Record<CardProps["tone"], string> = {
@@ -24,7 +25,9 @@ const TONE_HEX: Record<CardProps["tone"], string> = {
   amber: "#fbbf24",
 };
 
-const Card: React.FC<CardProps> = ({ index, icon: Icon, tone, titleKey, descKey, pdfHref, image }) => {
+import { metricsActions } from "../store/metricsStore";
+
+const Card: React.FC<CardProps> = ({ index, icon: Icon, tone, titleKey, descKey, pdfHref, image, downloadType }) => {
   const { t } = useLang();
   const color = TONE_HEX[tone];
   const ready = !!pdfHref;
@@ -124,7 +127,7 @@ const Card: React.FC<CardProps> = ({ index, icon: Icon, tone, titleKey, descKey,
 
         <div className="relative">
           {ready ? (
-            <a href={pdfHref} download className="inline-block">
+            <a href={pdfHref} download className="inline-block" onClick={() => metricsActions.recordDownload(downloadType)}>
               <GhostButton
                 size="md"
                 color={color}
@@ -216,6 +219,7 @@ export const OfflineDownloads: React.FC = () => {
             descKey="dl.card1.desc"
             image={flightMapImg}
             pdfHref={flightMapImg}
+            downloadType="pdf"
           />
           <Card
             index={1}
@@ -225,6 +229,7 @@ export const OfflineDownloads: React.FC = () => {
             descKey="dl.card2.desc"
             image={rallyImg}
             pdfHref={rallyImg}
+            downloadType="game"
           />
         </div>
       </div>

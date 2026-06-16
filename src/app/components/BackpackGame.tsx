@@ -5,6 +5,7 @@ import { Backpack, Shield, AlertTriangle, CheckCircle2, ChevronDown, RotateCcw }
 import { GhostButton } from "./ui/GhostButton";
 import { useLang } from "../utils/i18n";
 import { soundEngine } from "../utils/audioEngine";
+import { metricsActions } from "../store/metricsStore";
 
 import appleImg from "../../imports/яблоко_plasticine-style___202604161826-removebg-preview.png";
 import carrotImg from "../../imports/морковь_ОНА_ДОЛЖНА_202604161845_(1).png";
@@ -89,6 +90,7 @@ export const BackpackGame = ({
       soundEngine.clickWood();
       setBackpackGlow("warning");
       setShakeBackpack(true);
+      metricsActions.recordMistake('m1');
       showMessage(t("game.bp.msg.unsafe"), "error");
       setTimeout(() => {
         setBackpackGlow("neutral");
@@ -116,6 +118,7 @@ export const BackpackGame = ({
     } else {
       soundEngine.clickWood();
       setQuarantineGlow("neutral");
+      metricsActions.recordMistake('m1');
       showMessage(t("game.bp.msg.safeToTrash"), "error");
     }
     if (selected === id) setSelected(null);
