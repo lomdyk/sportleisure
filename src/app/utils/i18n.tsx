@@ -61,14 +61,14 @@ export const TRANSLATIONS: Dict = {
     en: "Today is a big day! You and your Galactic Crew are preparing for a massive sports tournament.", 
     de: "Heute ist ein großer Tag! Du und deine galaktische Crew bereiten sich auf ein großes Sportturnier vor." 
   },
-  "pku.title": { en: "Your Sports Energy", de: "Deine Sportenergie" },
+  "pku.title": { en: "The Broken Hammer", de: "Der kaputte Hammer" },
   "pku.desc": { 
-    en: "When you play sports, your body uses a lot of energy. Some foods make you tired, but your special PKU diet keeps your muscles strong and ready to win.", 
-    de: "Wenn du Sport treibst, verbraucht dein Körper viel Energie. Manche Lebensmittel machen dich müde, aber deine spezielle PKU-Diät hält deine Muskeln stark und bereit zum Gewinnen." 
+    en: "In PKU, your body's engine is missing a specific 'hammer' to break down a protein part called Phe. If you don't manage it, Phe builds up like toxic dust.", 
+    de: "Bei PKU fehlt dem Motor deines Körpers ein bestimmter 'Hammer', um ein Proteinteil namens Phe abzubauen. Wenn du es nicht kontrollierst, baut sich Phe wie giftiger Staub auf." 
   },
-  "fuel.clean": { en: "Super-Fuel", de: "Super-Treibstoff" },
+  "fuel.clean": { en: "Formula Power", de: "Formel-Kraft" },
   "fuel.cleanDesc": { 
-    en: "Fruits, veggies, and your PKU formula are your Super-Fuel. Your formula is like a magic potion—no toxic Phe, but packed with Tyrosine to keep your muscles strong!", 
+    en: "Fruits, veggies, and your PKU formula are your Formula Power. Your formula is like a magic potion—no toxic Phe, but packed with Tyrosine to keep your muscles strong!", 
     de: "Obst, Gemüse und deine PKU-Formel sind dein Super-Treibstoff. Deine Formel ist wie ein Zaubertrank — ohne giftiges Phe, aber voller Tyrosin, um deine Muskeln stark zu halten!" 
   },
   "fuel.heavy": { en: "Heavy Food", de: "Schweres Essen" },
@@ -85,12 +85,12 @@ export const TRANSLATIONS: Dict = {
   "m1.tag": { en: "Mission 01 - Pack with Luna", de: "Mission 01 - Mit Luna packen" },
   "m1.title": { en: "Pack the Team Backpack", de: "Den Team-Rucksack packen" },
   "m1.dialogue": {
-    en: "Attention, Captain! Today is match day. Your team is heading to the sports field for the big tournament. Luna is already at the locker room waiting for you.",
-    de: "Achtung, Kapitän! Heute ist Spieltag. Dein Team geht aufs Sportfeld zum großen Turnier. Luna wartet schon in der Umkleide auf dich.",
+    en: "Captain, we can't fly on an empty stomach! Fasting makes your body burn its own muscles, releasing toxic Phe. Pack safe energy (fruits) and your Tyrosine formula!",
+    de: "Kapitän, wir können nicht mit leerem Magen fliegen! Fasten lässt deinen Körper eigene Muskeln verbrennen, was giftiges Phe freisetzt. Packe sichere Energie (Obst) und deine Tyrosin-Formel ein!",
   },
   "m1.objective": {
-    en: "A good athlete always packs their special gear! Help Luna pick the right food for the sports backpack: safe snacks, low-Phe fruits, veggies, and your Super-Fuel (PKU formula). Leave the heavy-protein snacks behind.",
-    de: "Ein guter Athlet packt immer seine spezielle Ausrüstung ein! Hilf Luna, das richtige Essen für den Sportrucksack auszusuchen: sichere Snacks, Früchte, Gemüse und deinen Super-Treibstoff (PKU-Formel). Lass die proteinreichen Snacks zurück.",
+    en: "Sort the cargo! Send Safe Energy and Tyrosine Formula to your backpack. Throw Toxic Cargo (Heavy Protein) into the quarantine bin.",
+    de: "Sortiere die Fracht! Schicke Sichere Energie und Tyrosin-Formel in deinen Rucksack. Wirf Giftige Fracht (Schweres Protein) in die Quarantäne-Tonne.",
   },
   "m1.cta": { en: "Pack with Luna >", de: "Mit Luna packen >" },
   "m1.warning": { en: "Hey Captain, we haven't packed our sports backpack yet! Let's get our gear ready.", de: "Hey Kapitän, wir haben unseren Sportrucksack noch nicht gepackt! Lass uns unsere Ausrüstung bereitlegen." },
@@ -115,12 +115,12 @@ export const TRANSLATIONS: Dict = {
   "m3.tag": { en: "Mission 03 - The Match", de: "Mission 03 - Das Spiel" },
   "m3.title": { en: "Sprint with the Crew", de: "Sprint mit dem Team" },
   "m3.dialogue": {
-    en: "Captain, the physical activity begins! Whether you play football, swim the relay, or sprint with your crew, any sport burns energy fast.",
-    de: "Kapitän, die körperliche Aktivität beginnt! Egal, ob du Fußball spielst, Staffel schwimmst oder mit deinem Team sprintest, jeder Sport verbraucht schnell Energie.",
+    en: "Captain, use your Formula Power! Avoid the 'Fog Obstacles'—if you hit them, the Phe builds up and slows you down. Catch your Formula bottles to stay sharp!",
+    de: "Kapitän, nutze deine Formel-Kraft! Vermeide die 'Nebel-Hindernisse'—wenn du sie triffst, baut sich Phe auf und verlangsamt dich. Fange deine Formel-Flaschen, um geistig fit zu bleiben!",
   },
   "m3.objective": {
-    en: "Catch the Super-Fuel formula bottle during the run to get a visual power-up. Prove that your medical drink makes you strong and fast!",
-    de: "Fange die Super-Treibstoff-Flasche während des Laufs, um ein Power-Up zu erhalten. Beweise, dass dein medizinisches Getränk dich stark und schnell macht!",
+    en: "Catch your daily formula during the run to keep your mind sharp and reflexes quick. Avoid the Brain Fog!",
+    de: "Fange deine tägliche Formel während des Laufs, um deinen Geist scharf und deine Reflexe schnell zu halten. Vermeide den Gehirnnebel!",
   },
   "m3.cta": { en: "Sprint with Crew >", de: "Mit Team sprinten >" },
   "m3.warning": { en: "Captain, the match is starting! We need to step onto the field!", de: "Kapitän, das Spiel beginnt! Wir müssen aufs Feld gehen!" },
@@ -203,10 +203,10 @@ export const TRANSLATIONS: Dict = {
   "game.bp.trash": { en: "TRASH", de: "MÜLLEIMER" },
   "game.bp.highProtein": { en: "HIGH PROTEIN", de: "VIEL PROTEIN" },
   "game.bp.or": { en: "OR", de: "ODER" },
-  "game.bp.msg.safe": { en: "packed! Clean energy ready.", de: "eingepackt! Saubere Energie ist bereit." },
-  "game.bp.msg.unsafe": { en: "WARNING! High protein detected. Send to Trash!", de: "ACHTUNG! Viel Protein entdeckt. Ab in den Müll!" },
-  "game.bp.msg.safeToTrash": { en: "That's clean energy! Pack it in the Backpack instead.", de: "Das ist saubere Energie! Packe es stattdessen in den Rucksack." },
-  "game.bp.msg.unsafeToTrash": { en: "locked away! Backpack stays clean.", de: "entsorgt! Der Rucksack bleibt sauber." },
+  "game.bp.msg.safe": { en: "packed! Good for your engine.", de: "eingepackt! Gut für deinen Motor." },
+  "game.bp.msg.unsafe": { en: "Careful! Heavy protein causes Brain Fog. Quarantine it!", de: "Vorsicht! Schweres Protein verursacht Gehirnnebel. Ab in die Quarantäne!" },
+  "game.bp.msg.safeToTrash": { en: "Wait! That's safe energy to protect your muscles. Put it in the backpack.", de: "Warte! Das ist sichere Energie, um deine Muskeln zu schützen. Pack es in den Rucksack." },
+  "game.bp.msg.unsafeToTrash": { en: "quarantined! You avoided toxic Phe dust.", de: "in Quarantäne! Du hast giftigen Phe-Staub vermieden." },
 
   // Runner overlays
   "runner.ready": { en: "Ready, Champion?", de: "Bereit, Champion?" },
@@ -263,7 +263,7 @@ export const TRANSLATIONS: Dict = {
   "fact.2.text": { en: "If too much Phe builds up from heavy foods, it travels to your brain like space dust. This causes brain fog, anger, and loss of focus—the biggest enemies of any athlete.", de: "Wenn sich zu viel Phe aus schwerem Essen ansammelt, wandert es wie Weltraumstaub ins Gehirn. Das verursacht Gehirnnebel, Wut und Konzentrationsverlust — die größten Feinde eines jeden Athleten." },
   "fact.3.title": { en: "The Missing Building Block", de: "Der fehlende Baustein" },
   "fact.3.short": { en: "Tyrosine gives you power.", de: "Tyrosin gibt dir Kraft." },
-  "fact.3.text": { en: "Because the 'hammer' is missing, your body doesn't produce Tyrosine, a vital building block for athletes. That's exactly why your Super-Fuel (amino acid mix) is packed with it!", de: "Weil der 'Hammer' fehlt, produziert dein Körper kein Tyrosin, einen wichtigen Baustein für Sportler. Genau deshalb ist dein Super-Treibstoff (Aminosäurenmischung) voll davon!" },
+  "fact.3.text": { en: "Because the 'hammer' is missing, your body doesn't produce Tyrosine, a vital building block for athletes. That's exactly why your Formula Power (amino acid mix) is packed with it!", de: "Weil der 'Hammer' fehlt, produziert dein Körper kein Tyrosin, einen wichtigen Baustein für Sportler. Genau deshalb ist deine Formel-Kraft (Aminosäurenmischung) voll davon!" },
   "fact.4.title": { en: "Science is Helping", de: "Wissenschaft hilft" },
   "fact.4.short": { en: "New discoveries every year.", de: "Jedes Jahr neue Entdeckungen." },
   "fact.4.text": { en: "Sports scientists and researchers are always finding new ways to help athletes with PKU get the best out of their training!", de: "Sportwissenschaftler und Forscher finden ständig neue Wege, um Athleten mit PKU zu helfen, das Beste aus ihrem Training herauszuholen!" },
@@ -348,7 +348,7 @@ export const TRANSLATIONS: Dict = {
   "posttest.know.gluten": { en: "C) Avoiding gluten", de: "C) Vermeidung von Gluten" },
   "posttest.know.dk": { en: "D) I don't know", de: "D) Ich weiß es nicht" },
   
-  "posttest.empathy": { en: "4. Did the Sports Academy and 'Super-Fuel' theme make it easier to understand PKU?", de: "4. Hat das Thema 'Sport-Akademie' und 'Super-Treibstoff' geholfen, PKU besser zu verstehen?" },
+  "posttest.empathy": { en: "4. Did the Sports Academy and 'Formula Power' theme make it easier to understand PKU?", de: "4. Hat das Thema 'Sport-Akademie' und 'Formel-Kraft' geholfen, PKU besser zu verstehen?" },
   "posttest.emp.yes": { en: "🤩 Yes, much more engaging", de: "🤩 Ja, viel spannender" },
   "posttest.emp.somewhat": { en: "🙂 It was okay", de: "🙂 Es war in Ordnung" },
   "posttest.emp.no": { en: "😐 No, prefer medical texts", de: "😐 Nein, bevorzuge medizinische Texte" },

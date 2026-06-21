@@ -215,7 +215,8 @@ export const BackpackGame = ({
         <div className="flex items-center justify-center gap-6 md:gap-16 w-full max-w-3xl">
           <motion.button
             onClick={handleDropToBackpack}
-            onDragOver={(e) => { e.preventDefault(); setBackpackHovered(true); }}
+            onDragEnter={(e) => { e.preventDefault(); setBackpackHovered(true); }}
+            onDragOver={(e) => { e.preventDefault(); }}
             onDragLeave={() => setBackpackHovered(false)}
             onDrop={(e) => {
               e.preventDefault();
@@ -260,7 +261,8 @@ export const BackpackGame = ({
 
           <motion.button
             onClick={handleDropToQuarantine}
-            onDragOver={(e) => { e.preventDefault(); setQuarantineHovered(true); }}
+            onDragEnter={(e) => { e.preventDefault(); setQuarantineHovered(true); }}
+            onDragOver={(e) => { e.preventDefault(); }}
             onDragLeave={() => setQuarantineHovered(false)}
             onDrop={(e) => {
               e.preventDefault();

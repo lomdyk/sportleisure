@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { Hammer, CloudFog, Zap } from "lucide-react";
 import { ThreeScene } from "./ThreeScene";
 import { AnimatedShip } from "./AnimatedShip";
 
@@ -48,9 +49,12 @@ export const HeroStory = () => {
             padding: "2px 14px",
             color: "#a78bfa",
             textShadow: "0 0 20px rgba(167,139,250,0.6)",
-            display: "inline-block",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
             whiteSpace: "nowrap"
           }}>
+            <Hammer className="w-6 h-6 sm:w-8 sm:h-8" />
             {t("pku.title")}
           </span>
         </>
@@ -58,24 +62,6 @@ export const HeroStory = () => {
       text: (
         <>
           {t("pku.desc")}
-        </>
-      ),
-    },
-    {
-      accent: "#34d399",
-      titleEl: (
-        <>
-          <span style={{
-            color: "#34d399",
-            textShadow: "0 0 24px rgba(52,211,153,0.7)",
-          }}>
-            {t("fuel.clean")}
-          </span>
-        </>
-      ),
-      text: (
-        <>
-          {t("fuel.cleanDesc")}
         </>
       ),
     },
@@ -90,15 +76,40 @@ export const HeroStory = () => {
             padding: "2px 12px",
             color: "#f59e0b",
             textShadow: "0 0 20px rgba(245,158,11,0.5)",
-            display: "inline-block",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
           }}>
-            ⚠ {t("fuel.heavy")}
+            <CloudFog className="w-6 h-6 sm:w-8 sm:h-8" />
+            {t("fuel.heavy")}
           </span>
         </>
       ),
       text: (
         <>
           {t("fuel.heavyDesc")}
+        </>
+      ),
+    },
+    {
+      accent: "#34d399",
+      titleEl: (
+        <>
+          <span style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            color: "#34d399",
+            textShadow: "0 0 24px rgba(52,211,153,0.7)",
+          }}>
+            <Zap className="w-6 h-6 sm:w-8 sm:h-8" />
+            {t("fuel.clean")}
+          </span>
+        </>
+      ),
+      text: (
+        <>
+          {t("fuel.cleanDesc")}
         </>
       ),
     },
