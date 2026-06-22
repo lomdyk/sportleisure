@@ -63,9 +63,9 @@ function ThrusterFlames({ targetRef }: { targetRef: React.MutableRefObject<THREE
     let ignition = Math.max(0.2, Math.min(p * 10, 1)); 
     let smokeIntensity = 0;
 
-    // Heavy phase: 0.40 - 0.50 (Matches UI panel 2 'Heavy Food')
-    if (p >= 0.40 && p <= 0.50) {
-      const hP = (p - 0.40) / 0.10;
+    // Heavy phase: 0.395 - 0.547 (Matches UI panel 2 'Heavy Food')
+    if (p >= 0.395 && p <= 0.547) {
+      const hP = (p - 0.395) / 0.152;
       if (hP < 0.2) {
         ignition = THREE.MathUtils.lerp(1, 0.05, hP / 0.2); // Sputter out
         smokeIntensity = hP / 0.2; // Smoke starts
@@ -233,13 +233,13 @@ function FoodObstacles() {
     if (!groupRef.current) return;
     const p = scrollState.progress;
 
-    // Formula phase: 0.53 - 0.60 (Matches UI panel 3 'Formula Power')
-    const isFormula = p >= 0.53 && p <= 0.60;
-    const fPhase = isFormula ? (p - 0.53) / 0.07 : 0;
+    // Formula phase: 0.548 - 0.689 (Matches UI panel 3 'Formula Power')
+    const isFormula = p >= 0.548 && p <= 0.689;
+    const fPhase = isFormula ? (p - 0.548) / 0.141 : 0;
     
-    // Heavy phase: 0.40 - 0.50 (Matches UI panel 2 'Heavy Food')
-    const isHeavy = p >= 0.40 && p <= 0.50;
-    const hPhase = isHeavy ? (p - 0.40) / 0.10 : 0;
+    // Heavy phase: 0.395 - 0.547 (Matches UI panel 2 'Heavy Food')
+    const isHeavy = p >= 0.395 && p <= 0.547;
+    const hPhase = isHeavy ? (p - 0.395) / 0.152 : 0;
 
     if (isFormula) {
       apple.visible = true;
@@ -495,9 +495,9 @@ function AnimatedModel() {
 
     // --- Apply Effects BEFORE lerping the actual mesh ---
     
-    // HEAVY FOOD "Sad/Sick" Effect (0.40 - 0.50)
-    if (p >= 0.40 && p <= 0.50) {
-      const hP = (p - 0.40) / 0.10;
+    // HEAVY FOOD "Sad/Sick" Effect (0.395 - 0.547)
+    if (p >= 0.395 && p <= 0.547) {
+      const hP = (p - 0.395) / 0.152;
       // Sag downwards
       targetPos.y -= 2.0 * Math.sin(hP * Math.PI); 
       // Point the nose down (sadness)
@@ -519,7 +519,7 @@ function AnimatedModel() {
     }
 
     // HEAVY FOOD Shake Effect
-    if (p >= 0.40 && p <= 0.50) {
+    if (p >= 0.395 && p <= 0.547) {
       // Mild engine sputter shake
       const shakeIntensity = 0.05;
       target.position.x += (Math.random() - 0.5) * shakeIntensity;

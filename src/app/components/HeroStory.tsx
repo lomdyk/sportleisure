@@ -212,24 +212,30 @@ export const HeroStory = () => {
       ease: "power2.out",
     }, 0);
 
-    // Story panels
-    const panelDur = 0.11;
+    // Story panels custom timings to match 3D animations exactly
+    const timings = [
+      { start: 0.05, end: 0.19 },     // 0: Welcome
+      { start: 0.20, end: 0.38 },     // 1: PKU
+      { start: 0.395, end: 0.547 },   // 2: Heavy Food
+      { start: 0.548, end: 0.689 },   // 3: Formula Power
+    ];
+
     panelRefs.current.forEach((panel, i) => {
       if (!panel) return;
-      const start = 0.08 + i * panelDur;
+      const t = timings[i] || { start: 0.08 + i * 0.11, end: 0.08 + i * 0.11 + 0.075 };
 
       tl.fromTo(
         panel,
         { opacity: 0, x: isMobile ? 0 : -30, y: isMobile ? 20 : 0 },
         { opacity: 1, x: 0, y: 0, duration: 0.04, ease: "power2.out" },
-        start
+        t.start
       );
 
       if (i < STORY_PANELS.length - 1) {
         tl.to(
           panel,
           { opacity: 0, x: isMobile ? 0 : -20, y: isMobile ? -10 : 0, duration: 0.03, ease: "power2.in" },
-          start + 0.075
+          t.end - 0.03
         );
       }
     });
@@ -267,7 +273,7 @@ export const HeroStory = () => {
       }, 0.4);
     }
 
-    const zoomStart = 0.08 + (STORY_PANELS.length - 1) * panelDur + 0.05;
+    const zoomStart = timings[3].end + 0.03;
 
     // Auto-scroll instantly when zoom animation finishes (only when scrolling forward)
     tl.add(() => {
@@ -408,8 +414,8 @@ export const HeroStory = () => {
           <AdminProgressDisplay />
           <button onClick={() => window.scrollTo({ top: containerRef.current?.offsetTop || 0, behavior: 'smooth'})} className="text-left text-sm text-cyan-400 hover:text-cyan-300 transition-colors">1. Welcome</button>
           <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.25 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-purple-400 hover:text-purple-300 transition-colors">2. PKU Build</button>
-          <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.45 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-amber-500 hover:text-amber-400 transition-colors">3. Heavy Food 🍕</button>
-          <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.55 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-emerald-400 hover:text-emerald-300 transition-colors">4. Formula Power 🧪</button>
+          <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.471 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-amber-500 hover:text-amber-400 transition-colors">3. Heavy Food 🍕</button>
+          <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.618 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-emerald-400 hover:text-emerald-300 transition-colors">4. Formula Power 🧪</button>
         </div>
       )}
     </div>
