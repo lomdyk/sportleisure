@@ -4,17 +4,18 @@ import { useLang } from '../utils/i18n';
 import { GhostButton } from './ui/GhostButton';
 
 interface PostTestModalProps {
-  onSubmit: (design: number, clarity: number, knowledgeCheck: string, empathyImpact: string, behavioralIntent: string, feedback: string) => void;
+  onSubmit: (userFeelings: string[], biologyCheck: string, knowledgeCheck: string, foodCheck: string, sportsCheck: string, feedback: string, learnedNew: string) => void;
   onClose: () => void;
 }
 
 export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose }) => {
   const { t } = useLang();
-  const [designRating, setDesignRating] = useState<number>(0);
-  const [clarityRating, setClarityRating] = useState<number>(0);
+  const [userFeelings, setUserFeelings] = useState<string[]>([]);
+  const [biologyCheck, setBiologyCheck] = useState<string>('');
   const [knowledgeCheck, setKnowledgeCheck] = useState<string>('');
-  const [empathyImpact, setEmpathyImpact] = useState<string>('');
-  const [behavioralIntent, setBehavioralIntent] = useState<string>('');
+  const [foodCheck, setFoodCheck] = useState<string>('');
+  const [sportsCheck, setSportsCheck] = useState<string>('');
+  const [learnedNew, setLearnedNew] = useState<string>('');
   const [feedback, setFeedback] = useState('');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,9 +23,9 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (designRating && clarityRating && knowledgeCheck && empathyImpact && behavioralIntent) {
+    if (userFeelings.length > 0 && biologyCheck && knowledgeCheck && foodCheck && sportsCheck && learnedNew) {
       setIsSubmitting(true);
-      await onSubmit(designRating, clarityRating, knowledgeCheck, empathyImpact, behavioralIntent, feedback);
+      await onSubmit(userFeelings, biologyCheck, knowledgeCheck, foodCheck, sportsCheck, feedback, learnedNew);
       setIsSubmitting(false);
       setShowSuccess(true);
       setTimeout(() => {
@@ -70,7 +71,7 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        className="relative z-10 w-full max-w-xl bg-[#0a1128] border border-emerald-500/20 rounded-3xl p-6 md:p-8 shadow-[0_0_50px_rgba(52,211,153,0.1)] my-auto"
+        className="relative z-10 w-full max-w-xl bg-[#0a1128] border border-emerald-500/20 rounded-3xl p-4 sm:p-6 md:p-8 shadow-[0_0_50px_rgba(52,211,153,0.1)] my-auto"
       >
         {showSuccess ? (
           <div className="flex flex-col items-center justify-center py-10">
@@ -99,34 +100,86 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
               
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-300">
-                  {t("posttest.design")}
+                  {t("posttest.feelings")}
                 </label>
-                {renderStars(designRating, setDesignRating)}
-              </div>
-
-              <div className="space-y-2">
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { id: 'immersed', label: t("posttest.feel.immersed") },
+                    { id: 'confident', label: t("posttest.feel.confident") },
+                    { id: 'inspired', label: t("posttest.feel.inspired") },
+                    { id: 'motivated', label: t("posttest.feel.motivated") },
+                  ].map((opt) => {
+                    const isSelected = userFeelings.includes(opt.id);
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        onClick={() => {
+                          if (isSelected) {
+                            setUserFeelings(userFeelings.filter(id => id !== opt.id));
+                          } else {
+                            setUserFeelings([...userFeelings, opt.id]);
+                          }
+                        }}
+                        className={`py-2.5 px-4 rounded-xl border text-sm font-medium transition-all duration-300 text-left flex items-center justify-between ${
+                          isSelected
+                            ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
+                            : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
+                        }`}
+                      >
+                        <span>{opt.label}</span>
+                        <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+                          isSelected ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-500'
+                        }`}>
+                          {isSelected && <span className="text-xs">✓</span>}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+                           <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-300">
-                  {t("posttest.clarity")}
+                  {t("posttest.biology")}
                 </label>
-                {renderStars(clarityRating, setClarityRating)}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {[
+                    { id: 'brain', label: t("posttest.bio.brain") },
+                    { id: 'stomach', label: t("posttest.bio.stomach") },
+                    { id: 'weight', label: t("posttest.bio.weight") },
+                    { id: 'muscle', label: t("posttest.bio.muscle") }
+                  ].map(opt => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => setBiologyCheck(opt.id)}
+                      className={`py-2 px-3 rounded-lg border text-xs font-medium transition-all duration-300 text-left ${
+                        biologyCheck === opt.id
+                          ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
+                          : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-300">
                   {t("posttest.knowledge")}
                 </label>
-                <div className="flex flex-col gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {[
-                    { id: 'sugar', label: t("posttest.know.sugar") },
-                    { id: 'protein', label: t("posttest.know.protein") },
-                    { id: 'gluten', label: t("posttest.know.gluten") },
-                    { id: 'dk', label: t("posttest.know.dk") },
-                  ].map((opt) => (
+                    { id: 'sugar', label: t("posttest.k.sugar") },
+                    { id: 'protein', label: t("posttest.k.protein") },
+                    { id: 'gluten', label: t("posttest.k.gluten") },
+                    { id: 'dk', label: t("posttest.k.dk") }
+                  ].map(opt => (
                     <button
                       key={opt.id}
                       type="button"
                       onClick={() => setKnowledgeCheck(opt.id)}
-                      className={`py-2.5 px-4 rounded-xl border text-sm font-medium transition-all duration-300 text-left ${
+                      className={`py-2 px-3 rounded-lg border text-xs font-medium transition-all duration-300 text-left ${
                         knowledgeCheck === opt.id
                           ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
                           : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
@@ -140,20 +193,21 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
 
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-300">
-                  {t("posttest.empathy")}
+                  {t("posttest.food")}
                 </label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {[
-                    { id: 'yes', label: t("posttest.emp.yes") },
-                    { id: 'somewhat', label: t("posttest.emp.somewhat") },
-                    { id: 'no', label: t("posttest.emp.no") },
-                  ].map((opt) => (
+                    { id: 'apple', label: t("posttest.food.apple") },
+                    { id: 'cheese', label: t("posttest.food.cheese") },
+                    { id: 'nuts', label: t("posttest.food.nuts") },
+                    { id: 'milk', label: t("posttest.food.milk") }
+                  ].map(opt => (
                     <button
                       key={opt.id}
                       type="button"
-                      onClick={() => setEmpathyImpact(opt.id)}
-                      className={`py-2 px-1 rounded-lg border text-xs font-medium transition-all duration-300 text-center ${
-                        empathyImpact === opt.id
+                      onClick={() => setFoodCheck(opt.id)}
+                      className={`py-2 px-3 rounded-lg border text-xs font-medium transition-all duration-300 text-left ${
+                        foodCheck === opt.id
                           ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
                           : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
                       }`}
@@ -166,20 +220,21 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
 
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-300">
-                  {t("posttest.impact")}
+                  {t("posttest.sports")}
                 </label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 gap-2">
                   {[
-                    { id: 'yes', label: t("posttest.imp.yes") },
-                    { id: 'maybe', label: t("posttest.imp.maybe") },
-                    { id: 'no', label: t("posttest.imp.no") },
-                  ].map((opt) => (
+                    { id: 'spike', label: t("posttest.sp.spike") },
+                    { id: 'formula', label: t("posttest.sp.formula") },
+                    { id: 'low_intensity', label: t("posttest.sp.low") },
+                    { id: 'sugar', label: t("posttest.sp.sugar") }
+                  ].map(opt => (
                     <button
                       key={opt.id}
                       type="button"
-                      onClick={() => setBehavioralIntent(opt.id)}
-                      className={`py-2 px-1 rounded-lg border text-xs font-medium transition-all duration-300 text-center ${
-                        behavioralIntent === opt.id
+                      onClick={() => setSportsCheck(opt.id)}
+                      className={`py-2 px-4 rounded-lg border text-sm font-medium transition-all duration-300 text-left ${
+                        sportsCheck === opt.id
                           ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
                           : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
                       }`}
@@ -189,6 +244,33 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
                   ))}
                 </div>
               </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-slate-300">
+                  {t("posttest.formula")}
+                </label>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { id: 'breakdown', label: t("posttest.f.breakdown") },
+                    { id: 'tyrosine', label: t("posttest.f.amino") },
+                    { id: 'energy', label: t("posttest.f.energy") },
+                    { id: 'cure', label: t("posttest.f.cure") }
+                  ].map(opt => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => setLearnedNew(opt.id)}
+                      className={`py-2 px-4 rounded-lg border text-sm font-medium transition-all duration-300 text-left ${
+                        learnedNew === opt.id
+                          ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
+                          : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>   </div>
 
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-300">
@@ -216,7 +298,7 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
                   type="submit"
                   tone="emerald"
                   className="flex-[2] justify-center py-3"
-                  disabled={!designRating || !clarityRating || !knowledgeCheck || !empathyImpact || !behavioralIntent || isSubmitting}
+                  disabled={userFeelings.length === 0 || !biologyCheck || !knowledgeCheck || !foodCheck || !sportsCheck || !learnedNew || isSubmitting}
                 >
                   {isSubmitting ? '...' : t("posttest.submit")}
                 </GhostButton>

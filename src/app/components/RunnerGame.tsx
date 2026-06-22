@@ -218,7 +218,8 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       spawnTimerRef.current -= dt;
       if (spawnTimerRef.current <= 0) {
         spawnEntity();
-        const min = invincible ? 0.45 : 0.7;
+        // Increased min gap to prevent impossible double-jumps
+        const min = invincible ? 0.45 : 1.1;
         spawnTimerRef.current = min + Math.random() * 0.7;
       }
 

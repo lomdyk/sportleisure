@@ -39,7 +39,7 @@ export const PreTestModal: React.FC<PreTestModalProps> = ({ onSubmit }) => {
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-        className="relative z-10 w-full max-w-lg bg-[#0a1128] border border-cyan-500/20 rounded-3xl p-6 md:p-8 shadow-[0_0_50px_rgba(34,211,238,0.1)] my-auto"
+        className="relative z-10 w-full max-w-lg bg-[#0a1128] border border-cyan-500/20 rounded-3xl p-4 sm:p-6 md:p-8 shadow-[0_0_50px_rgba(34,211,238,0.1)] my-auto"
       >
         <div className="absolute top-4 right-4 flex gap-1 bg-slate-900/50 p-1 rounded-lg border border-slate-700/50">
           <button 
@@ -73,9 +73,10 @@ export const PreTestModal: React.FC<PreTestModalProps> = ({ onSubmit }) => {
             <label className="block text-sm font-semibold text-slate-300">
               {t("pretest.age")}
             </label>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-5 gap-2">
               {[
-                { id: '< 18', label: t("pretest.age.u18") },
+                { id: '6-12', label: t("pretest.age.6_12") },
+                { id: '13-17', label: t("pretest.age.13_17") },
                 { id: '18-25', label: t("pretest.age.18_25") },
                 { id: '26-35', label: t("pretest.age.26_35") },
                 { id: '35+', label: t("pretest.age.35p") },

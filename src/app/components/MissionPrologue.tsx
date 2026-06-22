@@ -145,8 +145,8 @@ export const MissionPrologue: React.FC<Props> = ({
       transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1], delay: 0.15 }}
       className="flex flex-col items-start gap-5 max-w-xl"
     >
-      <div className="flex flex-col items-start leading-none tracking-tight" >
-        <h2 className="text-white font-bold text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+      <div className="flex flex-col items-start leading-none tracking-tight">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
           {restTitle}{" "}
           <span style={{ color: a.color }}>{lastTitleWord}</span>
         </h2>

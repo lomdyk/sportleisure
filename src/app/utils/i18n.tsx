@@ -319,7 +319,8 @@ export const TRANSLATIONS: Dict = {
     de: "Willkommen zur PKU-Akademie-Simulation! Dies ist ein interaktives Bildungsprojekt, das das Bewusstsein für Phenylketonurie (PKU) schärfen soll. Bevor du deine Mission beginnst, beantworte bitte drei kurze Fragen, um uns bei unserer akademischen Forschung zu helfen." 
   },
   "pretest.age": { en: "1. What is your age group?", de: "1. Was ist deine Altersgruppe?" },
-  "pretest.age.u18": { en: "Under 18", de: "Unter 18" },
+  "pretest.age.6_12": { en: "6-12", de: "6-12" },
+  "pretest.age.13_17": { en: "13-17", de: "13-17" },
   "pretest.age.18_25": { en: "18-25", de: "18-25" },
   "pretest.age.26_35": { en: "26-35", de: "26-35" },
   "pretest.age.35p": { en: "35+", de: "35+" },
@@ -337,28 +338,45 @@ export const TRANSLATIONS: Dict = {
 
   // Post-Test
   "posttest.title": { en: "Mission Evaluation", de: "Missionsbewertung" },
-  "posttest.intro": { en: "Thank you for completing the simulation! Please answer a few questions about your experience.", de: "Vielen Dank für den Abschluss der Simulation! Bitte beantworte ein paar Fragen zu deiner Erfahrung." },
+  "posttest.intro": { en: "Your telemetry data has been saved. Please answer a few final questions to help us improve.", de: "Deine Telemetriedaten wurden gespeichert. Bitte beantworte noch ein paar abschließende Fragen, um uns zu helfen." },
   
-  "posttest.design": { en: "1. Rate the visual design and 3D graphics:", de: "1. Bewerte das visuelle Design und die 3D-Grafik:" },
-  "posttest.clarity": { en: "2. How clear and understandable were the minigames?", de: "2. Wie klar und verständlich waren die Minispiele?" },
-  
+  "posttest.feelings": { en: "1. How did this experience make you feel? (Select all that apply)", de: "1. Wie hast du dich bei dieser Erfahrung gefühlt? (Mehrfachauswahl möglich)" },
+  "posttest.feel.immersed": { en: "🌌 Immersed in the 3D space world", de: "🌌 Eingetaucht in die 3D-Weltraumwelt" },
+  "posttest.feel.confident": { en: "🎓 Confident I could explain PKU to a friend", de: "🎓 Zuversichtlich, dass ich einem Freund PKU erklären könnte" },
+  "posttest.feel.inspired": { en: "✨ Inspired by the challenges PKU athletes face", de: "✨ Inspiriert von den Herausforderungen der PKU-Athleten" },
+  "posttest.feel.motivated": { en: "📣 Motivated to share this game with others", de: "📣 Motiviert, dieses Spiel mit anderen zu teilen" },
+
+  "posttest.biology": { en: "2. What happens if a person with PKU eats too much regular protein?", de: "2. Was passiert, wenn eine Person mit PKU zu viel normales Protein isst?" },
+  "posttest.bio.brain": { en: "A toxic buildup affects their brain function", de: "Eine toxische Ansammlung beeinträchtigt die Gehirnfunktion" },
+  "posttest.bio.stomach": { en: "Their stomach cannot digest it", de: "Ihr Magen kann es nicht verdauen" },
+  "posttest.bio.weight": { en: "They immediately gain weight", de: "Sie nehmen sofort zu" },
+  "posttest.bio.muscle": { en: "Their muscles break down", de: "Ihre Muskeln bauen ab" },
+
   "posttest.knowledge": { en: "3. What is the most critical dietary restriction for someone with PKU?", de: "3. Was ist die wichtigste diätetische Einschränkung für jemanden mit PKU?" },
-  "posttest.know.sugar": { en: "A) Avoiding sugar", de: "A) Vermeidung von Zucker" },
-  "posttest.know.protein": { en: "B) Avoiding high-protein foods", de: "B) Vermeidung von proteinreichen Lebensmitteln" },
-  "posttest.know.gluten": { en: "C) Avoiding gluten", de: "C) Vermeidung von Gluten" },
-  "posttest.know.dk": { en: "D) I don't know", de: "D) Ich weiß es nicht" },
-  
-  "posttest.empathy": { en: "4. Did the Sports Academy and 'Formula Power' theme make it easier to understand PKU?", de: "4. Hat das Thema 'Sport-Akademie' und 'Formel-Kraft' geholfen, PKU besser zu verstehen?" },
-  "posttest.emp.yes": { en: "🤩 Yes, much more engaging", de: "🤩 Ja, viel spannender" },
-  "posttest.emp.somewhat": { en: "🙂 It was okay", de: "🙂 Es war in Ordnung" },
-  "posttest.emp.no": { en: "😐 No, prefer medical texts", de: "😐 Nein, bevorzuge medizinische Texte" },
+  "posttest.k.sugar": { en: "Avoiding Sugar", de: "Zucker vermeiden" },
+  "posttest.k.protein": { en: "Strictly limiting Protein (Phe)", de: "Protein (Phe) streng limitieren" },
+  "posttest.k.gluten": { en: "Going Gluten-Free", de: "Glutenfrei leben" },
+  "posttest.k.dk": { en: "I don't know", de: "Ich weiß es nicht" },
 
-  "posttest.impact": { en: "5. Do you believe people with PKU can be successful athletes?", de: "5. Glaubst du, dass Menschen mit PKU erfolgreiche Sportler sein können?" },
-  "posttest.imp.yes": { en: "✅ Yes, with the right diet", de: "✅ Ja, mit der richtigen Diät" },
-  "posttest.imp.maybe": { en: "🤔 Maybe, but it's hard", de: "🤔 Vielleicht, aber es ist schwer" },
-  "posttest.imp.no": { en: "❌ No", de: "❌ Nein" },
+  "posttest.food": { en: "4. Which of these foods is safe for someone with PKU to eat freely?", de: "4. Welches dieser Lebensmittel ist für jemanden mit PKU unbedenklich?" },
+  "posttest.food.apple": { en: "An apple", de: "Ein Apfel" },
+  "posttest.food.cheese": { en: "A piece of cheese", de: "Ein Stück Käse" },
+  "posttest.food.nuts": { en: "A handful of nuts", de: "Eine Handvoll Nüsse" },
+  "posttest.food.milk": { en: "A glass of regular milk", de: "Ein Glas normale Milch" },
 
-  "posttest.feedback": { en: "6. Any feedback or thoughts? (Optional)", de: "6. Irgendwelche Rückmeldungen oder Gedanken? (Optional)" },
+  "posttest.sports": { en: "5. Can children with PKU play sports professionally?", de: "5. Können Kinder mit PKU professionell Sport treiben?" },
+  "posttest.sp.spike": { en: "No, physical exertion causes a dangerous Phe spike", de: "Nein, Anstrengung verursacht einen gefährlichen Phe-Anstieg" },
+  "posttest.sp.formula": { en: "Yes, but they must consume a specialized amino acid formula", de: "Ja, aber sie müssen eine spezielle Aminosäure-Formel nehmen" },
+  "posttest.sp.low": { en: "Only low-intensity sports, as they burn too much protein", de: "Nur leichten Sport, da sie zu viel Protein verbrennen" },
+  "posttest.sp.sugar": { en: "Yes, they have no restrictions if they avoid sugar", de: "Ja, sie haben keine Einschränkungen, wenn sie Zucker meiden" },
+
+  "posttest.formula": { en: "6. What does the PKU Formula actually give your body?", de: "6. Was gibt die PKU-Formel deinem Körper eigentlich?" },
+  "posttest.f.breakdown": { en: "It breaks down excess Phe in the blood", de: "Sie baut überschüssiges Phe im Blut ab" },
+  "posttest.f.amino": { en: "It provides safe amino acids (like Tyrosine)", de: "Sie liefert sichere Aminosäuren (wie Tyrosin)" },
+  "posttest.f.energy": { en: "It is a high-energy metabolic boost", de: "Sie ist ein energiereicher Stoffwechsel-Boost" },
+  "posttest.f.cure": { en: "It temporarily cures PKU", de: "Sie heilt PKU vorübergehend" },
+
+  "posttest.feedback": { en: "7. Any feedback or thoughts? (Optional)", de: "7. Irgendwelche Rückmeldungen oder Gedanken? (Optional)" },
   "posttest.placeholder": { en: "I would like to change...", de: "Ich möchte ändern..." },
   "posttest.submit": { en: "Submit Report", de: "Bericht absenden" },
   "posttest.cancel": { en: "Cancel", de: "Abbrechen" },

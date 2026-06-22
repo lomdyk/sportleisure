@@ -32,7 +32,7 @@ export const TopTabBar: React.FC<Props> = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["crew-greeting", "mission-1", "mission-2", "mission-3", "downloads", "logs"];
+      const sections = ["crew-greeting", "mission-1", "mission-2", "mission-3", "downloads", "footer"];
       let currentStage = 0; // Default to 0 (HeroStory / CrewGreeting)
 
       sections.forEach((id, index) => {
@@ -146,7 +146,7 @@ export const TopTabBar: React.FC<Props> = () => {
                 className="h-full rounded-full"
                 style={{
                   width: progressPercent,
-                  background: `linear-gradient(90deg, #22d3ee, #a78bfa, #34d399, #fbbf24)`,
+                  background: accent,
                   boxShadow: `0 0 10px ${accent}80`,
                 }}
               />

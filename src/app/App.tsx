@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { X } from "lucide-react";
 import { StarField } from "./components/StarField";
 import { HeroStory } from "./components/HeroStory";
+import { ScrollDots } from "./components/ScrollDots";
 import { BackpackGame } from "./components/BackpackGame";
 import { CommunicationGame } from "./components/CommunicationGame";
 import { RunnerGame } from "./components/RunnerGame";
@@ -192,11 +193,11 @@ function AppInner() {
     if (!GameComponent) return null;
 
     return (
-      <div className="absolute inset-0 z-50 bg-[#050a18] overflow-auto flex flex-col">
+      <div data-lenis-prevent="true" className="absolute inset-0 z-50 bg-[#050a18] overflow-auto flex flex-col">
         <StarField />
         
         {/* Exit Button Container */}
-        <div className="absolute top-4 left-4 z-[60] sticky-top-button">
+        <div className="fixed top-4 left-4 z-[60] sticky-top-button">
           <GhostButton
             tone="cyan"
             size="sm"
@@ -217,7 +218,7 @@ function AppInner() {
 
   return (
     <div
-      className="bg-[#050a18] min-h-screen text-white selection:bg-cyan-500/30 selection:text-cyan-200 relative"
+      className="bg-[#050a18] min-h-screen text-white selection:bg-cyan-500/30 selection:text-cyan-200 relative overflow-clip w-full"
       style={{ fontFamily: "'Space Grotesk', sans-serif" }}
     >
       <h1 className="sr-only">{t("app.title")}</h1>
@@ -236,10 +237,10 @@ function AppInner() {
         {showPostTest && (
           <PostTestModal 
             key="posttest"
-            onClose={() => setShowPostTest(false)}
-            onSubmit={async (design, clarity, knowledge, empathy, impact, feedback) => {
-              await metricsActions.finishSession(design, clarity, knowledge, empathy, impact, feedback);
+            onSubmit={(userFeelings, biologyCheck, knowledgeCheck, foodCheck, sportsCheck, feedback, learnedNew) => {
+              metricsActions.finishSession(userFeelings, biologyCheck, knowledgeCheck, foodCheck, sportsCheck, feedback, learnedNew);
             }}
+            onClose={() => setShowPostTest(false)}
           />
         )}
       </AnimatePresence>
@@ -253,9 +254,12 @@ function AppInner() {
           unlocked={completed}
           onJump={() => {}}
         />
+        <ScrollDots />
 
         <main className="pt-16 md:pt-20">
-          <HeroStory />
+          <div id="hero">
+            <HeroStory />
+          </div>
 
           <div id="crew-greeting">
             <CrewGreeting onContinue={() => {

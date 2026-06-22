@@ -31,11 +31,12 @@ export interface TestSession {
   downloaded_game: boolean;
   
   // Post-test
-  rating_design: number;
-  rating_clarity: number;
-  knowledge_check: string; // The selected answer option
-  empathy_impact: string;
-  behavioral_intent: string;
+  user_feelings: string[];
+  biology_check: string;
+  knowledge_check: string;
+  food_check: string;
+  sports_check: string;
+  learned_new: string | null;
   feedback: string;
 }
 
@@ -62,11 +63,12 @@ const initialState: TestSession = {
   footer_cards_flipped: 0,
   downloaded_pdf: false,
   downloaded_game: false,
-  rating_design: 0,
-  rating_clarity: 0,
+  user_feelings: [],
+  biology_check: '',
   knowledge_check: '',
-  empathy_impact: '',
-  behavioral_intent: '',
+  food_check: '',
+  sports_check: '',
+  learned_new: null,
   feedback: '',
 };
 
@@ -187,12 +189,13 @@ export const metricsActions = {
           downloaded_pdf: state.downloaded_pdf,
           downloaded_game: state.downloaded_game,
           completed: state.completed,
-          rating_design: state.rating_design,
-          rating_clarity: state.rating_clarity,
+          user_feelings: state.user_feelings,
+          biology_check: state.biology_check,
           knowledge_check: state.knowledge_check,
-          empathy_impact: state.empathy_impact,
-          behavioral_intent: state.behavioral_intent,
-          feedback: state.feedback,
+          food_check: state.food_check,
+          sports_check: state.sports_check,
+          learned_new: state.learned_new ? state.learned_new === 'tyrosine' : null,
+          feedback: state.learned_new ? `[Formula: ${state.learned_new}] ${state.feedback}` : state.feedback,
         }).eq('id', state.id);
         
         if (error) {
@@ -209,12 +212,13 @@ export const metricsActions = {
     }
   },
 
-  finishSession(design: number, clarity: number, knowledgeCheck: string, empathyImpact: string, behavioralIntent: string, feedback: string) {
-    metricsState.rating_design = design;
-    metricsState.rating_clarity = clarity;
+  async finishSession(userFeelings: string[], biologyCheck: string, knowledgeCheck: string, foodCheck: string, sportsCheck: string, feedback: string, learnedNew: string | null = null) {
+    metricsState.user_feelings = userFeelings;
+    metricsState.biology_check = biologyCheck;
     metricsState.knowledge_check = knowledgeCheck;
-    metricsState.empathy_impact = empathyImpact;
-    metricsState.behavioral_intent = behavioralIntent;
+    metricsState.food_check = foodCheck;
+    metricsState.sports_check = sportsCheck;
+    metricsState.learned_new = learnedNew;
     metricsState.feedback = feedback;
     metricsState.completed = true;
     

@@ -225,10 +225,13 @@ export const CommunicationGame = ({
   const [messages, setMessages]     = useState<ChatMsg[]>([]);
   const [isNPCTyping, setIsNPCTyping] = useState(false);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [shuffledIndices, setShuffledIndices] = useState<number[]>([0, 1, 2]);
 
   const chatEndRef = useRef<HTMLDivElement>(null);
   const timersRef  = useRef<number[]>([]);
   const runNPCRef  = useRef<((msgs: string[], idx: number) => void) | null>(null);
+
+  const localizedScenarios = React.useMemo(() => localizeScenarios(lang), [lang]);
 
   const copy = {
     titleA: lang === "de" ? "Sprich wie ein" : "Talk Like a",
@@ -298,13 +301,19 @@ export const CommunicationGame = ({
     setIsNPCTyping(false);
     setSelectedOption(null);
     setChatPhase("npc");
-    timersRef.current.push(window.setTimeout(() => runNPCRef.current?.(SCENARIOS[idx].npcMessages, 0), 400));
-  }, [clearAll]);
+    const indices = [0, 1, 2];
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    setShuffledIndices(indices);
+    timersRef.current.push(window.setTimeout(() => runNPCRef.current?.(localizedScenarios[idx].npcMessages, 0), 400));
+  }, [clearAll, localizedScenarios]);
 
   const handleAnswer = useCallback((optionIdx: number) => {
     if (chatPhase !== "choosing") return;
     soundEngine.clickSwitch();
-    const option = SCENARIOS[scenarioIdx].options[optionIdx];
+    const option = localizedScenarios[scenarioIdx].options[optionIdx];
     setSelectedOption(optionIdx);
     setChatPhase("feedback");
     setMessages((p) => [...p, { id: `player-${Date.now()}`, from: "player", text: option.text, grade: option.grade }]);
@@ -314,7 +323,7 @@ export const CommunicationGame = ({
     } else {
       soundEngine.clickThunk();
     }
-  }, [chatPhase, scenarioIdx]);
+  }, [chatPhase, scenarioIdx, localizedScenarios]);
 
   const handleContinue = useCallback(() => {
     if (scenarioIdx < localizedScenarios.length - 1) {
@@ -323,9 +332,8 @@ export const CommunicationGame = ({
       setPhase("complete");
       confetti({ particleCount: 200, spread: 120, origin: { x: 0.5, y: 0.4 }, colors: ["#22d3ee", "#34d399", "#a78bfa", "#f59e0b"] });
     }
-  }, [scenarioIdx, startScenario]);
+  }, [scenarioIdx, startScenario, localizedScenarios.length]);
 
-  const localizedScenarios = React.useMemo(() => localizeScenarios(lang), [lang]);
   const scenario       = localizedScenarios[scenarioIdx];
   const selOpt         = selectedOption !== null ? scenario.options[selectedOption] : null;
   const gradeConf      = selOpt ? { ...GRADE_CONFIG[selOpt.grade], label: selOpt.grade === "boss" ? copy.gradeBoss : selOpt.grade === "medium" ? copy.gradeMedium : copy.gradeWrong } : null;
@@ -366,7 +374,7 @@ export const CommunicationGame = ({
             <motion.div key="intro" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
               className="flex flex-col items-center gap-8">
 
-              <div className="flex items-end justify-center gap-6 sm:gap-10">
+              <div className="flex flex-wrap sm:flex-nowrap items-end justify-center gap-6 sm:gap-10">
                 {[
                   { gif: lunaGif, name: "Luna", color: "#22d3ee" },
                   { gif: boGif,   name: "Bo",   color: "#a78bfa" },
@@ -379,9 +387,8 @@ export const CommunicationGame = ({
                     className="flex flex-col items-center gap-2"
                   >
                     <div
-                      className="rounded-2xl overflow-hidden border-2"
+                      className="rounded-2xl overflow-hidden border-2 w-20 h-20 sm:w-28 sm:h-28 md:w-[148px] md:h-[148px]"
                       style={{
-                        width: 148, height: 148,
                         borderColor: c.color + "60",
                         boxShadow: `0 0 32px ${c.color}30, inset 0 0 0 1px ${c.color}15`,
                         background: "rgba(255,255,255,0.04)",
@@ -405,8 +412,7 @@ export const CommunicationGame = ({
                 style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)" }}
               >
                 <div
-                  className="rounded-xl overflow-hidden border border-amber-400/40 flex-shrink-0"
-                  style={{ width: 76, height: 88 }}
+                  className="rounded-xl overflow-hidden border border-amber-400/40 flex-shrink-0 w-[60px] h-[70px] md:w-[76px] md:h-[88px]"
                 >
                   <GifImg src={npcGif} alt="Nick" imgKey={imgKey}
                     className="w-full h-full object-cover object-center" />
@@ -452,7 +458,7 @@ export const CommunicationGame = ({
             >
               <div className="flex items-center justify-between px-1">
                 <div className="flex items-center gap-2">
-                  {SCENARIOS.map((_, i) => (
+                  {localizedScenarios.map((_, i) => (
                     <div key={i} className="h-1.5 rounded-full transition-all duration-300" style={{
                       width: i === scenarioIdx ? 24 : 8,
                       background: i === scenarioIdx ? scenario.captainColor : i < scenarioIdx ? scenario.captainColor + "60" : "rgba(255,255,255,0.1)",
@@ -496,7 +502,7 @@ export const CommunicationGame = ({
                   </div>
                 </div>
 
-                <div data-chat-scroll className="h-56 sm:h-64 overflow-y-auto px-4 py-4 flex flex-col gap-3 scroll-smooth">
+                <div data-lenis-prevent="true" data-chat-scroll className="flex-1 max-h-[40vh] sm:h-64 overflow-y-auto px-4 py-4 flex flex-col gap-3 scroll-smooth">
                   <AnimatePresence>
                     {messages.map((msg) => (
                       <motion.div key={msg.id}
@@ -552,29 +558,32 @@ export const CommunicationGame = ({
                     className="flex flex-col gap-2">
                     <p className="text-[11px] text-slate-500 tracking-[0.2em] uppercase px-1 mb-1"
                       >{copy.choose}</p>
-                    {scenario.options.map((opt, i) => (
-                      <motion.button key={i}
-                        initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.07 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => handleAnswer(i)}
-                        className="w-full text-left px-5 py-4 rounded-2xl border transition-all duration-200"
-                        style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)", fontSize: 14, lineHeight: 1.6, color: "rgba(226,232,240,0.85)" }}
-                        onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLButtonElement).style.borderColor = scenario.captainColor + "55";
-                          (e.currentTarget as HTMLButtonElement).style.background = `${scenario.captainColor}09`;
-                        }}
-                        onMouseLeave={(e) => {
-                          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.08)";
-                          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.03)";
-                        }}
-                      >
-                        <span className="mr-2 opacity-40" >
-                          {String.fromCharCode(65 + i)})
-                        </span>
-                        {opt.text}
-                      </motion.button>
-                    ))}
+                    {shuffledIndices.map((originalIndex, displayIndex) => {
+                      const opt = scenario.options[originalIndex];
+                      return (
+                        <motion.button key={originalIndex}
+                          initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: displayIndex * 0.07 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => handleAnswer(originalIndex)}
+                          className="w-full text-left px-5 py-4 rounded-2xl border transition-all duration-200"
+                          style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)", fontSize: 14, lineHeight: 1.6, color: "rgba(226,232,240,0.85)" }}
+                          onMouseEnter={(e) => {
+                            (e.currentTarget as HTMLButtonElement).style.borderColor = scenario.captainColor + "55";
+                            (e.currentTarget as HTMLButtonElement).style.background = `${scenario.captainColor}09`;
+                          }}
+                          onMouseLeave={(e) => {
+                            (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.08)";
+                            (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.03)";
+                          }}
+                        >
+                          <span className="mr-2 opacity-40" >
+                            {String.fromCharCode(65 + displayIndex)})
+                          </span>
+                          {opt.text}
+                        </motion.button>
+                      );
+                    })}
                   </motion.div>
                 )}
 
