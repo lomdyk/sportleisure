@@ -212,30 +212,24 @@ export const HeroStory = () => {
       ease: "power2.out",
     }, 0);
 
-    // Story panels custom timings to match 3D animations exactly
-    const timings = [
-      { start: 0.05, end: 0.19 },     // 0: Welcome
-      { start: 0.20, end: 0.38 },     // 1: PKU
-      { start: 0.395, end: 0.547 },   // 2: Heavy Food
-      { start: 0.548, end: 0.689 },   // 3: Formula Power
-    ];
-
+    // Story panels
+    const panelDur = 0.11;
     panelRefs.current.forEach((panel, i) => {
       if (!panel) return;
-      const t = timings[i] || { start: 0.08 + i * 0.11, end: 0.08 + i * 0.11 + 0.075 };
+      const start = 0.08 + i * panelDur;
 
       tl.fromTo(
         panel,
         { opacity: 0, x: isMobile ? 0 : -30, y: isMobile ? 20 : 0 },
         { opacity: 1, x: 0, y: 0, duration: 0.04, ease: "power2.out" },
-        t.start
+        start
       );
 
       if (i < STORY_PANELS.length - 1) {
         tl.to(
           panel,
           { opacity: 0, x: isMobile ? 0 : -20, y: isMobile ? -10 : 0, duration: 0.03, ease: "power2.in" },
-          t.end - 0.03
+          start + 0.075
         );
       }
     });
@@ -273,7 +267,7 @@ export const HeroStory = () => {
       }, 0.4);
     }
 
-    const zoomStart = timings[3].end + 0.03;
+    const zoomStart = 0.08 + (STORY_PANELS.length - 1) * panelDur + 0.05;
 
     // Auto-scroll instantly when zoom animation finishes (only when scrolling forward)
     tl.add(() => {
