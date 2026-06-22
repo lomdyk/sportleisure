@@ -155,11 +155,25 @@ export const HeroStory = () => {
   const [isMobileScreen, setIsMobileScreen] = React.useState(
     typeof window !== 'undefined' ? window.innerWidth < 768 : false
   );
+  const [showAdmin, setShowAdmin] = React.useState(false);
 
   React.useEffect(() => {
     const handleResize = () => setIsMobileScreen(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore if typing in an input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.key.toLowerCase() === 'p') {
+        setShowAdmin(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   useGSAP(() => {
@@ -376,6 +390,17 @@ export const HeroStory = () => {
           <path d="M10 4v12m0 0l-4-4m4 4l4-4" stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
+
+      {/* Admin Menu for jumping to specific animations */}
+      {showAdmin && (
+        <div className="fixed bottom-4 left-4 z-[9999] bg-slate-900/90 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-2xl flex flex-col gap-3 pointer-events-auto">
+          <div className="text-white/50 text-[10px] font-bold uppercase tracking-widest mb-1 border-b border-white/10 pb-2">Admin Animation Controls</div>
+          <button onClick={() => window.scrollTo({ top: containerRef.current?.offsetTop || 0, behavior: 'smooth'})} className="text-left text-sm text-cyan-400 hover:text-cyan-300 transition-colors">1. Welcome</button>
+          <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.25 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-purple-400 hover:text-purple-300 transition-colors">2. PKU Build</button>
+          <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.45 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-amber-500 hover:text-amber-400 transition-colors">3. Heavy Food 🍕</button>
+          <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.55 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-emerald-400 hover:text-emerald-300 transition-colors">4. Formula Power 🧪</button>
+        </div>
+      )}
     </div>
   );
 };
