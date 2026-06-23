@@ -61,20 +61,20 @@ export const TRANSLATIONS: Dict = {
     en: "Today is a big day! You and your Galactic Crew are preparing for a massive sports tournament.", 
     de: "Heute ist ein großer Tag! Du und deine galaktische Crew bereiten sich auf ein großes Sportturnier vor." 
   },
-  "pku.title": { en: "The Broken Hammer", de: "Der kaputte Hammer" },
+  "pku.title": { en: "The Champion's Diet", de: "Die Champion-Diät" },
   "pku.desc": { 
-    en: "In PKU, your body's engine is missing a specific 'hammer' to break down a protein part called Phe. If you don't manage it, Phe builds up like toxic dust and affects your brain function.", 
-    de: "Bei PKU fehlt dem Motor deines Körpers ein bestimmter 'Hammer', um ein Proteinteil namens Phe abzubauen. Wenn du es nicht kontrollierst, baut sich Phe wie giftiger Staub auf und beeinträchtigt deine Gehirnfunktion." 
+    en: "As an athlete with PKU, you already know the basics: your body handles protein differently. To be a champion on the field, you need the perfect sports diet to keep your energy high and your mind sharp.", 
+    de: "Als Athlet mit PKU kennst du bereits die Grundlagen: Dein Körper verarbeitet Protein anders. Um ein Champion auf dem Feld zu sein, brauchst du die perfekte Sportdiät, um deine Energie hoch und deinen Geist scharf zu halten." 
   },
   "fuel.clean": { en: "Formula Power", de: "Formel-Kraft" },
   "fuel.cleanDesc": { 
-    en: "Fruits, veggies, and your PKU formula are your Formula Power. Remember: your formula does NOT break down excess Phe—it provides safe amino acids (like Tyrosine) your brain and muscles need!", 
-    de: "Obst, Gemüse und deine PKU-Formel sind dein Super-Treibstoff. Denk dran: Deine Formel baut überschüssiges Phe NICHT ab — sie liefert sichere Aminosäuren (wie Tyrosin), die dein Gehirn und deine Muskeln brauchen!" 
+    en: "Fruits, veggies, and your PKU formula are your Super-Fuel! Your formula provides the safe amino acids (like Tyrosine) your brain and muscles need to build strength and endurance for the big match.", 
+    de: "Obst, Gemüse und deine PKU-Formel sind dein Super-Treibstoff! Deine Formel liefert die sicheren Aminosäuren (wie Tyrosin), die dein Gehirn und deine Muskeln brauchen, um Kraft und Ausdauer für das große Spiel aufzubauen." 
   },
   "fuel.heavy": { en: "Heavy Food", de: "Schweres Essen" },
   "fuel.heavyDesc": { 
-    en: "Meat, cheese, and regular milk are heavy. They are full of Phe! A toxic buildup affects your brain function, causing brain fog and slowing down your reflexes.", 
-    de: "Fleisch, Käse und normale Milch sind schwer. Sie sind voller Phe! Eine toxische Ansammlung beeinträchtigt deine Gehirnfunktion, verursacht Gehirnnebel und verlangsamt deine Reflexe." 
+    en: "Meat, cheese, and regular milk are heavy. They are full of Phe! During sports, a toxic buildup of Phe affects your brain function, causing brain fog and slowing down your reflexes on the field.", 
+    de: "Fleisch, Käse und normale Milch sind schwer. Sie sind voller Phe! Beim Sport beeinträchtigt eine toxische Ansammlung von Phe deine Gehirnfunktion, verursacht Gehirnnebel und verlangsamt deine Reflexe auf dem Spielfeld." 
   },
   "ship.enter": { 
     en: "Time to meet your team! But before we fly to the stadium, a true athlete must pack their sports bag. Let's go!", 
