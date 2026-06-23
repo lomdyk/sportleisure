@@ -466,15 +466,15 @@ export const HeroStory = () => {
           <div ref={mobileShipContainerRef} className="absolute inset-0 flex items-center justify-center pointer-events-none z-[5]">
             <div className="relative">
               {/* Bad Foods */}
-              <img ref={pizzaRef} src={pizzaImg} alt="Pizza" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-16 object-contain z-[6]" />
-              <img ref={cheeseRef} src={cheeseImg} alt="Cheese" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-16 object-contain z-[6]" />
+              <img ref={pizzaRef} src={pizzaImg} alt="Pizza" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-16 object-contain z-[6]" style={{ opacity: 0 }} />
+              <img ref={cheeseRef} src={cheeseImg} alt="Cheese" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-16 object-contain z-[6]" style={{ opacity: 0 }} />
               
               {/* Good Foods */}
-              <img ref={appleRef} src={appleImg} alt="Apple" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-16 object-contain z-[6]" />
-              <img ref={formulaRef} src={formulaImg} alt="Formula" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-20 object-contain z-[6]" />
-              <img ref={waterRef} src={waterbottleImg} alt="Water Bottle" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-16 object-contain z-[6]" />
+              <img ref={appleRef} src={appleImg} alt="Apple" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-16 object-contain z-[6]" style={{ opacity: 0 }} />
+              <img ref={formulaRef} src={formulaImg} alt="Formula" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-20 object-contain z-[6]" style={{ opacity: 0 }} />
+              <img ref={waterRef} src={waterbottleImg} alt="Water Bottle" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-16 object-contain z-[6]" style={{ opacity: 0 }} />
 
-              <div ref={blockIconRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-red-500 text-6xl drop-shadow-lg z-[8]">
+              <div ref={blockIconRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-red-500 text-6xl drop-shadow-lg z-[8]" style={{ opacity: 0 }}>
                 🚫
               </div>
 

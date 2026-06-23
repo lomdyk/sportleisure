@@ -41,7 +41,7 @@ export const ScrollDots: React.FC = () => {
   };
 
   return (
-    <div className="fixed left-4 md:left-6 top-1/2 -translate-y-1/2 z-[90] flex flex-col items-center gap-3 p-3 rounded-full bg-white/[0.02] border border-white/[0.05] backdrop-blur-md shadow-2xl">
+    <div className="hidden md:flex fixed left-4 md:left-6 top-1/2 -translate-y-1/2 z-[90] flex-col items-center gap-3 p-3 rounded-full bg-white/[0.02] border border-white/[0.05] backdrop-blur-md shadow-2xl">
       {SECTIONS.map((section, idx) => {
         const isActive = activeIdx === idx;
         const color = isActive ? section.color : "rgba(255, 255, 255, 0.15)";
