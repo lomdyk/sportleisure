@@ -37,10 +37,22 @@ class AudioEngine {
         this.crowdAudio = new Audio(crowdMusicSrc);
         this.crowdAudio.loop = true;
         this.crowdAudio.volume = 0;
-        this.targetCrowdVolume = 0.05;
+        this.targetCrowdVolume = 0.015;
       }
     } catch (e) {
       console.warn('Audio tag not supported', e);
+    }
+
+    if (typeof document !== 'undefined') {
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          this.ctx?.suspend();
+          if (this.crowdAudio) this.crowdAudio.volume = 0;
+        } else {
+          this.ctx?.resume();
+          if (this.crowdAudio && !this.isMuted) this.crowdAudio.volume = this.targetCrowdVolume;
+        }
+      });
     }
   }
 
@@ -77,11 +89,11 @@ class AudioEngine {
   }
 
   public setCrowdIntensity(intensity: 'low' | 'high') {
-    this.targetCrowdVolume = intensity === 'high' ? 0.15 : 0.05;
+    this.targetCrowdVolume = intensity === 'high' ? 0.05 : 0.015;
     if (this.crowdAudio && !this.isMuted) {
       // Simple fade
       const fade = setInterval(() => {
-        if (!this.crowdAudio || this.isMuted) {
+        if (!this.crowdAudio || this.isMuted || document.hidden) {
           clearInterval(fade);
           return;
         }
