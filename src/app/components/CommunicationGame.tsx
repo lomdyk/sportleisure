@@ -8,10 +8,11 @@ import { GhostButton } from "./ui/GhostButton";
 import { useLang } from "../utils/i18n";
 import { soundEngine } from "../utils/audioEngine";
 
-import npcGif from "../../imports/npc.gif";
+import npcGif from "../../imports/alien_1.gif";
 import lunaGif from "../../imports/luNA-ezgif.com-crop.gif";
 import boGif from "../../imports/bo-ezgif.com-crop.gif";
 import elaGif from "../../imports/ela-ezgif.com-crop.gif";
+import medalImg from "../../imports/medal.png";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -348,6 +349,45 @@ export const CommunicationGame = ({
     clearAll();
   }, [clearAll]);
 
+  if (phase === "complete") {
+    return (
+      <div className="relative w-full min-h-[400px] flex items-center justify-center p-8">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-white/5 border border-white/10 rounded-3xl p-8 max-w-md w-full text-center backdrop-blur-md"
+        >
+          <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6">
+            <img src={medalImg} alt="MVP Medal" className="w-20 h-20 drop-shadow-[0_0_15px_rgba(250,204,21,0.6)] animate-[pulse_2s_ease-in-out_infinite]" />
+          </div>
+          <h2 className="text-3xl font-bold text-white mb-2 font-['Space_Grotesk']">
+            {copy.doneA} <span className="text-violet-400">{copy.doneB}</span>
+          </h2>
+          <p className="text-white/60 mb-8 font-['Space_Grotesk']">
+            {t("game.wellDone")}
+          </p>
+          <div className="flex flex-col items-center justify-center gap-4">
+            <GhostButton
+              tone="violet"
+              size="lg"
+              onClick={onClose}
+            >
+              {t("complete.continue")}
+            </GhostButton>
+            <button
+              onClick={() => { soundEngine.clickSwitch(); handleRestart(); }}
+              onMouseEnter={() => soundEngine.hoverNote()}
+              className="text-white/40 hover:text-white/70 flex items-center gap-1.5 text-sm transition-colors mt-2"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              {t("btn.restart")}
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative w-full flex flex-col items-center px-4 py-10 md:py-14">
       {/* Heading */}
@@ -644,49 +684,7 @@ export const CommunicationGame = ({
               </AnimatePresence>
             </motion.div>
           )}
-
-          {/* ── COMPLETE ── */}
-          {phase === "complete" && (
-            <motion.div key="complete" initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }}
-              transition={{ type: "spring", duration: 0.5, bounce: 0.15 }}
-              className="flex flex-col items-center text-center gap-6 py-8">
-              <div className="w-20 h-20 rounded-full border border-violet-400/30 flex items-center justify-center"
-                style={{ background: "rgba(167,139,250,0.1)" }}>
-                <Star className="w-10 h-10 text-violet-400" />
-              </div>
-              <div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl tracking-tight mb-3 text-white"
-                  style={{ fontWeight: 700, }}>
-                  {copy.doneA} <span className="text-violet-400" style={{ textShadow: "0 0 20px rgba(167,139,250,0.6)" }}>{copy.doneB}</span>
-                </h3>
-                <p className="text-slate-300 max-w-sm mx-auto mb-4"
-                  style={{ lineHeight: 1.8 }}>
-                  {copy.doneText}
-                </p>
-                <p className="text-white/60 mb-8 font-['Space_Grotesk']">
-                  {t("game.wellDone")}
-                </p>
-              </div>
-              <div className="flex flex-col items-center justify-center gap-4">
-                <GhostButton
-                  tone="violet"
-                  size="lg"
-                  onClick={onClose}
-                >
-                  {t("complete.continue")}
-                </GhostButton>
-                <button
-                  onClick={() => { soundEngine.clickSwitch(); handleRestart(); }}
-                  onMouseEnter={() => soundEngine.hoverNote()}
-                  className="text-white/40 hover:text-white/70 flex items-center gap-1.5 text-sm transition-colors mt-2"
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                  {t("btn.restart")}
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        </div>
       </div>
     </div>
   );

@@ -274,11 +274,11 @@ export const TRANSLATIONS: Dict = {
   "fact.5.text": { en: "With the right preparation, there are no physical limits for you. You can participate in any sport your peers do, join the team, and most importantly—have fun!", de: "Mit der richtigen Vorbereitung gibt es für dich keine körperlichen Grenzen. Du kannst an jedem Sport teilnehmen, den deine Freunde machen, dem Team beitreten und vor allem – Spaß haben!" },
 
   // Footer Logs
-  "hero.0.name": { en: "Captain's Log #1", de: "Kapitänslogbuch #1" },
+  "hero.0.name": { en: "Locker Room Notes #1", de: "Kabinen-Notizen #1" },
   "hero.0.quote": { en: "Managing PKU doesn't make you different — it makes you disciplined. Every meal is a choice, and every good choice fuels your sports journey.", de: "PKU zu managen macht dich nicht anders – es macht dich diszipliniert. Jede Mahlzeit ist eine Entscheidung, und jede gute Entscheidung treibt deine sportliche Reise an." },
-  "hero.1.name": { en: "Captain's Log #2", de: "Kapitänslogbuch #2" },
+  "hero.1.name": { en: "Locker Room Notes #2", de: "Kabinen-Notizen #2" },
   "hero.1.quote": { en: "Someone offered me protein snacks once. I just told them I have my own special sports fuel. Now they cheer for me when I drink it!", de: "Jemand hat mir einmal Protein-Snacks angeboten. Ich habe ihnen einfach gesagt, dass ich meinen eigenen speziellen Sporttreibstoff habe. Jetzt feuern sie mich an, wenn ich ihn trinke!" },
-  "hero.2.name": { en: "Captain's Log #3", de: "Kapitänslogbuch #3" },
+  "hero.2.name": { en: "Locker Room Notes #3", de: "Kabinen-Notizen #3" },
   "hero.2.quote": { en: "Keep lots of low-Phe fruits in your bag. Apples and bananas are perfect for quick stamina during half time.", de: "Bewahre viele fruktosereiche Früchte in deiner Tasche auf. Äpfel und Bananen sind perfekt für schnelle Ausdauer in der Halbzeit." },
 
   // Footer Tips

@@ -1,3 +1,5 @@
+import crowdMusicSrc from "../../imports/crowd_music.mp3";
+
 class AudioEngine {
   private ctx: AudioContext | null = null;
   private masterGain: GainNode | null = null;
@@ -6,6 +8,8 @@ class AudioEngine {
   private lastPlayed: Map<string, number> = new Map();
   private hoverScale = [196.0, 220.0, 246.9, 293.7, 329.6, 349.2, 392.0];
   private cardScale = [130.8, 146.8, 164.8, 196.0, 220.0, 246.9];
+  private crowdAudio: HTMLAudioElement | null = null;
+  private targetCrowdVolume: number = 0.0;
 
   public init() {
     if (this.ctx) return;
@@ -27,12 +31,26 @@ class AudioEngine {
     } catch (e) {
       console.warn('Web Audio API not supported', e);
     }
+    
+    try {
+      if (!this.crowdAudio) {
+        this.crowdAudio = new Audio(crowdMusicSrc);
+        this.crowdAudio.loop = true;
+        this.crowdAudio.volume = 0;
+        this.targetCrowdVolume = 0.05;
+      }
+    } catch (e) {
+      console.warn('Audio tag not supported', e);
+    }
   }
 
   public toggleMute() {
     this.isMuted = !this.isMuted;
     if (this.masterGain) {
       this.masterGain.gain.setTargetAtTime(this.isMuted ? 0 : 0.35, this.ctx?.currentTime || 0, 0.05);
+    }
+    if (this.crowdAudio) {
+      this.crowdAudio.volume = this.isMuted ? 0 : this.targetCrowdVolume;
     }
     return this.isMuted;
   }
@@ -42,10 +60,40 @@ class AudioEngine {
     if (this.masterGain) {
       this.masterGain.gain.setTargetAtTime(this.isMuted ? 0 : 0.35, this.ctx?.currentTime || 0, 0.05);
     }
+    if (this.crowdAudio) {
+      this.crowdAudio.volume = this.isMuted ? 0 : this.targetCrowdVolume;
+    }
   }
 
   public get isMutedState() {
     return this.isMuted;
+  }
+
+  public playCrowdBackground() {
+    this.init();
+    if (this.crowdAudio && this.crowdAudio.paused) {
+      this.crowdAudio.play().catch(e => console.warn("Crowd audio autoplay blocked", e));
+    }
+  }
+
+  public setCrowdIntensity(intensity: 'low' | 'high') {
+    this.targetCrowdVolume = intensity === 'high' ? 0.15 : 0.05;
+    if (this.crowdAudio && !this.isMuted) {
+      // Simple fade
+      const fade = setInterval(() => {
+        if (!this.crowdAudio || this.isMuted) {
+          clearInterval(fade);
+          return;
+        }
+        const diff = this.targetCrowdVolume - this.crowdAudio.volume;
+        if (Math.abs(diff) < 0.01) {
+          this.crowdAudio.volume = this.targetCrowdVolume;
+          clearInterval(fade);
+        } else {
+          this.crowdAudio.volume += diff * 0.1;
+        }
+      }, 50);
+    }
   }
 
   private _rand(min: number, max: number) {

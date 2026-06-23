@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import confetti from "canvas-confetti";
-import { Backpack, Shield, AlertTriangle, CheckCircle2, ChevronDown, RotateCcw } from "lucide-react";
+import { Backpack, Shield, AlertTriangle, ChevronDown, RotateCcw } from "lucide-react";
 import { GhostButton } from "./ui/GhostButton";
 import { useLang } from "../utils/i18n";
 import { soundEngine } from "../utils/audioEngine";
 import { metricsActions } from "../store/metricsStore";
+import medalImg from "../../imports/medal.png";
 
 import appleImg from "../../imports/яблоко_plasticine-style___202604161826-removebg-preview.png";
 import waterbottleImg from "../../imports/waterbottle.png";
@@ -159,8 +160,8 @@ export const BackpackGame = ({
           animate={{ opacity: 1, scale: 1 }}
           className="bg-white/5 border border-white/10 rounded-3xl p-8 max-w-md w-full text-center backdrop-blur-md"
         >
-          <div className="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 className="w-10 h-10 text-emerald-400" />
+          <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6">
+            <img src={medalImg} alt="MVP Medal" className="w-20 h-20 drop-shadow-[0_0_15px_rgba(250,204,21,0.6)] animate-[pulse_2s_ease-in-out_infinite]" />
           </div>
           <h2 className="text-3xl font-bold text-white mb-2 font-['Space_Grotesk']">
             {t("complete.m1.title")}

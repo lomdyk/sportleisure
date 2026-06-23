@@ -24,6 +24,7 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { scrollState } from "./store/rocketAnimation";
+import { soundEngine } from "./utils/audioEngine";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -112,7 +113,17 @@ function AppInner() {
     else if (activeScene === 'runner') missionId = 'm3';
     
     metricsActions.setActiveMission(missionId);
-  }, [activeScene, scrollTarget]);
+
+    // Audio Engine updates
+    if (session.id) {
+      soundEngine.playCrowdBackground();
+      if (activeScene === 'backpack' || activeScene === 'runner') {
+        soundEngine.setCrowdIntensity('high');
+      } else {
+        soundEngine.setCrowdIntensity('low');
+      }
+    }
+  }, [activeScene, scrollTarget, session.id]);
 
   // Track scroll depth
   useEffect(() => {

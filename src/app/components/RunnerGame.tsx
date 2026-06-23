@@ -4,6 +4,7 @@ import { Play, RotateCcw, Zap, Trophy } from "lucide-react";
 import { GhostButton } from "./ui/GhostButton";
 import { useLang } from "../utils/i18n";
 import { soundEngine } from "../utils/audioEngine";
+import medalImg from "../../imports/medal.png";
 import { metricsActions } from "../store/metricsStore";
 
 import runnerGif from "../../imports/ezgif.com-crop.gif";
@@ -500,6 +501,9 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             )}
             {state === "over" && (
               <Overlay key="over">
+                <div className="w-24 h-24 flex items-center justify-center mx-auto mb-2">
+                  <img src={medalImg} alt="MVP Medal" className="w-20 h-20 drop-shadow-[0_0_15px_rgba(250,204,21,0.6)] animate-[pulse_2s_ease-in-out_infinite]" />
+                </div>
                 <div className="text-emerald-300 uppercase tracking-[0.3em] text-xs mb-2">{t(encouragement)}</div>
                 <h3 className="text-white mb-1" style={{ fontWeight: 700, fontSize: "32px" }}>
                   {t("runner.distanceLabel")}: <span className="text-cyan-300 tabular-nums">{score}</span>
