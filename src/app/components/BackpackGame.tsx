@@ -347,7 +347,7 @@ export const BackpackGame = ({
                     }
                   }}
                   className={`
-                    relative flex flex-col items-center p-2 md:p-3 rounded-xl border-2 transition-all duration-200 cursor-grab active:cursor-grabbing
+                    relative flex flex-col items-center p-2 md:p-3 rounded-xl border-2 transition-colors duration-200 cursor-grab active:cursor-grabbing
                     ${selected === item.id
                       ? "border-cyan-400 bg-cyan-500/10 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
                       : "border-white/[0.08] bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06]"
