@@ -1,6 +1,7 @@
 import { proxy, snapshot } from 'valtio';
 import { supabase } from '../utils/supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
+import { TESTING_MODE } from '../utils/config';
 
 export interface TestSession {
   id: string;
@@ -152,6 +153,7 @@ export const metricsActions = {
   },
 
   async syncToDb(isInitial = false) {
+    if (!TESTING_MODE) return;
     if (!metricsState.id) return;
     
     // Get a plain JS object from the proxy to avoid serialization issues with Supabase

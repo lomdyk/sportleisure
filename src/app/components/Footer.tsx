@@ -8,7 +8,8 @@ import {
 } from "lucide-react";
 import { useLang } from "../utils/i18n";
 import { soundEngine } from "../utils/audioEngine";
-import { metricsActions } from "../store/metricsStore";
+import { metricsState, metricsActions } from "../store/metricsStore";
+import { TESTING_MODE } from "../utils/config";
 
 // ─── PKU Facts ────────────────────────────────────────────────────────────────
 
@@ -514,7 +515,7 @@ export const Footer = ({
             transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
             className="inline-block mb-14"
           >
-            {isPostTestCompleted ? (
+            {(!TESTING_MODE || isPostTestCompleted) ? (
               <GhostButton
                 tone="cyan"
                 size="md"

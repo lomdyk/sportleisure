@@ -23,6 +23,7 @@ import { useSnapshot } from 'valtio';
 import Lenis from "lenis";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { TESTING_MODE } from "./utils/config";
 import { scrollState } from "./store/rocketAnimation";
 import { soundEngine } from "./utils/audioEngine";
 
@@ -62,6 +63,17 @@ function AppInner() {
     };
   }, [activeScene, session.id, showPostTest]);
 
+  // Auto-init session if testing mode is disabled
+  useEffect(() => {
+    if (!TESTING_MODE && !session.id) {
+      metricsActions.initSession({
+        age_group: "none",
+        pku_knowledge: "none",
+        dietary_restrictions: "none"
+      }, lang);
+    }
+  }, [session.id]);
+
   // Handle scrolling to a target when returning to main scene
   useEffect(() => {
     const lenis = new Lenis({
@@ -77,7 +89,7 @@ function AppInner() {
     (window as any).lenis = lenis;
 
     // Immediately stop lenis if overlay is active on mount
-    if (session.id === '') {
+    if (session.id === '' && TESTING_MODE) {
       lenis.stop();
     }
 
@@ -233,19 +245,18 @@ function AppInner() {
       style={{ fontFamily: "'Space Grotesk', sans-serif" }}
     >
       <h1 className="sr-only">{t("app.title")}</h1>
-      
       <Preloader />
       
       <AnimatePresence>
-        {!session.id && (
+        {TESTING_MODE && !session.id && (
           <PreTestModal
-            onSubmit={(age, knowledge, restrictions) => {
-              metricsActions.initSession(age, knowledge, restrictions, lang);
+            onSubmit={(data) => {
+              metricsActions.initSession(data, lang);
             }}
           />
         )}
         
-        {showPostTest && (
+        {TESTING_MODE && showPostTest && (
           <PostTestModal 
             key="posttest"
             onSubmit={(userFeelings, biologyCheck, knowledgeCheck, foodCheck, sportsCheck, feedback, learnedNew) => {
