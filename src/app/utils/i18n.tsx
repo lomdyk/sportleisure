@@ -85,15 +85,15 @@ export const TRANSLATIONS: Dict = {
   "m1.tag": { en: "Mission 01 - Pack with Luna", de: "Mission 01 - Mit Luna packen" },
   "m1.title": { en: "Pack the Team Backpack", de: "Den Team-Rucksack packen" },
   "m1.dialogue": {
-    en: "Captain, we can't fly on an empty stomach! Fasting makes your body burn its own muscles, releasing toxic Phe. Pack safe energy (fruits) and your Tyrosine formula!",
-    de: "Kapitän, wir können nicht mit leerem Magen fliegen! Fasten lässt deinen Körper eigene Muskeln verbrennen, was giftiges Phe freisetzt. Packe sichere Energie (Obst) und deine Tyrosin-Formel ein!",
+    en: "Captain, we can't fly on an empty stomach! Your Super-Fuel helps your body stay strong and prevents toxic Phe from building up. Pack safe energy (fruits) and your Tyrosine formula!",
+    de: "Kapitän, wir können nicht mit leerem Magen fliegen! Dein Super-Treibstoff hilft deinem Körper, stark zu bleiben und verhindert den Aufbau von giftigem Phe. Packe sichere Energie (Obst) und deine Tyrosin-Formel ein!",
   },
   "m1.objective": {
     en: "Sort the cargo! Send Safe Energy and Tyrosine Formula to your backpack. Throw Toxic Cargo (Heavy Protein) into the quarantine bin.",
     de: "Sortiere die Fracht! Schicke Sichere Energie und Tyrosin-Formel in deinen Rucksack. Wirf Giftige Fracht (Schweres Protein) in die Quarantäne-Tonne.",
   },
   "m1.cta": { en: "Pack with Luna >", de: "Mit Luna packen >" },
-  "m1.warning": { en: "Hey Captain, we haven't packed our sports backpack yet! Let's get our gear ready.", de: "Hey Kapitän, wir haben unseren Sportrucksack noch nicht gepackt! Lass uns unsere Ausrüstung bereitlegen." },
+  "m1.warning": { en: "Hey Captain, pack your energy gear before training! We need our Super-Fuel to stay strong.", de: "Hey Kapitän, packe deine Energieausrüstung vor dem Training ein! Wir brauchen unseren Super-Treibstoff, um stark zu bleiben." },
   "m1.speaker": { en: "Luna", de: "Luna" },
 
   // ── Mission 02 — Talk ──────────────────────────────────────
@@ -104,8 +104,8 @@ export const TRANSLATIONS: Dict = {
     de: "\"Hey Kapitän, wir sind am Stadion! Pass auf, ein Fremder aus einem anderen Team geht durch den Tunnel und bietet schwere, proteinreiche Snacks an.\"",
   },
   "m2.objective": {
-    en: "You need to practice saying 'no, thank you'. Learn how to confidently explain that you have a special sports diet to stay fast!",
-    de: "Du musst üben, 'Nein, danke' zu sagen. Lerne, selbstbewusst zu erklären, dass du eine spezielle Sportdiät hast, um schnell zu bleiben!",
+    en: "You need to practice saying 'no, thank you'. Remember: with the right preparation, you can join your team and have fun!",
+    de: "Du musst üben, 'Nein, danke' zu sagen. Denk dran: Mit der richtigen Vorbereitung kannst du in deinem Team mitspielen und Spaß haben!",
   },
   "m2.cta": { en: "Meet the Team >", de: "Team treffen >" },
   "m2.warning": { en: "Wait! Someone is offering a strange snack. We need to figure out what to say!", de: "Warte! Jemand bietet einen seltsamen Snack an. Wir müssen überlegen, was wir sagen!" },
@@ -119,8 +119,8 @@ export const TRANSLATIONS: Dict = {
     de: "Kapitän, nutze deine Formel-Kraft! Vermeide die 'Nebel-Hindernisse'—wenn du sie triffst, baut sich Phe auf und verlangsamt dich. Fange deine Formel-Flaschen, um geistig fit zu bleiben!",
   },
   "m3.objective": {
-    en: "Catch your daily formula during the run to keep your mind sharp and reflexes quick. Avoid the Brain Fog!",
-    de: "Fange deine tägliche Formel während des Laufs, um deinen Geist scharf und deine Reflexe schnell zu halten. Vermeide den Gehirnnebel!",
+    en: "Listen to your body! Catch your daily formula during the run to keep your mind sharp, but avoid the Brain Fog!",
+    de: "Höre auf deinen Körper! Fange deine tägliche Formel während des Laufs, um deinen Geist scharf zu halten, aber vermeide den Gehirnnebel!",
   },
   "m3.cta": { en: "Sprint with Crew >", de: "Mit Team sprinten >" },
   "m3.warning": { en: "Captain, the match is starting! We need to step onto the field!", de: "Kapitän, das Spiel beginnt! Wir müssen aufs Feld gehen!" },
