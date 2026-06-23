@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import confetti from "canvas-confetti";
-import { Backpack, Shield, AlertTriangle, ChevronDown, RotateCcw } from "lucide-react";
+import { Backpack, Shield, AlertTriangle, CheckCircle2, ChevronDown, RotateCcw } from "lucide-react";
 import { GhostButton } from "./ui/GhostButton";
 import { useLang } from "../utils/i18n";
 import { soundEngine } from "../utils/audioEngine";
