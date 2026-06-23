@@ -160,8 +160,9 @@ export const BackpackGame = ({
           animate={{ opacity: 1, scale: 1 }}
           className="bg-white/5 border border-white/10 rounded-3xl p-8 max-w-md w-full text-center backdrop-blur-md"
         >
-          <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6">
-            <img src={medalImg} alt="MVP Medal" className="w-20 h-20 drop-shadow-[0_0_15px_rgba(250,204,21,0.6)] animate-[pulse_2s_ease-in-out_infinite]" />
+          <div className="w-32 h-32 flex items-center justify-center mx-auto mb-6 relative">
+            <div className="absolute inset-0 bg-yellow-400/20 rounded-full blur-2xl" />
+            <img src={medalImg} alt="MVP Medal" className="w-32 h-32 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)] relative z-10" />
           </div>
           <h2 className="text-3xl font-bold text-white mb-2 font-['Space_Grotesk']">
             {t("complete.m1.title")}

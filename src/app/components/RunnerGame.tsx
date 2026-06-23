@@ -501,8 +501,9 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             )}
             {state === "over" && (
               <Overlay key="over">
-                <div className="w-24 h-24 flex items-center justify-center mx-auto mb-2">
-                  <img src={medalImg} alt="MVP Medal" className="w-20 h-20 drop-shadow-[0_0_15px_rgba(250,204,21,0.6)] animate-[pulse_2s_ease-in-out_infinite]" />
+                <div className="w-32 h-32 flex items-center justify-center mx-auto mb-4 relative">
+                  <div className="absolute inset-0 bg-yellow-400/20 rounded-full blur-2xl" />
+                  <img src={medalImg} alt="MVP Medal" className="w-32 h-32 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)] relative z-10" />
                 </div>
                 <div className="text-emerald-300 uppercase tracking-[0.3em] text-xs mb-2">{t(encouragement)}</div>
                 <h3 className="text-white mb-1" style={{ fontWeight: 700, fontSize: "32px" }}>
