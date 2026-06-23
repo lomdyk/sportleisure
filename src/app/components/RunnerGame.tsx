@@ -13,7 +13,7 @@ import pizzaImg from "../../imports/Untitled_(1).png";
 import formulaImg from "../../imports/Untitled.png";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const GAME_HEIGHT = 360;
+const GAME_HEIGHT = 440;
 const GROUND_Y = 60;
 const PLAYER_X = 80;
 const PLAYER_SIZE = 84;
