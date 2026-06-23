@@ -38,6 +38,66 @@ const INITIAL_ITEMS: FoodItem[] = [
   { id: "pizza", name: "Pizza", img: pizzaImg, type: "unsafe", label: "High protein" },
 ];
 
+const FoodItemCard = React.memo(({ 
+  item, 
+  isSelected, 
+  onSelect, 
+  t 
+}: { 
+  item: FoodItem, 
+  isSelected: boolean, 
+  onSelect: (id: string) => void, 
+  t: any 
+}) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0, transition: { duration: 0.3 } }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <button
+        onClick={() => onSelect(item.id)}
+        onMouseEnter={() => soundEngine.hoverNote()}
+        draggable
+        onDragStart={(e) => {
+          e.dataTransfer.setData("text/plain", item.id);
+        }}
+        onDragEnd={(e) => {
+          e.preventDefault();
+        }}
+        className={`
+          relative flex flex-col items-center p-2 md:p-3 rounded-xl border-2 transition-colors duration-200 cursor-grab active:cursor-grabbing
+          ${isSelected
+            ? "border-cyan-400 bg-cyan-500/10 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+            : "border-white/[0.08] bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06]"
+          }
+        `}
+      >
+        <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
+          <img
+            src={item.img}
+            alt={item.name}
+            className="max-w-full max-h-full object-contain drop-shadow-lg pointer-events-none"
+          />
+        </div>
+        <span className="text-[11px] text-white/80 font-['Space_Grotesk'] mt-1">{t(`food.${item.id}.name`)}</span>
+        <span className={`text-[9px] font-['Space_Grotesk'] mt-0.5 ${item.type === "safe" ? "text-cyan-400/60" : "text-amber-400/60"}`}>
+          {t(`food.${item.id}.label`)}
+        </span>
+        {isSelected && (
+          <motion.div
+            layoutId="selected-indicator"
+            className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-cyan-400 flex items-center justify-center"
+          >
+            <ChevronDown className="w-3 h-3 text-[#050a18]" />
+          </motion.div>
+        )}
+      </button>
+    </motion.div>
+  );
+});
+
 export const BackpackGame = ({
   onComplete,
   onClose,
@@ -69,10 +129,10 @@ export const BackpackGame = ({
     setTimeout(() => setMessage(null), 2500);
   }, []);
 
-  const handleSelectItem = (id: string) => {
+  const handleSelectItem = useCallback((id: string) => {
     soundEngine.clickPop();
-    setSelected(selected === id ? null : id);
-  };
+    setSelected((prev) => (prev === id ? null : id));
+  }, []);
 
   const handleDropItemToBackpack = (id: string) => {
     const item = items.find((i) => i.id === id);
@@ -338,52 +398,13 @@ export const BackpackGame = ({
           <div className="flex flex-wrap justify-center gap-3 p-4 bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-2xl">
             <AnimatePresence>
               {items.map((item) => (
-                <motion.div
+                <FoodItemCard
                   key={item.id}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0, transition: { duration: 0.3 } }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <button
-                    onClick={() => handleSelectItem(item.id)}
-                    onMouseEnter={() => soundEngine.hoverNote()}
-                    draggable
-                    onDragStart={(e) => {
-                      e.dataTransfer.setData("text/plain", item.id);
-                    }}
-                    onDragEnd={(e) => {
-                      e.preventDefault();
-                    }}
-                    className={`
-                      relative flex flex-col items-center p-2 md:p-3 rounded-xl border-2 transition-colors duration-200 cursor-grab active:cursor-grabbing
-                      ${selected === item.id
-                        ? "border-cyan-400 bg-cyan-500/10 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
-                        : "border-white/[0.08] bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06]"
-                      }
-                    `}
-                  >
-                    <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
-                      <img
-                        src={item.img}
-                        alt={item.name}
-                        className="max-w-full max-h-full object-contain drop-shadow-lg pointer-events-none"
-                      />
-                    </div>
-                    <span className="text-[11px] text-white/80 font-['Space_Grotesk'] mt-1">{t(`food.${item.id}.name`)}</span>
-                    <span className={`text-[9px] font-['Space_Grotesk'] mt-0.5 ${item.type === "safe" ? "text-cyan-400/60" : "text-amber-400/60"}`}>
-                      {t(`food.${item.id}.label`)}
-                    </span>
-                    {selected === item.id && (
-                      <motion.div
-                        layoutId="selected-indicator"
-                        className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-cyan-400 flex items-center justify-center"
-                      >
-                        <ChevronDown className="w-3 h-3 text-[#050a18]" />
-                      </motion.div>
-                    )}
-                  </button>
-                </motion.div>
+                  item={item}
+                  isSelected={selected === item.id}
+                  onSelect={handleSelectItem}
+                  t={t}
+                />
               ))}
             </AnimatePresence>
           </div>
