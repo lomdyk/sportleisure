@@ -46,6 +46,8 @@ export const BackpackGame = ({
   onClose: () => void;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const backpackRef = useRef<HTMLButtonElement>(null);
+  const quarantineRef = useRef<HTMLButtonElement>(null);
   const [items, setItems] = useState<FoodItem[]>(INITIAL_ITEMS);
   const [selected, setSelected] = useState<string | null>(null);
   const [message, setMessage] = useState<{ text: string; type: "error" | "success" } | null>(null);
@@ -218,16 +220,8 @@ export const BackpackGame = ({
 
         <div className="flex items-center justify-center gap-6 md:gap-16 w-full max-w-3xl">
           <motion.button
+            ref={backpackRef}
             onClick={handleDropToBackpack}
-            onDragEnter={(e) => { e.preventDefault(); setBackpackHovered(true); }}
-            onDragOver={(e) => { e.preventDefault(); }}
-            onDragLeave={() => setBackpackHovered(false)}
-            onDrop={(e) => {
-              e.preventDefault();
-              setBackpackHovered(false);
-              const id = e.dataTransfer.getData("text/plain");
-              if (id) handleDropItemToBackpack(id);
-            }}
             onMouseEnter={() => setBackpackHovered(true)}
             onMouseLeave={() => setBackpackHovered(false)}
             animate={shakeBackpack ? { x: [0, -8, 8, -8, 8, 0] } : selected ? { scale: [1, 1.05, 1] } : {}}
@@ -264,16 +258,8 @@ export const BackpackGame = ({
           </div>
 
           <motion.button
+            ref={quarantineRef}
             onClick={handleDropToQuarantine}
-            onDragEnter={(e) => { e.preventDefault(); setQuarantineHovered(true); }}
-            onDragOver={(e) => { e.preventDefault(); }}
-            onDragLeave={() => setQuarantineHovered(false)}
-            onDrop={(e) => {
-              e.preventDefault();
-              setQuarantineHovered(false);
-              const id = e.dataTransfer.getData("text/plain");
-              if (id) handleDropItemToQuarantine(id);
-            }}
             onMouseEnter={() => setQuarantineHovered(true)}
             onMouseLeave={() => setQuarantineHovered(false)}
             animate={selected ? { scale: [1, 1.05, 1] } : {}}
@@ -343,14 +329,22 @@ export const BackpackGame = ({
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleSelectItem(item.id)}
                   onMouseEnter={() => soundEngine.hoverNote()}
-                  draggable
-                  onDragStart={(e) => {
-                    e.dataTransfer.setData("text/plain", item.id);
-                    // Make it look grabbed
-                    e.currentTarget.style.opacity = "0.5";
-                  }}
-                  onDragEnd={(e) => {
-                    e.currentTarget.style.opacity = "1";
+                  drag
+                  dragSnapToOrigin
+                  whileDrag={{ scale: 1.1, zIndex: 50, cursor: "grabbing" }}
+                  onDragEnd={(e, info) => {
+                    const checkOverlap = (ref: React.RefObject<HTMLButtonElement | null>) => {
+                      if (!ref.current) return false;
+                      const rect = ref.current.getBoundingClientRect();
+                      return info.point.x >= rect.left && info.point.x <= rect.right &&
+                             info.point.y >= rect.top && info.point.y <= rect.bottom;
+                    };
+                    
+                    if (checkOverlap(backpackRef)) {
+                      handleDropItemToBackpack(item.id);
+                    } else if (checkOverlap(quarantineRef)) {
+                      handleDropItemToQuarantine(item.id);
+                    }
                   }}
                   className={`
                     relative flex flex-col items-center p-2 md:p-3 rounded-xl border-2 transition-all duration-200 cursor-grab active:cursor-grabbing
