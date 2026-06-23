@@ -58,8 +58,8 @@ export const TRANSLATIONS: Dict = {
   // ── Onboarding / HeroStory ────────────────────────────────
   "welcome.title": { en: "Welcome, Captain!", de: "Willkommen, Kapitän!" },
   "welcome.subtitle": { 
-    en: "Today is a big day! You and your Galactic Crew are preparing for a massive sports tournament.", 
-    de: "Heute ist ein großer Tag! Du und deine galaktische Crew bereiten sich auf ein großes Sportturnier vor." 
+    en: "Today is a big day! You and your sports team are preparing for a massive tournament.", 
+    de: "Heute ist ein großer Tag! Du und dein Sport-Team bereiten sich auf ein großes Turnier vor." 
   },
   "pku.title": { en: "The Champion's Diet", de: "Die Champion-Diät" },
   "pku.desc": { 
@@ -77,20 +77,20 @@ export const TRANSLATIONS: Dict = {
     de: "Fleisch, Käse und normale Milch sind schwer. Sie sind voller Phe! Beim Sport beeinträchtigt eine toxische Ansammlung von Phe deine Gehirnfunktion, verursacht Gehirnnebel und verlangsamt deine Reflexe auf dem Spielfeld." 
   },
   "ship.enter": { 
-    en: "Time to meet your team! But before we fly to the stadium, a true athlete must pack their sports bag. Let's go!", 
-    de: "Zeit, dein Team zu treffen! Aber bevor wir zum Stadion fliegen, muss ein wahrer Athlet seine Sporttasche packen. Los geht's!" 
+    en: "Time to meet your team! But before we head to the stadium, a true athlete must pack their sports bag. Let's go!", 
+    de: "Zeit, dein Team zu treffen! Aber bevor wir zum Stadion fahren, muss ein wahrer Athlet seine Sporttasche packen. Los geht's!" 
   },
 
   // ── Mission 01 — Sorting ───────────────────────────────────
   "m1.tag": { en: "Mission 01 - Pack with Luna", de: "Mission 01 - Mit Luna packen" },
   "m1.title": { en: "Pack the Team Backpack", de: "Den Team-Rucksack packen" },
   "m1.dialogue": {
-    en: "Captain, we can't fly on an empty stomach! Your Super-Fuel helps your body stay strong and prevents toxic Phe from building up. Pack safe energy (fruits) and your Tyrosine formula!",
-    de: "Kapitän, wir können nicht mit leerem Magen fliegen! Dein Super-Treibstoff hilft deinem Körper, stark zu bleiben und verhindert den Aufbau von giftigem Phe. Packe sichere Energie (Obst) und deine Tyrosin-Formel ein!",
+    en: "Captain, we can't play on an empty stomach! Your Super-Fuel helps your body stay strong and prevents toxic Phe from building up. Pack safe energy (fruits) and your Tyrosine formula!",
+    de: "Kapitän, wir können nicht mit leerem Magen spielen! Dein Super-Treibstoff hilft deinem Körper, stark zu bleiben und verhindert den Aufbau von giftigem Phe. Packe sichere Energie (Obst) und deine Tyrosin-Formel ein!",
   },
   "m1.objective": {
-    en: "Sort the cargo! Send Safe Energy and Tyrosine Formula to your backpack. Throw Toxic Cargo (Heavy Protein) into the quarantine bin.",
-    de: "Sortiere die Fracht! Schicke Sichere Energie und Tyrosin-Formel in deinen Rucksack. Wirf Giftige Fracht (Schweres Protein) in die Quarantäne-Tonne.",
+    en: "Pack your gym bag! Send Safe Energy and Tyrosine Formula to your bag. Throw Heavy Snacks (Heavy Protein) into the trash bin.",
+    de: "Pack deine Sporttasche! Schicke Sichere Energie und Tyrosin-Formel in deine Tasche. Wirf Schwere Snacks (Schweres Protein) in den Mülleimer.",
   },
   "m1.cta": { en: "Pack with Luna >", de: "Mit Luna packen >" },
   "m1.warning": { en: "Hey Captain, pack your energy gear before training! We need our Super-Fuel to stay strong.", de: "Hey Kapitän, packe deine Energieausrüstung vor dem Training ein! Wir brauchen unseren Super-Treibstoff, um stark zu bleiben." },
@@ -194,40 +194,40 @@ export const TRANSLATIONS: Dict = {
   "game.wellDone": { en: "Well done, you did it!", de: "Gut gemacht, du hast es geschafft!" },
 
   // Backpack Game specific
-  "game.bp.title.pick": { en: "Pick a food item", de: "Wähle ein Lebensmittel" },
+  "game.bp.title.pick": { en: "Pick a snack for the match", de: "Wähle einen Snack für das Spiel" },
   "game.bp.title.put": { en: "Now choose where to put it", de: "Jetzt wähle, wohin damit" },
   "game.bp.sub.pick": { en: "Tap an item below to pick it up", de: "Tippe auf ein Item, um es auszuwählen" },
-  "game.bp.sub.put": { en: "Tap the Backpack for clean energy, or Trash for high-protein items", de: "Tippe auf den Rucksack für saubere Energie, oder auf den Müll für proteinreiche Snacks" },
-  "game.bp.backpack": { en: "BACKPACK", de: "RUCKSACK" },
-  "game.bp.cleanEnergy": { en: "CLEAN ENERGY", de: "SAUBERE ENERGIE" },
+  "game.bp.sub.put": { en: "Tap the Gym Bag for clean energy, or Trash for high-protein items", de: "Tippe auf die Sporttasche für saubere Energie, oder auf den Müll für proteinreiche Snacks" },
+  "game.bp.backpack": { en: "GYM BAG", de: "SPORTTASCHE" },
+  "game.bp.cleanEnergy": { en: "STAMINA", de: "AUSDAUER" },
   "game.bp.trash": { en: "TRASH", de: "MÜLLEIMER" },
-  "game.bp.highProtein": { en: "HIGH PROTEIN", de: "VIEL PROTEIN" },
+  "game.bp.highProtein": { en: "PENALTY", de: "STRAFE" },
   "game.bp.or": { en: "OR", de: "ODER" },
-  "game.bp.msg.safe": { en: "packed! Good for your engine.", de: "eingepackt! Gut für deinen Motor." },
-  "game.bp.msg.unsafe": { en: "Careful! Heavy protein causes Brain Fog. Quarantine it!", de: "Vorsicht! Schweres Protein verursacht Gehirnnebel. Ab in die Quarantäne!" },
-  "game.bp.msg.safeToTrash": { en: "Wait! That's safe energy to protect your muscles. Put it in the backpack.", de: "Warte! Das ist sichere Energie, um deine Muskeln zu schützen. Pack es in den Rucksack." },
-  "game.bp.msg.unsafeToTrash": { en: "quarantined! You avoided toxic Phe dust.", de: "in Quarantäne! Du hast giftigen Phe-Staub vermieden." },
+  "game.bp.msg.safe": { en: "packed! Great fuel for the match.", de: "eingepackt! Super Energie für das Spiel." },
+  "game.bp.msg.unsafe": { en: "Careful! Heavy protein slows you down. Trash it!", de: "Vorsicht! Schweres Protein bremst dich aus. Ab in den Müll!" },
+  "game.bp.msg.safeToTrash": { en: "Wait! That's safe energy to protect your muscles. Put it in the gym bag.", de: "Warte! Das ist sichere Energie, um deine Muskeln zu schützen. Pack es in die Sporttasche." },
+  "game.bp.msg.unsafeToTrash": { en: "trashed! You avoided a protein penalty.", de: "weggeworfen! Du hast eine Protein-Strafe vermieden." },
 
   // Runner overlays
   "runner.ready": { en: "Ready, Champion?", de: "Bereit, Champion?" },
   "runner.intro": {
-    en: "Avoid the cheese and pizza on the track. Catch the green formula bottle for Super Energy Mode.",
-    de: "Weiche Käse und Pizza auf der Strecke aus. Fang die grüne Formel-Flasche für den Super-Energie-Modus.",
+    en: "Avoid the cheese and pizza on the track. Catch the green formula bottle for Super Sprint Mode.",
+    de: "Weiche Käse und Pizza auf der Laufbahn aus. Fang die grüne Formel-Flasche für den Super-Sprint-Modus.",
   },
   "runner.distance": { en: "Distance", de: "Distanz" },
   "runner.best": { en: "Best", de: "Bester" },
-  "runner.energy": { en: "Energy", de: "Energie" },
+  "runner.energy": { en: "Stamina", de: "Ausdauer" },
   "runner.tap": { en: "Tap / Space to Jump", de: "Tippen / Leertaste zum Springen" },
   "runner.bestRun": { en: "Best run", de: "Bester Lauf" },
   "runner.distanceLabel": { en: "Distance", de: "Distanz" },
   "runner.encourage.0": { en: "Nice Run!", de: "Guter Lauf!" },
-  "runner.encourage.1": { en: "Great Flight!", de: "Toller Flug!" },
-  "runner.encourage.2": { en: "Stellar Effort!", de: "Klasse Leistung!" },
-  "runner.encourage.3": { en: "Cosmic Try!", de: "Kosmischer Versuch!" },
+  "runner.encourage.1": { en: "Great Sprint!", de: "Toller Sprint!" },
+  "runner.encourage.2": { en: "Strong Effort!", de: "Starke Leistung!" },
+  "runner.encourage.3": { en: "Athletic Try!", de: "Sportlicher Versuch!" },
   "runner.encourage.4": { en: "Well Played!", de: "Gut gespielt!" },
   "runner.encourage.5": { en: "Almost There!", de: "Fast da!" },
   "runner.encourage.6": { en: "Keep Going!", de: "Weiter so!" },
-  "runner.encourage.7": { en: "Out of This World!", de: "Nicht von dieser Welt!" },
+  "runner.encourage.7": { en: "Record Breaking!", de: "Rekordverdächtig!" },
 
   // Preloader
   "preloader.online": { en: "Systems Online", de: "Systeme online" },
