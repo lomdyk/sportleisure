@@ -8,7 +8,8 @@ import { soundEngine } from "../utils/audioEngine";
 import { metricsActions } from "../store/metricsStore";
 
 import appleImg from "../../imports/яблоко_plasticine-style___202604161826-removebg-preview.png";
-import carrotImg from "../../imports/морковь_ОНА_ДОЛЖНА_202604161845_(1).png";
+import waterbottleImg from "../../imports/waterbottle.png";
+import medcardImg from "../../imports/medcard.png";
 import cheeseImg from "../../imports/сыр_ОНА_ДОЛЖНА_202604161846_(1).png";
 import formulaImg from "../../imports/Untitled.png";
 import pizzaImg from "../../imports/Untitled_(1).png";
@@ -29,7 +30,8 @@ interface FoodItem {
 
 const INITIAL_ITEMS: FoodItem[] = [
   { id: "apple", name: "Apple", img: appleImg, type: "safe", label: "Low-Phe fruit" },
-  { id: "carrot", name: "Carrot", img: carrotImg, type: "safe", label: "Low-Phe veggie" },
+  { id: "water", name: "Water Bottle", img: waterbottleImg, type: "safe", label: "Hydration" },
+  { id: "contact", name: "Emergency Card", img: medcardImg, type: "safe", label: "Contact Info" },
   { id: "formula", name: "PKU Formula", img: formulaImg, type: "safe", label: "Clean energy" },
   { id: "cheese", name: "Cheese", img: cheeseImg, type: "unsafe", label: "High protein" },
   { id: "pizza", name: "Pizza", img: pizzaImg, type: "unsafe", label: "High protein" },

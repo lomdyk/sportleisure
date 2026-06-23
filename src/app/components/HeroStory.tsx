@@ -16,7 +16,7 @@ import cheeseImg from "../../imports/сыр_ОНА_ДОЛЖНА_202604161846_(1)
 import pizzaImg from "../../imports/Untitled_(1).png";
 import formulaImg from "../../imports/Untitled.png";
 import appleImg from "../../imports/яблоко_plasticine-style___202604161826-removebg-preview.png";
-import carrotImg from "../../imports/морковь_ОНА_ДОЛЖНА_202604161845_(1).png";
+import waterbottleImg from "../../imports/waterbottle.png";
 
 const AdminProgressDisplay = () => {
   const snap = useSnapshot(scrollState);
@@ -174,7 +174,7 @@ export const HeroStory = () => {
   const cheeseRef = useRef<HTMLImageElement>(null);
   const appleRef = useRef<HTMLImageElement>(null);
   const formulaRef = useRef<HTMLImageElement>(null);
-  const carrotRef = useRef<HTMLImageElement>(null);
+  const waterRef = useRef<HTMLImageElement>(null);
   const blockIconRef = useRef<HTMLDivElement>(null);
 
   const [isMobileScreen, setIsMobileScreen] = React.useState(
@@ -334,13 +334,13 @@ export const HeroStory = () => {
       const formStart = 0.548;
       
       // Set initial positions for good food
-      gsap.set([appleRef.current, formulaRef.current, carrotRef.current], { scale: 0, opacity: 0, rotation: 0 });
+      gsap.set([appleRef.current, formulaRef.current, waterRef.current], { scale: 0, opacity: 0, rotation: 0 });
       gsap.set(appleRef.current, { x: -200, y: -100 });
       gsap.set(formulaRef.current, { x: 200, y: -50 });
-      gsap.set(carrotRef.current, { x: -100, y: 150 });
+      gsap.set(waterRef.current, { x: -100, y: 150 });
 
       // Fly in
-      tl.to([appleRef.current, formulaRef.current, carrotRef.current], {
+      tl.to([appleRef.current, formulaRef.current, waterRef.current], {
         scale: 0.8,
         opacity: 1,
         x: (index) => index === 0 ? -60 : (index === 1 ? 60 : -30),
@@ -358,7 +358,7 @@ export const HeroStory = () => {
       }, formStart + 0.02);
 
       // Foods get absorbed (scale to 0, move to center)
-      tl.to([appleRef.current, formulaRef.current, carrotRef.current], {
+      tl.to([appleRef.current, formulaRef.current, waterRef.current], {
         x: 0, y: 0, scale: 0, rotation: 360, opacity: 0,
         duration: 0.05, ease: "power2.in"
       }, formStart + 0.06);
@@ -472,7 +472,7 @@ export const HeroStory = () => {
               {/* Good Foods */}
               <img ref={appleRef} src={appleImg} alt="Apple" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-16 object-contain z-[6]" />
               <img ref={formulaRef} src={formulaImg} alt="Formula" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-20 object-contain z-[6]" />
-              <img ref={carrotRef} src={carrotImg} alt="Carrot" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-16 object-contain z-[6]" />
+              <img ref={waterRef} src={waterbottleImg} alt="Water Bottle" className="absolute top-1/2 left-1/2 -ml-8 -mt-8 w-16 h-16 object-contain z-[6]" />
 
               <div ref={blockIconRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-red-500 text-6xl drop-shadow-lg z-[8]">
                 🚫

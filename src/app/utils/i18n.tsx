@@ -236,8 +236,10 @@ export const TRANSLATIONS: Dict = {
   // Food Items
   "food.apple.name": { en: "Apple", de: "Apfel" },
   "food.apple.label": { en: "Low-Phe fruit", de: "Frucht (wenig Phe)" },
-  "food.carrot.name": { en: "Carrot", de: "Karotte" },
-  "food.carrot.label": { en: "Low-Phe veggie", de: "Gemüse (wenig Phe)" },
+  "food.water.name": { en: "Water Bottle", de: "Wasserflasche" },
+  "food.water.label": { en: "Hydration", de: "Hydratation" },
+  "food.contact.name": { en: "Emergency Card", de: "Notfallkarte" },
+  "food.contact.label": { en: "Contact Info", de: "Kontaktinfo" },
   "food.formula.name": { en: "PKU Formula", de: "PKU Formel" },
   "food.formula.label": { en: "Clean energy", de: "Saubere Energie" },
   "food.cheese.name": { en: "Cheese", de: "Käse" },
