@@ -328,7 +328,7 @@ export const BackpackGame = ({
       </div>
 
       <div className="relative z-20 pt-2 px-4">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="flex flex-wrap justify-center gap-3 p-4 bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-2xl">
             <AnimatePresence>
               {items.map((item) => (
