@@ -83,7 +83,7 @@ const SCENARIOS: Scenario[] = [
     contextEmoji: "🧃",
     npcMessages: [
       "Whoa, what IS that stuff? 🤢",
-      "It smells kinda funky. Is that some gross space-medicine?",
+      "It smells kinda funky. Is that some weird sports drink?",
     ],
     options: [
       {
@@ -152,7 +152,7 @@ const localizeScenarios = (lang: "en" | "de"): Scenario[] => {
       ...SCENARIOS[0],
       captainName: "Kapitänin Luna",
       context: "Pizza-Druck vor dem Match",
-      npcMessages: ["Hey, nimm ein Stück! Beste Fleisch-Pizza im Stadion 🍕", "Komm schon — nur ein Bissen vor dem Space-Ball!"],
+      npcMessages: ["Hey, nimm ein Stück! Beste Fleisch-Pizza im Stadion 🍕", "Komm schon — nur ein Bissen vor dem Finale!"],
       options: [
         { ...SCENARIOS[0].options[0], text: "Danke, ich bleibe bei meinem Sport-Treibstoff. Damit bleibt mein Fokus bei 100% und ich bin auf dem Feld schnell. Ich kenne mein Setup.", feedback: "Stark: Du klingst wie ein:e Athlet:in, der/die den eigenen Körper kennt — nicht wie jemand, der etwas verpasst." },
         { ...SCENARIOS[0].options[1], text: "Ich kann das nicht essen. Ich habe PKU und zu viel Protein ist schlecht für mich.", feedback: "Sachlich richtig, aber für andere Kinder klingt es schnell schwer. Kurz, ruhig und sportlich funktioniert oft besser." },
@@ -164,7 +164,7 @@ const localizeScenarios = (lang: "en" | "de"): Scenario[] => {
       ...SCENARIOS[1],
       captainName: "Kapitän Bo",
       context: "Der seltsame Drink",
-      npcMessages: ["Whoa, was IST das denn? 🧃", "Riecht irgendwie komisch. Ist das Weltraum-Medizin?"],
+      npcMessages: ["Whoa, was IST das denn? 🧃", "Riecht irgendwie komisch. Ist das so ein komischer Sport-Drink?"],
       options: [
         { ...SCENARIOS[1].options[0], text: "Das ist mein konzentrierter Nährstoff-Mix. Ja, schmeckt speziell — aber er hält meine Energie stabil, damit ich im Training nicht abstürze.", feedback: "Perfekt: ehrlich über den Geschmack, dann direkt zum Nutzen. Das klingt souverän und sportlich." },
         { ...SCENARIOS[1].options[1], text: "Das ist meine medizinische Formel. Ohne sie lande ich vielleicht im Krankenhaus.", feedback: "Zu dramatisch für diese Situation. Du musst niemanden erschrecken — ruhig erklären reicht." },
