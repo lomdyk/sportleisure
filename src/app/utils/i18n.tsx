@@ -85,15 +85,15 @@ export const TRANSLATIONS: Dict = {
   "m1.tag": { en: "Mission 01 - Pack with Luna", de: "Mission 01 - Mit Luna packen" },
   "m1.title": { en: "Pack the Team Backpack", de: "Den Team-Rucksack packen" },
   "m1.dialogue": {
-    en: "Captain, we can't play on an empty stomach! Your Super-Fuel helps your body stay strong and prevents toxic Phe from building up. Pack safe energy (fruits) and your Tyrosine formula!",
-    de: "Kapitän, wir können nicht mit leerem Magen spielen! Dein Super-Treibstoff hilft deinem Körper, stark zu bleiben und verhindert den Aufbau von giftigem Phe. Packe sichere Energie (Obst) und deine Tyrosin-Formel ein!",
+    en: "Captain, we can't play on an empty stomach! Fruits give you stamina, and your Tyrosine formula builds strong muscles without toxic Phe. Pack your safe snacks and formula!",
+    de: "Kapitän, wir können nicht mit leerem Magen spielen! Früchte geben dir Ausdauer und deine Tyrosin-Formel baut starke Muskeln auf, ohne giftiges Phe. Pack deine sicheren Snacks und die Formel ein!",
   },
   "m1.objective": {
-    en: "Pack your gym bag! Send Safe Energy and Tyrosine Formula to your bag. Throw Heavy Snacks (Heavy Protein) into the trash bin.",
-    de: "Pack deine Sporttasche! Schicke Sichere Energie und Tyrosin-Formel in deine Tasche. Wirf Schwere Snacks (Schweres Protein) in den Mülleimer.",
+    en: "Pack your sport bag! Send Safe Fuel (fruits) and Tyrosine Formula to your bag. Throw Heavy Snacks (Heavy Protein) into the trash bin.",
+    de: "Pack deine Sporttasche! Schicke Sicheren Treibstoff (Obst) und Tyrosin-Formel in deine Tasche. Wirf Schwere Snacks (Schweres Protein) in den Mülleimer.",
   },
   "m1.cta": { en: "Pack with Luna >", de: "Mit Luna packen >" },
-  "m1.warning": { en: "Hey Captain, pack your energy gear before training! We need our Super-Fuel to stay strong.", de: "Hey Kapitän, packe deine Energieausrüstung vor dem Training ein! Wir brauchen unseren Super-Treibstoff, um stark zu bleiben." },
+  "m1.warning": { en: "Hey Captain, pack your sport bag before training! We need our Super-Fuel to stay strong.", de: "Hey Kapitän, packe deine Sporttasche vor dem Training! Wir brauchen unseren Super-Treibstoff, um stark zu bleiben." },
   "m1.speaker": { en: "Luna", de: "Luna" },
 
   // ── Mission 02 — Talk ──────────────────────────────────────
@@ -115,8 +115,8 @@ export const TRANSLATIONS: Dict = {
   "m3.tag": { en: "Mission 03 - The Match", de: "Mission 03 - Das Spiel" },
   "m3.title": { en: "Sprint with the Crew", de: "Sprint mit dem Team" },
   "m3.dialogue": {
-    en: "Captain, use your Formula Power! Avoid the 'Fog Obstacles'—if you hit them, the Phe builds up and slows you down. Catch your Formula bottles to stay sharp!",
-    de: "Kapitän, nutze deine Formel-Kraft! Vermeide die 'Nebel-Hindernisse'—wenn du sie triffst, baut sich Phe auf und verlangsamt dich. Fange deine Formel-Flaschen, um geistig fit zu bleiben!",
+    en: "Captain, use your Formula Power! Avoid the 'Fog Obstacles'—if you hit them, the Phe builds up and slows you down. Catch your Formula bottles to keep your muscles strong!",
+    de: "Kapitän, nutze deine Formel-Kraft! Vermeide die 'Nebel-Hindernisse'—wenn du sie triffst, baut sich Phe auf und verlangsamt dich. Fange deine Formel-Flaschen, um deine Muskeln stark zu halten!",
   },
   "m3.objective": {
     en: "Listen to your body! Catch your daily formula during the run to keep your mind sharp, but avoid the Brain Fog!",
@@ -139,8 +139,8 @@ export const TRANSLATIONS: Dict = {
   "ui.train": { en: "Training", de: "Training" },
   "log.1.author": { en: "Captain Nova", de: "Kapitän Nova" },
   "log.1.text": {
-    en: "Always drink your formula before a big match. It is the best way to get instant energy! Never skip it if you want to win.",
-    de: "Trinke deine Formel immer vor einem großen Spiel. Es ist der beste Weg, um sofort Energie zu bekommen! Überspringe sie nie, wenn du gewinnen willst."
+    en: "Always drink your formula before a big match. It provides the essential amino acids to keep your muscles strong and mind sharp! Never skip it if you want to win.",
+    de: "Trinke deine Formel immer vor einem großen Spiel. Sie liefert essenzielle Aminosäuren, um deine Muskeln stark und deinen Geist scharf zu halten! Lass sie niemals aus, wenn du gewinnen willst."
   },
   "log.2.author": { en: "Captain Leo", de: "Kapitän Leo" },
   "log.2.text": {
@@ -197,15 +197,15 @@ export const TRANSLATIONS: Dict = {
   "game.bp.title.pick": { en: "Pick a snack for the match", de: "Wähle einen Snack für das Spiel" },
   "game.bp.title.put": { en: "Now choose where to put it", de: "Jetzt wähle, wohin damit" },
   "game.bp.sub.pick": { en: "Tap an item below to pick it up", de: "Tippe auf ein Item, um es auszuwählen" },
-  "game.bp.sub.put": { en: "Tap the Gym Bag for clean energy, or Trash for high-protein items", de: "Tippe auf die Sporttasche für saubere Energie, oder auf den Müll für proteinreiche Snacks" },
-  "game.bp.backpack": { en: "GYM BAG", de: "SPORTTASCHE" },
-  "game.bp.cleanEnergy": { en: "STAMINA", de: "AUSDAUER" },
+  "game.bp.sub.put": { en: "Tap the Sport Bag for safe fuel & formula, or Trash for heavy protein", de: "Tippe auf die Sporttasche für sicheren Treibstoff & Formel, oder auf den Müll für schweres Protein" },
+  "game.bp.backpack": { en: "SPORT BAG", de: "SPORTTASCHE" },
+  "game.bp.cleanEnergy": { en: "SAFE FUEL", de: "SICHERER TREIBSTOFF" },
   "game.bp.trash": { en: "TRASH", de: "MÜLLEIMER" },
   "game.bp.highProtein": { en: "PENALTY", de: "STRAFE" },
   "game.bp.or": { en: "OR", de: "ODER" },
   "game.bp.msg.safe": { en: "packed! Great fuel for the match.", de: "eingepackt! Super Energie für das Spiel." },
   "game.bp.msg.unsafe": { en: "Careful! Heavy protein slows you down. Trash it!", de: "Vorsicht! Schweres Protein bremst dich aus. Ab in den Müll!" },
-  "game.bp.msg.safeToTrash": { en: "Wait! That's safe energy to protect your muscles. Put it in the gym bag.", de: "Warte! Das ist sichere Energie, um deine Muskeln zu schützen. Pack es in die Sporttasche." },
+  "game.bp.msg.safeToTrash": { en: "Wait! That's safe fuel to protect your muscles. Put it in the sport bag.", de: "Warte! Das ist sicherer Treibstoff, um deine Muskeln zu schützen. Pack es in die Sporttasche." },
   "game.bp.msg.unsafeToTrash": { en: "trashed! You avoided a protein penalty.", de: "weggeworfen! Du hast eine Protein-Strafe vermieden." },
 
   // Runner overlays
@@ -241,7 +241,7 @@ export const TRANSLATIONS: Dict = {
   "food.contact.name": { en: "Emergency Card", de: "Notfallkarte" },
   "food.contact.label": { en: "Contact Info", de: "Kontaktinfo" },
   "food.formula.name": { en: "PKU Formula", de: "PKU Formel" },
-  "food.formula.label": { en: "Clean energy", de: "Saubere Energie" },
+  "food.formula.label": { en: "Safe protein", de: "Sicheres Protein" },
   "food.cheese.name": { en: "Cheese", de: "Käse" },
   "food.cheese.label": { en: "High protein", de: "Viel Protein" },
   "food.pizza.name": { en: "Pizza", de: "Pizza" },
@@ -256,7 +256,7 @@ export const TRANSLATIONS: Dict = {
   // Footer Facts
   "fact.0.title": { en: "The Universal Warm-up", de: "Das universelle Aufwärmen" },
   "fact.0.short": { en: "Preparation is key.", de: "Vorbereitung ist alles." },
-  "fact.0.text": { en: "Whether you play soccer, swim, or dance, your routine doesn't differ from other athletes. Just pack your energy gear before training and you are good to go!", de: "Egal, ob du Fußball spielst, schwimmst oder tanzt, deine Routine unterscheidet sich nicht von der anderer Athleten. Packe einfach deine Energieausrüstung vor dem Training ein und schon kann es losgehen!" },
+  "fact.0.text": { en: "Whether you play soccer, swim, or dance, your routine doesn't differ from other athletes. Just pack your sport bag before training and you are good to go!", de: "Egal, ob du Fußball spielst, schwimmst oder tanzt, deine Routine unterscheidet sich nicht von der anderer Athleten. Packe einfach deine Sporttasche vor dem Training und schon kann es losgehen!" },
   "fact.1.title": { en: "The Golden Rule of Sports", de: "Die goldene Regel des Sports" },
   "fact.1.short": { en: "Listen to your body.", de: "Höre auf deinen Körper." },
   "fact.1.text": { en: "Every athlete needs to tune into their body. If you feel dizzy, exhausted, or unwell during the match, simply take a break, drink water, and tell your coach.", de: "Jeder Athlet muss auf seinen Körper hören. Wenn dir während des Spiels schwindelig, erschöpft oder unwohl ist, mache einfach eine Pause, trinke Wasser und sage deinem Trainer Bescheid." },
