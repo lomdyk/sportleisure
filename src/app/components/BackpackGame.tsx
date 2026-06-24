@@ -82,7 +82,7 @@ const FoodItemCard = React.memo(({
           />
         </div>
         <span className="text-[11px] text-white/80 font-['Space_Grotesk'] mt-1">{t(`food.${item.id}.name`)}</span>
-        <span className={`text-[9px] font-['Space_Grotesk'] mt-0.5 ${item.type === "safe" ? "text-cyan-400/60" : "text-amber-400/60"}`}>
+        <span className={`text-[9px] font-['Space_Grotesk'] mt-0.5 text-white/40`}>
           {t(`food.${item.id}.label`)}
         </span>
         {isSelected && (
@@ -107,7 +107,14 @@ export const BackpackGame = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const backpackRef = useRef<HTMLButtonElement>(null);
   const quarantineRef = useRef<HTMLButtonElement>(null);
-  const [items, setItems] = useState<FoodItem[]>(INITIAL_ITEMS);
+  const [items, setItems] = useState<FoodItem[]>(() => {
+    const shuffled = [...INITIAL_ITEMS];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  });
   const [selected, setSelected] = useState<string | null>(null);
   const [message, setMessage] = useState<{ text: string; type: "error" | "success" } | null>(null);
   const [isCompleted, setIsCompleted] = useState(false);

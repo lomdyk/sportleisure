@@ -199,13 +199,13 @@ export const TRANSLATIONS: Dict = {
   "game.bp.sub.pick": { en: "Tap an item below to pick it up", de: "Tippe auf ein Item, um es auszuwählen" },
   "game.bp.sub.put": { en: "Tap the Sport Bag for safe fuel & formula, or Trash for heavy protein", de: "Tippe auf die Sporttasche für sicheren Treibstoff & Formel, oder auf den Müll für schweres Protein" },
   "game.bp.backpack": { en: "SPORT BAG", de: "SPORTTASCHE" },
-  "game.bp.cleanEnergy": { en: "SAFE FUEL", de: "SICHERER TREIBSTOFF" },
+  "game.bp.cleanEnergy": { en: "SAFE TO PACK", de: "SICHER" },
   "game.bp.trash": { en: "TRASH", de: "MÜLLEIMER" },
-  "game.bp.highProtein": { en: "PENALTY", de: "STRAFE" },
+  "game.bp.highProtein": { en: "AVOID", de: "VERMEIDEN" },
   "game.bp.or": { en: "OR", de: "ODER" },
   "game.bp.msg.safe": { en: "packed! Great fuel for the match.", de: "eingepackt! Super Energie für das Spiel." },
   "game.bp.msg.unsafe": { en: "Careful! Heavy protein slows you down. Trash it!", de: "Vorsicht! Schweres Protein bremst dich aus. Ab in den Müll!" },
-  "game.bp.msg.safeToTrash": { en: "Wait! That's safe fuel to protect your muscles. Put it in the sport bag.", de: "Warte! Das ist sicherer Treibstoff, um deine Muskeln zu schützen. Pack es in die Sporttasche." },
+  "game.bp.msg.safeToTrash": { en: "Wait! That's safe to protect your muscles. Put it in the sport bag.", de: "Warte! Das ist sicher, um deine Muskeln zu schützen. Pack es in die Sporttasche." },
   "game.bp.msg.unsafeToTrash": { en: "trashed! You avoided a protein penalty.", de: "weggeworfen! Du hast eine Protein-Strafe vermieden." },
 
   // Runner overlays
