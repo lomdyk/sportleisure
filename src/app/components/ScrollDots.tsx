@@ -14,22 +14,33 @@ export const ScrollDots: React.FC = () => {
   const [activeIdx, setActiveIdx] = useState(0);
 
   useEffect(() => {
+    let ticking = false;
+
+    // ⚡ Bolt: Use requestAnimationFrame to throttle the scroll event handler.
+    // This prevents layout thrashing (synchronous reflows caused by getBoundingClientRect)
+    // from blocking the main thread multiple times per frame during rapid scrolling.
     const handleScroll = () => {
-      let currentStage = 0;
-      SECTIONS.forEach((section, index) => {
-        const el = document.getElementById(section.id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight * 0.65) {
-            currentStage = index;
-          }
-        }
-      });
-      setActiveIdx(currentStage);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          let currentStage = 0;
+          SECTIONS.forEach((section, index) => {
+            const el = document.getElementById(section.id);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top < window.innerHeight * 0.65) {
+                currentStage = index;
+              }
+            }
+          });
+          setActiveIdx(currentStage);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+    handleScroll(); // Initial check
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
