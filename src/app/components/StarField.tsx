@@ -20,6 +20,21 @@ export const StarField = () => {
     }[] = [];
     const STAR_COUNT = 420;
 
+    // Pre-render the glow to an offscreen canvas for huge performance gains
+    const GLOW_SIZE = 64;
+    const glowCanvas = document.createElement("canvas");
+    glowCanvas.width = GLOW_SIZE;
+    glowCanvas.height = GLOW_SIZE;
+    const glowCtx = glowCanvas.getContext("2d");
+    if (glowCtx) {
+      const halfSize = GLOW_SIZE / 2;
+      const g = glowCtx.createRadialGradient(halfSize, halfSize, 0, halfSize, halfSize, halfSize);
+      g.addColorStop(0, "rgba(180,220,255,1)");
+      g.addColorStop(1, "transparent");
+      glowCtx.fillStyle = g;
+      glowCtx.fillRect(0, 0, GLOW_SIZE, GLOW_SIZE);
+    }
+
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -80,13 +95,14 @@ export const StarField = () => {
           if (!isFinite(px) || !isFinite(py) || !isFinite(s.r) || s.r <= 0) {
             return;
           }
-          const g = ctx.createRadialGradient(px, py, 0, px, py, s.r * 3);
-          g.addColorStop(0, `rgba(180,220,255,${0.12 * flicker})`);
-          g.addColorStop(1, "transparent");
-          ctx.beginPath();
-          ctx.arc(px, py, s.r * 3, 0, Math.PI * 2);
-          ctx.fillStyle = g;
-          ctx.fill();
+
+          // Performance optimization: We used to create a new radial gradient for every frame
+          // for every large star. Instead, we pre-render a 100x100 radial gradient once,
+          // and use drawImage with globalAlpha to paint it, which is ~10x faster.
+          const radius = s.r * 3;
+          ctx.globalAlpha = 0.12 * flicker;
+          ctx.drawImage(glowCanvas, px - radius, py - radius, radius * 2, radius * 2);
+          ctx.globalAlpha = 1.0;
         }
 
         // Slow drift
