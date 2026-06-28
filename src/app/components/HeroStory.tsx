@@ -12,10 +12,14 @@ import { useLang } from "../utils/i18n";
 import { scrollState } from "../store/rocketAnimation";
 import { useSnapshot } from 'valtio';
 
+import cheeseImg from "../../imports/сыр_ОНА_ДОЛЖНА_202604161846_(1).png";
+import pizzaImg from "../../imports/Untitled_(1).png";
 import formulaImg from "../../imports/furmula.png";
-import sportImg from "../../imports/sport.png";
-import bagImg from "../../imports/bag_1.png";
-import medalImg from "../../imports/medal.png";
+import gameBg1 from "../../imports/game_bg_1.png";
+import gameBg2 from "../../imports/game_bg_2.png";
+import gameBg3 from "../../imports/game_bg_3.png";
+import appleImg from "../../imports/яблоко_plasticine-style___202604161826-removebg-preview.png";
+import waterbottleImg from "../../imports/waterbottle.png";
 
 const AdminProgressDisplay = () => {
   const snap = useSnapshot(scrollState);
@@ -186,10 +190,6 @@ export const HeroStory = () => {
   const mobileShipRef = useRef<HTMLDivElement>(null);
   const mobileShipContainerRef = useRef<HTMLDivElement>(null);
   
-  const sportRef = useRef<HTMLImageElement>(null);
-  const bagRef = useRef<HTMLImageElement>(null);
-  const mobileFormulaRef = useRef<HTMLImageElement>(null);
-  const medalRef = useRef<HTMLImageElement>(null);
 
   const [isMobileScreen, setIsMobileScreen] = React.useState(
     typeof window !== 'undefined' ? window.innerWidth < 768 : false
@@ -294,37 +294,6 @@ export const HeroStory = () => {
         repeat: 3,
         ease: "rough({ template: none.out, strength: 1, points: 20, taper: none, randomize: true, clamp: false })"
       }, 0.4);
-
-      // 5. Floating sports objects animation
-      const objStart = 0.15;
-      
-      // Sport ball flies past
-      tl.fromTo(sportRef.current,
-        { y: -100, x: 50, scale: 0.5, rotation: 0, opacity: 0 },
-        { y: 600, x: -100, scale: 1.2, rotation: -180, opacity: 1, duration: 0.2, ease: "power1.inOut" },
-        objStart
-      );
-      
-      // Bag flies past
-      tl.fromTo(bagRef.current,
-        { y: -100, x: -80, scale: 0.6, rotation: 0, opacity: 0 },
-        { y: 650, x: 120, scale: 1.5, rotation: 120, opacity: 1, duration: 0.25, ease: "power1.inOut" },
-        objStart + 0.05
-      );
-      
-      // Formula flies past
-      tl.fromTo(mobileFormulaRef.current,
-        { y: -100, x: 0, scale: 0.4, rotation: 0, opacity: 0 },
-        { y: 600, x: -50, scale: 1.3, rotation: 90, opacity: 1, duration: 0.18, ease: "power1.inOut" },
-        objStart + 0.1
-      );
-      
-      // Medal flies past
-      tl.fromTo(medalRef.current,
-        { y: -100, x: 70, scale: 0.5, rotation: -45, opacity: 0 },
-        { y: 650, x: 20, scale: 1.4, rotation: 45, opacity: 1, duration: 0.22, ease: "power1.inOut" },
-        objStart + 0.15
-      );
     }
 
     const zoomStart = 0.08 + (STORY_PANELS.length - 1) * panelDur + 0.05;
@@ -421,13 +390,37 @@ export const HeroStory = () => {
         {/* 2D Ship specifically for mobile to save battery */}
         {isMobileScreen && (
           <div ref={mobileShipContainerRef} className="absolute inset-0 flex items-center justify-center pointer-events-none z-[5]">
-            <div className="relative">
-              {/* Floating Sports Objects */}
-              <img ref={sportRef} src={sportImg} alt="" className="absolute -top-32 -left-16 w-16 h-16 object-contain z-[6]" style={{ opacity: 0 }} />
-              <img ref={bagRef} src={bagImg} alt="" className="absolute -top-32 left-32 w-20 h-20 object-contain z-[6]" style={{ opacity: 0 }} />
-              <img ref={mobileFormulaRef} src={formulaImg} alt="" className="absolute -top-32 -left-4 w-16 h-16 object-contain z-[8]" style={{ opacity: 0 }} />
-              <img ref={medalRef} src={medalImg} alt="" className="absolute -top-32 left-16 w-16 h-16 object-contain z-[8]" style={{ opacity: 0 }} />
+            <style>{`
+              @keyframes float1 {
+                0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                50% { transform: translate(-10px, 20px) rotate(15deg); }
+              }
+              @keyframes float2 {
+                0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                50% { transform: translate(15px, -15px) rotate(-10deg); }
+              }
+              @keyframes float3 {
+                0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                50% { transform: translate(-15px, -20px) rotate(20deg); }
+              }
+              @keyframes float4 {
+                0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                50% { transform: translate(10px, 25px) rotate(-15deg); }
+              }
+              .animate-float-1 { animation: float1 6s ease-in-out infinite; }
+              .animate-float-2 { animation: float2 7.5s ease-in-out infinite; }
+              .animate-float-3 { animation: float3 8s ease-in-out infinite; }
+              .animate-float-4 { animation: float4 9.5s ease-in-out infinite; }
+            `}</style>
+            
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-[6]">
+              <img src={gameBg1} className="absolute top-[25%] right-[10%] w-20 h-20 sm:w-28 sm:h-28 object-contain animate-float-1 opacity-80" />
+              <img src={gameBg2} className="absolute bottom-[25%] left-[5%] w-24 h-24 sm:w-32 sm:h-32 object-contain animate-float-2 opacity-80" />
+              <img src={gameBg3} className="absolute top-[15%] left-[10%] w-24 h-24 sm:w-32 sm:h-32 object-contain animate-float-3 opacity-90" />
+              <img src={formulaImg} className="absolute bottom-[18%] right-[15%] w-24 h-24 sm:w-32 sm:h-32 object-contain animate-float-4 opacity-90" />
+            </div>
 
+            <div className="relative">
               <AnimatedShip
                 ref={mobileShipRef}
                 className="relative w-48 sm:w-64 aspect-square z-[7]"
