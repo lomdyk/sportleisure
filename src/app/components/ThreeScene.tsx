@@ -223,10 +223,10 @@ function SportsObstacles() {
   const { scene: formula } = useGLTF('/formula_3d.glb', true, true, setupLoader);
 
   useMemo(() => {
-    gantela.scale.setScalar(0.5);
-    basket.scale.setScalar(0.5);
-    amfootball.scale.setScalar(0.4);
-    formula.scale.setScalar(0.6);
+    gantela.scale.setScalar(0.7);
+    basket.scale.setScalar(0.7);
+    amfootball.scale.setScalar(0.6);
+    formula.scale.setScalar(0.85);
   }, [gantela, basket, amfootball, formula]);
 
   useFrame((state, delta) => {

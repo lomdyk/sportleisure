@@ -85,42 +85,42 @@ export const TRANSLATIONS: Dict = {
   "m1.tag": { en: "Mission 01 - Pack with Luna", de: "Mission 01 - Mit Luna packen" },
   "m1.title": { en: "Pack the Team Backpack", de: "Den Team-Rucksack packen" },
   "m1.dialogue": {
-    en: "Captain, we can't play on an empty stomach! Fruits give you stamina, and your Tyrosine formula builds strong muscles without toxic Phe. Pack your safe snacks and formula!",
-    de: "Kapitän, wir können nicht mit leerem Magen spielen! Früchte geben dir Ausdauer und deine Tyrosin-Formel baut starke Muskeln auf, ohne giftiges Phe. Pack deine sicheren Snacks und die Formel ein!",
+    en: "Captain, we can't play without proper preparation! Your sports equipment gives you an edge, and your formula builds strong muscles. Pack your gear and formula!",
+    de: "Kapitän, wir können nicht ohne richtige Vorbereitung spielen! Deine Sportausrüstung gibt dir einen Vorteil, und deine Formel baut starke Muskeln auf. Pack deine Ausrüstung und die Formel ein!",
   },
   "m1.objective": {
-    en: "Pack your sport bag! Send Safe Fuel (fruits) and Tyrosine Formula to your bag. Throw Heavy Snacks (Heavy Protein) into the trash bin.",
-    de: "Pack deine Sporttasche! Schicke Sicheren Treibstoff (Obst) und Tyrosin-Formel in deine Tasche. Wirf Schwere Snacks (Schweres Protein) in den Mülleimer.",
+    en: "Pack your sport bag! Send your gear and Formula to your bag. Throw unnecessary items into the trash bin.",
+    de: "Pack deine Sporttasche! Schicke deine Ausrüstung und Formel in deine Tasche. Wirf unnötige Gegenstände in den Mülleimer.",
   },
   "m1.cta": { en: "Pack with Luna >", de: "Mit Luna packen >" },
-  "m1.warning": { en: "Hey Captain, pack your sport bag before training! We need our Super-Fuel to stay strong.", de: "Hey Kapitän, packe deine Sporttasche vor dem Training! Wir brauchen unseren Super-Treibstoff, um stark zu bleiben." },
+  "m1.warning": { en: "Hey Captain, pack your sport bag before training! We need our equipment to stay strong.", de: "Hey Kapitän, packe deine Sporttasche vor dem Training! Wir brauchen unsere Ausrüstung, um stark zu bleiben." },
   "m1.speaker": { en: "Luna", de: "Luna" },
 
   // ── Mission 02 — Talk ──────────────────────────────────────
   "m2.tag": { en: "Mission 02 - The Stadium Tunnel", de: "Mission 02 - Der Stadiontunnel" },
   "m2.title": { en: "Social Trial", de: "Soziale Herausforderung" },
   "m2.dialogue": {
-    en: "\"Hey Captain, we are at the stadium! Watch out, a stranger from another team is walking through the tunnel offering heavy, high-protein snacks.\"",
-    de: "\"Hey Kapitän, wir sind am Stadion! Pass auf, ein Fremder aus einem anderen Team geht durch den Tunnel und bietet schwere, proteinreiche Snacks an.\"",
+    en: "\"Hey Captain, we are at the stadium! Watch out, a stranger from another team is walking through the tunnel offering distractions.\"",
+    de: "\"Hey Kapitän, wir sind am Stadion! Pass auf, ein Fremder aus einem anderen Team geht durch den Tunnel und bietet Ablenkungen an.\"",
   },
   "m2.objective": {
-    en: "You need to practice saying 'no, thank you'. Remember: with the right preparation, you can join your team and have fun!",
-    de: "Du musst üben, 'Nein, danke' zu sagen. Denk dran: Mit der richtigen Vorbereitung kannst du in deinem Team mitspielen und Spaß haben!",
+    en: "You need to practice saying 'no, thank you'. Remember: stay focused on your training so you can join your team and have fun!",
+    de: "Du musst üben, 'Nein, danke' zu sagen. Denk dran: Konzentriere dich auf dein Training, damit du in deinem Team mitspielen und Spaß haben kannst!",
   },
   "m2.cta": { en: "Meet the Team >", de: "Team treffen >" },
-  "m2.warning": { en: "Wait! Someone is offering a strange snack. We need to figure out what to say!", de: "Warte! Jemand bietet einen seltsamen Snack an. Wir müssen überlegen, was wir sagen!" },
+  "m2.warning": { en: "Wait! Someone is trying to distract us. We need to figure out what to say!", de: "Warte! Jemand versucht, uns abzulenken. Wir müssen überlegen, was wir sagen!" },
   "m2.speaker": { en: "Ela", de: "Ela" },
 
   // ── Mission 03 — Runner ────────────────────────────────────
   "m3.tag": { en: "Mission 03 - The Match", de: "Mission 03 - Das Spiel" },
   "m3.title": { en: "Sprint with the Crew", de: "Sprint mit dem Team" },
   "m3.dialogue": {
-    en: "Captain, use your Formula Power! Avoid the 'Fog Obstacles'—if you hit them, the Phe builds up and slows you down. Catch your Formula bottles to keep your muscles strong!",
-    de: "Kapitän, nutze deine Formel-Kraft! Vermeide die 'Nebel-Hindernisse'—wenn du sie triffst, baut sich Phe auf und verlangsamt dich. Fange deine Formel-Flaschen, um deine Muskeln stark zu halten!",
+    en: "Captain, use your Formula Power! Avoid the obstacles—if you hit them, you'll lose speed and focus. Catch your Formula bottles to keep your stamina up!",
+    de: "Kapitän, nutze deine Formel-Kraft! Vermeide die Hindernisse—wenn du sie triffst, verlierst du Geschwindigkeit und Fokus. Fange deine Formel-Flaschen, um deine Ausdauer aufrechtzuerhalten!",
   },
   "m3.objective": {
-    en: "Listen to your body! Catch your daily formula during the run to keep your mind sharp, but avoid the Brain Fog!",
-    de: "Höre auf deinen Körper! Fange deine tägliche Formel während des Laufs, um deinen Geist scharf zu halten, aber vermeide den Gehirnnebel!",
+    en: "Listen to your body! Catch your sports formula during the run to keep your mind sharp, but avoid the obstacles on the track!",
+    de: "Höre auf deinen Körper! Fange deine Sportformel während des Laufs, um deinen Geist scharf zu halten, aber vermeide die Hindernisse auf der Strecke!",
   },
   "m3.cta": { en: "Sprint with Crew >", de: "Mit Team sprinten >" },
   "m3.warning": { en: "Captain, the match is starting! We need to step onto the field!", de: "Kapitän, das Spiel beginnt! Wir müssen aufs Feld gehen!" },
@@ -139,18 +139,18 @@ export const TRANSLATIONS: Dict = {
   "ui.train": { en: "Training", de: "Training" },
   "log.1.author": { en: "Captain Nova", de: "Kapitän Nova" },
   "log.1.text": {
-    en: "Always drink your formula before a big match. It provides the essential amino acids to keep your muscles strong and mind sharp! Never skip it if you want to win.",
-    de: "Trinke deine Formel immer vor einem großen Spiel. Sie liefert essenzielle Aminosäuren, um deine Muskeln stark und deinen Geist scharf zu halten! Lass sie niemals aus, wenn du gewinnen willst."
+    en: "Always drink your formula before a big match. It provides the essential energy to keep your muscles strong and mind sharp! Never skip it if you want to win.",
+    de: "Trinke deine Formel immer vor einem großen Spiel. Sie liefert die essenzielle Energie, um deine Muskeln stark und deinen Geist scharf zu halten! Lass sie niemals aus, wenn du gewinnen willst."
   },
   "log.2.author": { en: "Captain Leo", de: "Kapitän Leo" },
   "log.2.text": {
-    en: "Someone offered me protein snacks once. I just told them I have my own special sports fuel. Now they cheer for me when I drink it!",
-    de: "Jemand hat mir einmal Protein-Snacks angeboten. Ich habe ihnen einfach gesagt, dass ich meinen eigenen speziellen Sporttreibstoff habe. Jetzt feuern sie mich an, wenn ich ihn trinke!"
+    en: "Someone offered me distractions once. I just told them I have my own training goals. Now they cheer for me on the field!",
+    de: "Jemand hat mir einmal Ablenkungen angeboten. Ich habe ihnen einfach gesagt, dass ich meine eigenen Trainingsziele habe. Jetzt feuern sie mich auf dem Spielfeld an!"
   },
   "log.3.author": { en: "Captain Orion", de: "Kapitän Orion" },
   "log.3.text": {
-    en: "Keep lots of low-Phe fruits in your bag. Apples and bananas are perfect for quick stamina during half time.",
-    de: "Bewahre viele fruktosereiche Früchte in deiner Tasche auf. Äpfel und Bananen sind perfekt für schnelle Ausdauer in der Halbzeit."
+    en: "Keep lots of water and essential gear in your bag. Proper hydration is perfect for quick stamina during half time.",
+    de: "Bewahre viel Wasser und wichtige Ausrüstung in deiner Tasche auf. Richtige Flüssigkeitszufuhr ist perfekt für schnelle Ausdauer in der Halbzeit."
   },
 
   // ── Crew greeting ──────────────────────────────────────────
@@ -163,14 +163,14 @@ export const TRANSLATIONS: Dict = {
   "crew.luna.name": { en: "Luna", de: "Luna" },
   "crew.luna.role": { en: "Quartermaster", de: "Ausrüsterin" },
   "crew.luna.line": {
-    en: "\"Hey Captain! I will help you pack the right food. We need your formula and the healthy snacks. Ready?\"",
-    de: "\"Hey Kapitän! Ich werde dir helfen, das richtige Essen einzupacken. Wir brauchen deine Formel und die gesunden Snacks. Bereit?\"",
+    en: "\"Hey Captain! I will help you pack the right equipment. We need your formula and your gear. Ready?\"",
+    de: "\"Hey Kapitän! Ich werde dir helfen, die richtige Ausrüstung einzupacken. Wir brauchen deine Formel und deine Ausrüstung. Bereit?\"",
   },
   "crew.bo.name": { en: "Bo", de: "Bo" },
   "crew.bo.role": { en: "Striker", de: "Stürmer" },
   "crew.bo.line": {
-    en: "\"You are our Captain! Just tell us what you can eat and we have got your back at the snack bar.\"",
-    de: "\"Du bist unser Kapitän! Sag uns einfach, was du essen kannst und wir unterstützen dich an der Snackbar.\"",
+    en: "\"You are our Captain! Just tell us the game plan and we have got your back on the field.\"",
+    de: "\"Du bist unser Kapitän! Sag uns einfach den Spielplan und wir decken dir auf dem Spielfeld den Rücken.\"",
   },
   "crew.ela.name": { en: "Ela", de: "Ela" },
   "crew.ela.role": { en: "Sprint Lead", de: "Sprint-Leiterin" },
@@ -194,10 +194,10 @@ export const TRANSLATIONS: Dict = {
   "game.wellDone": { en: "Well done, you did it!", de: "Gut gemacht, du hast es geschafft!" },
 
   // Backpack Game specific
-  "game.bp.title.pick": { en: "Pick a snack for the match", de: "Wähle einen Snack für das Spiel" },
+  "game.bp.title.pick": { en: "Pick an item for the match", de: "Wähle einen Gegenstand für das Spiel" },
   "game.bp.title.put": { en: "Now choose where to put it", de: "Jetzt wähle, wohin damit" },
   "game.bp.sub.pick": { en: "Tap an item below to pick it up", de: "Tippe auf ein Item, um es auszuwählen" },
-  "game.bp.sub.put": { en: "Tap the Sport Bag for safe fuel & formula, or Trash for heavy protein", de: "Tippe auf die Sporttasche für sicheren Treibstoff & Formel, oder auf den Müll für schweres Protein" },
+  "game.bp.sub.put": { en: "Tap the Sport Bag for essential gear & formula, or Trash for distractions", de: "Tippe auf die Sporttasche für wichtige Ausrüstung & Formel, oder auf den Müll für Ablenkungen" },
   "game.bp.backpack": { en: "SPORT BAG", de: "SPORTTASCHE" },
   "game.bp.cleanEnergy": { en: "SAFE TO PACK", de: "SICHER" },
   "game.bp.trash": { en: "TRASH", de: "MÜLLEIMER" },
