@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Backpack, Users, Zap, Rocket, Trophy } from "lucide-react";
+import { Backpack, Users, Zap } from "lucide-react";
 import { ThreeScene } from "./ThreeScene";
 import { AnimatedShip } from "./AnimatedShip";
 
@@ -33,98 +33,136 @@ export const HeroStory = () => {
 
   const STORY_PANELS = [
     {
-      accent: "#f8fafc",
+      accent: "#22d3ee",
       titleEl: (
-        <div className="flex flex-col items-start gap-2">
-          <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs sm:text-sm md:text-base tracking-widest uppercase font-bold shadow-[0_0_15px_rgba(255,255,255,0.3)]">
-            <Trophy className="w-4 h-4" />
-            Tournament Day
-          </span>
-          <span className="text-white drop-shadow-[0_0_32px_rgba(255,255,255,0.8)]">
+        <>
+          <span style={{
+            color: "#22d3ee",
+            textShadow: "0 0 32px rgba(34,211,238,0.9)",
+            textDecoration: "underline",
+            textDecorationColor: "#22d3ee",
+            textDecorationThickness: "3px",
+            textUnderlineOffset: "6px",
+          }}>
             {t("welcome.title")}
           </span>
-        </div>
+        </>
       ),
       text: (
-        <span className="block text-slate-200 text-base md:text-xl font-medium leading-relaxed">
+        <>
           {t("welcome.subtitle")}
-        </span>
+        </>
       ),
     },
     {
       accent: "#22d3ee",
       titleEl: (
-        <div className="flex flex-col items-start gap-2">
-          <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 text-xs sm:text-sm md:text-base tracking-widest uppercase font-bold shadow-[0_0_15px_rgba(34,211,238,0.5)]">
-            <Backpack className="w-4 h-4" />
-            Phase 1
-          </span>
-          <span className="text-white drop-shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+        <>
+          <span style={{
+            background: "rgba(34,211,238,0.18)",
+            border: "1px solid rgba(34,211,238,0.5)",
+            borderRadius: "10px",
+            padding: "2px 14px",
+            color: "#22d3ee",
+            textShadow: "0 0 20px rgba(34,211,238,0.6)",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            whiteSpace: "nowrap"
+          }}>
+            <Backpack className="w-6 h-6 sm:w-8 sm:h-8" />
             {t("pku.title")}
           </span>
-        </div>
+        </>
       ),
       text: (
-        <span className="block text-slate-200 text-base md:text-xl font-medium leading-relaxed">
+        <>
           {t("pku.desc")}
-        </span>
+        </>
       ),
     },
     {
-      accent: "#8b5cf6",
+      accent: "#a78bfa",
       titleEl: (
-        <div className="flex flex-col items-start gap-2">
-          <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/20 border border-violet-500/30 text-violet-400 text-xs sm:text-sm md:text-base tracking-widest uppercase font-bold shadow-[0_0_15px_rgba(139,92,246,0.5)]">
-            <Users className="w-4 h-4" />
-            Phase 2
-          </span>
-          <span className="text-white drop-shadow-[0_0_20px_rgba(139,92,246,0.4)]">
+        <>
+          <span style={{
+            background: "rgba(167,139,250,0.18)",
+            border: "1px solid rgba(167,139,250,0.5)",
+            borderRadius: "10px",
+            padding: "2px 14px",
+            color: "#a78bfa",
+            textShadow: "0 0 20px rgba(167,139,250,0.5)",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            whiteSpace: "nowrap"
+          }}>
+            <Users className="w-6 h-6 sm:w-8 sm:h-8" />
             {t("fuel.heavy")}
           </span>
-        </div>
+        </>
       ),
       text: (
-        <span className="block text-slate-200 text-base md:text-xl font-medium leading-relaxed">
+        <>
           {t("fuel.heavyDesc")}
-        </span>
+        </>
       ),
     },
     {
-      accent: "#10b981",
+      accent: "#34d399",
       titleEl: (
-        <div className="flex flex-col items-start gap-2">
-          <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm md:text-base tracking-widest uppercase font-bold shadow-[0_0_15px_rgba(16,185,129,0.5)]">
-            <Zap className="w-4 h-4" />
-            Phase 3
-          </span>
-          <span className="text-white drop-shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+        <>
+          <span style={{
+            background: "rgba(52,211,153,0.18)",
+            border: "1px solid rgba(52,211,153,0.5)",
+            borderRadius: "10px",
+            padding: "2px 14px",
+            color: "#34d399",
+            textShadow: "0 0 20px rgba(52,211,153,0.6)",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            whiteSpace: "nowrap"
+          }}>
+            <Zap className="w-6 h-6 sm:w-8 sm:h-8" />
             {t("fuel.clean")}
           </span>
-        </div>
+        </>
       ),
       text: (
-        <span className="block text-slate-200 text-base md:text-xl font-medium leading-relaxed">
+        <>
           {t("fuel.cleanDesc")}
-        </span>
+        </>
       ),
     },
     {
-      accent: "#f8fafc",
+      accent: "#22d3ee",
       titleEl: (
-        <div className="flex flex-col items-start gap-2">
-          <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs sm:text-sm md:text-base tracking-widest uppercase font-bold shadow-[0_0_15px_rgba(255,255,255,0.3)]">
-            <Rocket className="w-4 h-4" />
-            {t("ui.timeTo")} {t("ui.train")}
+        <>
+          {t("ui.timeTo")}{" "}
+          <span className="whitespace-nowrap">
+            <span style={{
+              color: "#22d3ee",
+              textShadow: "0 0 30px rgba(34,211,238,1)",
+              letterSpacing: "0.02em",
+            }}>
+              {t("ui.train")}
+            </span>
+            <span style={{
+              fontSize: "0.7em",
+              color: "#22d3ee",
+              marginLeft: "6px",
+              opacity: 0.9,
+            }}>
+              →
+            </span>
           </span>
-          <span className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">
-            Let's Go!
-          </span>
-        </div>
+        </>
       ),
       text: (
-        <span className="block text-slate-200 text-base md:text-xl font-medium leading-relaxed">
+        <>
           {t("ship.enter")}
-        </span>
+        </>
       ),
     },
   ];
@@ -314,21 +352,21 @@ export const HeroStory = () => {
               style={{ opacity: 0 }}
             >
               <div className="w-full max-w-lg">
-                <div
-                  className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl mb-4 tracking-tight"
+                <h2
+                  className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl mb-4 tracking-tight text-white"
                   style={{
                     fontWeight: 700,
                     textShadow: `0 0 40px ${panel.accent}66`,
                   }}
                 >
                   {panel.titleEl}
-                </div>
-                <div
-                  className="max-w-md"
+                </h2>
+                <p
+                  className="text-sm sm:text-base md:text-lg text-slate-300/80 max-w-md"
                   style={{ lineHeight: 1.8, }}
                 >
                   {panel.text}
-                </div>
+                </p>
               </div>
             </div>
           ))}
@@ -386,8 +424,8 @@ export const HeroStory = () => {
           <div className="text-white/50 text-[10px] font-bold uppercase tracking-widest mb-1 border-b border-white/10 pb-2">Admin Animation Controls</div>
           <AdminProgressDisplay />
           <button onClick={() => window.scrollTo({ top: containerRef.current?.offsetTop || 0, behavior: 'smooth'})} className="text-left text-sm text-cyan-400 hover:text-cyan-300 transition-colors">1. Welcome</button>
-          <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.25 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-purple-400 hover:text-purple-300 transition-colors">2. PKU Build</button>
-          <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.471 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-amber-500 hover:text-amber-400 transition-colors">3. Step 2 (Social)</button>
+          <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.25 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-cyan-400 hover:text-cyan-300 transition-colors">2. Step 1 (Bag)</button>
+          <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.471 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-purple-400 hover:text-purple-300 transition-colors">3. Step 2 (Social)</button>
           <button onClick={() => window.scrollTo({ top: (containerRef.current?.offsetTop || 0) + 0.618 * 5.5 * window.innerHeight, behavior: 'smooth'})} className="text-left text-sm text-emerald-400 hover:text-emerald-300 transition-colors">4. Step 3 (Formula)</button>
         </div>
       )}
