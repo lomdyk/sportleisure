@@ -217,17 +217,35 @@ function SportsObstacles() {
   useFrame((state, delta) => {
     const time = state.clock.getElapsedTime();
     
-    // Slow drifting and rotating around the ship
-    gantela.position.set(1.8, 1.2 + Math.sin(time * 0.8) * 0.5, -1.2 + Math.cos(time * 0.5) * 1);
+    // Electron-like orbits (Option 3)
+    const r = 3.2; // Orbit radius
+    
+    gantela.position.set(
+      Math.cos(time * 0.6) * r,
+      Math.sin(time * 0.6) * r * 0.5,
+      Math.sin(time * 0.6) * r * 0.86
+    );
     gantela.rotation.set(time * 0.5, time * 0.2, 0);
 
-    basket.position.set(-1.5, -0.9 + Math.cos(time * 0.7) * 0.5, 0.6 + Math.sin(time * 0.6) * 1);
+    basket.position.set(
+      Math.sin(time * 0.7) * r,
+      Math.cos(time * 0.7) * r * 0.5,
+      -Math.cos(time * 0.7) * r * 0.86
+    );
     basket.rotation.set(time * 0.3, time * 0.4, 0);
 
-    amfootball.position.set(2.4, -0.6 + Math.sin(time * 0.9) * 0.5, 1.2 + Math.cos(time * 0.7) * 1);
+    amfootball.position.set(
+      Math.cos(time * 0.8 + 2) * r * 0.7,
+      Math.sin(time * 0.8 + 2) * r,
+      Math.cos(time * 0.8 + 2) * r * 0.7
+    );
     amfootball.rotation.set(time * 0.4, 0, time * 0.3);
 
-    formula.position.set(-1.8, 1.2 + Math.cos(time * 0.8) * 0.5, -0.6 + Math.sin(time * 0.8) * 1);
+    formula.position.set(
+      -Math.sin(time * 0.75 + 1) * r * 0.7,
+      -Math.cos(time * 0.75 + 1) * r * 0.7,
+      Math.sin(time * 0.75 + 1) * r
+    );
     formula.rotation.set(0, time * 0.5, time * 0.2);
   });
 
