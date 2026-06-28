@@ -205,18 +205,29 @@ function AppInner() {
   // Full-screen overlay wrapper for games
   const renderGameScene = () => {
     let GameComponent = null;
+    let bgImg = null;
     if (activeScene === "backpack") {
       GameComponent = <BackpackGame key={gameKey} onComplete={() => {}} onClose={() => handleCloseGame("continue", "m1")} />;
+      bgImg = gameBg1;
     } else if (activeScene === "communication") {
       GameComponent = <CommunicationGame key={`comm-${gameKey}`} imgKey={gameKey} onComplete={() => {}} onClose={() => handleCloseGame("continue", "m2")} />;
+      bgImg = gameBg2;
     } else if (activeScene === "runner") {
       GameComponent = <RunnerGame key={`run-${gameKey}`} onClose={() => handleCloseGame("continue", "m3")} />;
+      bgImg = gameBg3;
     }
 
     if (!GameComponent) return null;
 
     return (
       <div data-lenis-prevent="true" className="absolute inset-0 z-50 bg-[#050a18] overflow-auto flex flex-col">
+        {bgImg && (
+          <div 
+            className="absolute inset-0 z-0 opacity-30 bg-cover bg-center bg-no-repeat pointer-events-none" 
+            style={{ backgroundImage: `url(${bgImg})` }} 
+          />
+        )}
+        <div className="absolute inset-0 z-0 bg-black/40 pointer-events-none" />
         <StarField />
         
         {/* Exit Button Container */}
