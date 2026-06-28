@@ -61,20 +61,20 @@ export const TRANSLATIONS: Dict = {
     en: "Today is a big day! You and your sports team are preparing for a massive tournament.", 
     de: "Heute ist ein großer Tag! Du und dein Sport-Team bereiten sich auf ein großes Turnier vor." 
   },
-  "pku.title": { en: "The Champion's Diet", de: "Die Champion-Diät" },
+  "pku.title": { en: "Step 1: Preparation", de: "Schritt 1: Vorbereitung" },
   "pku.desc": { 
-    en: "As an athlete with PKU, you already know the basics: your body handles protein differently. To be a champion on the field, you need the perfect sports diet to keep your energy high and your mind sharp.", 
-    de: "Als Athlet mit PKU kennst du bereits die Grundlagen: Dein Körper verarbeitet Protein anders. Um ein Champion auf dem Feld zu sein, brauchst du die perfekte Sportdiät, um deine Energie hoch und deinen Geist scharf zu halten." 
+    en: "A successful match starts before you even step on the field. The first step is packing your sports bag correctly. Having all the right equipment and fuel is key to victory.", 
+    de: "Ein erfolgreiches Spiel beginnt, bevor du überhaupt den Platz betrittst. Der erste Schritt ist das richtige Packen deiner Sporttasche. Die richtige Ausrüstung und den richtigen Treibstoff zu haben, ist der Schlüssel zum Sieg." 
   },
-  "fuel.clean": { en: "Formula Power", de: "Formel-Kraft" },
+  "fuel.clean": { en: "Step 3: The Secret Weapon", de: "Schritt 3: Die Geheimwaffe" },
   "fuel.cleanDesc": { 
-    en: "Fruits, veggies, and your PKU formula are your Super-Fuel! Your formula provides the safe amino acids (like Tyrosine) your brain and muscles need to build strength and endurance for the big match.", 
-    de: "Obst, Gemüse und deine PKU-Formel sind dein Super-Treibstoff! Deine Formel liefert die sicheren Aminosäuren (wie Tyrosin), die dein Gehirn und deine Muskeln brauchen, um Kraft und Ausdauer für das große Spiel aufzubauen." 
+    en: "During intense training, your energy will drain quickly. Your sports formula is your secret weapon! Taking it during the match will keep your speed high and your reflexes sharp.", 
+    de: "Während eines intensiven Trainings wird deine Energie schnell abnehmen. Deine Sportformel ist deine Geheimwaffe! Wenn du sie während des Spiels nimmst, bleiben deine Geschwindigkeit hoch und deine Reflexe scharf." 
   },
-  "fuel.heavy": { en: "Heavy Food", de: "Schweres Essen" },
+  "fuel.heavy": { en: "Step 2: Team Spirit", de: "Schritt 2: Teamgeist" },
   "fuel.heavyDesc": { 
-    en: "Meat, cheese, and regular milk are heavy. They are full of Phe! During sports, a toxic buildup of Phe affects your brain function, causing brain fog and slowing down your reflexes on the field.", 
-    de: "Fleisch, Käse und normale Milch sind schwer. Sie sind voller Phe! Beim Sport beeinträchtigt eine toxische Ansammlung von Phe deine Gehirnfunktion, verursacht Gehirnnebel und verlangsamt deine Reflexe auf dem Spielfeld." 
+    en: "Being part of a team means communicating clearly. You will interact with teammates and face different social situations. Stay confident and communicate your needs like a true leader.", 
+    de: "Teil eines Teams zu sein bedeutet, klar zu kommunizieren. Du wirst mit Teamkollegen interagieren und verschiedenen sozialen Situationen begegnen. Bleib selbstbewusst und kommuniziere deine Bedürfnisse wie eine echte Führungspersönlichkeit." 
   },
   "ship.enter": { 
     en: "Time to meet your team! But before we head to the stadium, a true athlete must pack their sports bag. Let's go!", 

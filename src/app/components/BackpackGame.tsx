@@ -12,7 +12,7 @@ import appleImg from "../../imports/яблоко_plasticine-style___202604161826
 import waterbottleImg from "../../imports/waterbottle.png";
 import medcardImg from "../../imports/medcard.png";
 import cheeseImg from "../../imports/сыр_ОНА_ДОЛЖНА_202604161846_(1).png";
-import formulaImg from "../../imports/Untitled.png";
+import formulaImg from "../../imports/formula_new.png";
 import pizzaImg from "../../imports/Untitled_(1).png";
 import closedBackpackImg from "../../imports/closed.png";
 import openedBackpackImg from "../../imports/opened.png";

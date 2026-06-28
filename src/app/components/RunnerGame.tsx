@@ -10,7 +10,7 @@ import { metricsActions } from "../store/metricsStore";
 import runnerGif from "../../imports/ezgif.com-crop.gif";
 import cheeseImg from "../../imports/сыр_ОНА_ДОЛЖНА_202604161846_(1).png";
 import pizzaImg from "../../imports/Untitled_(1).png";
-import formulaImg from "../../imports/Untitled.png";
+import formulaImg from "../../imports/formula_new.png";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const GAME_HEIGHT = 440;

@@ -205,7 +205,7 @@ function ThrusterFlames({ targetRef }: { targetRef: React.MutableRefObject<THREE
   );
 }
 
-function FoodObstacles() {
+function SportsObstacles() {
   const { gl } = useThree();
   const setupLoader = (loader: any) => {
     if (!loader.ktx2LoaderAttached) {
@@ -217,192 +217,41 @@ function FoodObstacles() {
     }
   };
 
-  const { scene: apple } = useGLTF('/apple-detailled-normal.glb', true, true, setupLoader);
-  const { scene: potion } = useGLTF('/potion-detailled-normal.glb', true, true, setupLoader);
-  const { scene: pizza } = useGLTF('/pizza-detailled-normal.glb', true, true, setupLoader);
-  const { scene: cheese } = useGLTF('/cheese-detailled-normal.glb', true, true, setupLoader);
+  const { scene: gantela } = useGLTF('/gantela.glb', true, true, setupLoader);
+  const { scene: basket } = useGLTF('/basket.glb', true, true, setupLoader);
+  const { scene: amfootball } = useGLTF('/amfootball.glb', true, true, setupLoader);
+  const { scene: formula } = useGLTF('/formula_3d.glb', true, true, setupLoader);
 
-  const apple2 = useMemo(() => apple.clone(), [apple]);
-  const potion2 = useMemo(() => potion.clone(), [potion]);
-  const pizza2 = useMemo(() => pizza.clone(), [pizza]);
-  const cheese2 = useMemo(() => cheese.clone(), [cheese]);
-
-  const groupRef = useRef<THREE.Group>(null);
+  useMemo(() => {
+    gantela.scale.setScalar(0.5);
+    basket.scale.setScalar(0.5);
+    amfootball.scale.setScalar(0.4);
+    formula.scale.setScalar(0.6);
+  }, [gantela, basket, amfootball, formula]);
 
   useFrame((state, delta) => {
-    if (!groupRef.current) return;
-    const p = scrollState.progress;
-
-    // Formula phase: 0.548 - 0.689 (Matches UI panel 3 'Formula Power')
-    const isFormula = p >= 0.548 && p <= 0.689;
-    const fPhase = isFormula ? (p - 0.548) / 0.141 : 0;
+    const time = state.clock.getElapsedTime();
     
-    // Heavy phase: 0.395 - 0.547 (Matches UI panel 2 'Heavy Food')
-    const isHeavy = p >= 0.395 && p <= 0.547;
-    const hPhase = isHeavy ? (p - 0.395) / 0.152 : 0;
+    // Slow drifting and rotating around the ship
+    gantela.position.set(3, 2 + Math.sin(time * 0.8) * 0.5, -2 + Math.cos(time * 0.5) * 1);
+    gantela.rotation.set(time * 0.5, time * 0.2, 0);
 
-    if (isFormula) {
-      apple.visible = true;
-      potion.visible = true;
-      apple2.visible = true;
-      potion2.visible = true;
-      
-      const noseX = 2;
-      const engineX = -2.0;
-      const engineY = -0.2;
-      const engineZ = 0;
-      
-      const smoothF = fPhase * fPhase * (3 - 2 * fPhase);
-      
-      let currentX = noseX + 8 - (smoothF * 10);
-      let appleY = 1.0 + Math.sin(smoothF * Math.PI * 3) * 0.8;
-      let appleZ = -1.0;
-      let potionY = -1.5 - Math.sin(smoothF * Math.PI * 3) * 0.8;
-      let potionZ = 1.0;
-      
-      let apple2Y = 0.5 + Math.cos(smoothF * Math.PI * 3) * 0.8;
-      let apple2Z = 1.5;
-      let potion2Y = -0.5 - Math.cos(smoothF * Math.PI * 3) * 0.8;
-      let potion2Z = -1.5;
+    basket.position.set(-2.5, -1.5 + Math.cos(time * 0.7) * 0.5, 1 + Math.sin(time * 0.6) * 1);
+    basket.rotation.set(time * 0.3, time * 0.4, 0);
 
-      let appleX = currentX;
-      let potionX = currentX - 1.5;
-      let apple2X = currentX - 0.5;
-      let potion2X = currentX - 2.5;
+    amfootball.position.set(4, -1 + Math.sin(time * 0.9) * 0.5, 2 + Math.cos(time * 0.7) * 1);
+    amfootball.rotation.set(time * 0.4, 0, time * 0.3);
 
-      if (fPhase > 0.7) {
-        const suctionP = (fPhase - 0.7) / 0.3; // 0 to 1
-        const smoothSuction = suctionP * suctionP * (3 - 2 * suctionP);
-        
-        appleX = THREE.MathUtils.lerp(appleX, engineX, smoothSuction);
-        appleY = THREE.MathUtils.lerp(appleY, engineY, smoothSuction);
-        appleZ = THREE.MathUtils.lerp(appleZ, engineZ, smoothSuction);
-        
-        potionX = THREE.MathUtils.lerp(potionX, engineX, smoothSuction);
-        potionY = THREE.MathUtils.lerp(potionY, engineY, smoothSuction);
-        potionZ = THREE.MathUtils.lerp(potionZ, engineZ, smoothSuction);
-        
-        apple2X = THREE.MathUtils.lerp(apple2X, engineX, smoothSuction);
-        apple2Y = THREE.MathUtils.lerp(apple2Y, engineY, smoothSuction);
-        apple2Z = THREE.MathUtils.lerp(apple2Z, engineZ, smoothSuction);
-        
-        potion2X = THREE.MathUtils.lerp(potion2X, engineX, smoothSuction);
-        potion2Y = THREE.MathUtils.lerp(potion2Y, engineY, smoothSuction);
-        potion2Z = THREE.MathUtils.lerp(potion2Z, engineZ, smoothSuction);
-      }
-      
-      apple.position.set(appleX, appleY, appleZ);
-      potion.position.set(potionX, potionY, potionZ); 
-      apple2.position.set(apple2X, apple2Y, apple2Z);
-      potion2.position.set(potion2X, potion2Y, potion2Z);
-      
-      // Graceful tumbling
-      apple.rotation.x += delta * 1.0;
-      apple.rotation.y += delta * 1.2;
-      potion.rotation.z -= delta * 1.0;
-      potion.rotation.y += delta * 1.2;
-      apple2.rotation.z += delta * 0.8;
-      apple2.rotation.y += delta * 1.5;
-      potion2.rotation.x += delta * 1.2;
-      potion2.rotation.z -= delta * 0.8;
-
-      const baseAppleScale = 3.0;
-      const basePotionScale = 2.4;
-      let scaleMult = 1;
-      if (fPhase < 0.1) {
-        scaleMult = fPhase / 0.1; 
-      } else if (fPhase > 0.7) {
-        scaleMult = 1 - (fPhase - 0.7) / 0.3; 
-      }
-      
-      apple.scale.setScalar(baseAppleScale * scaleMult);
-      potion.scale.setScalar(basePotionScale * scaleMult);
-      apple2.scale.setScalar(baseAppleScale * scaleMult * 0.8);
-      potion2.scale.setScalar(basePotionScale * scaleMult * 0.9);
-    } else {
-      apple.visible = false;
-      potion.visible = false;
-      apple2.visible = false;
-      potion2.visible = false;
-    }
-
-    if (isHeavy) {
-      pizza.visible = true;
-      cheese.visible = true;
-      pizza2.visible = true;
-      cheese2.visible = true;
-      
-      const noseX = 2;
-      const basePizzaScale = 1.5;
-      const baseCheeseScale = 1.2;
-
-      if (hPhase < 0.4) {
-        const approachP = hPhase / 0.4; 
-        const smoothApp = approachP * approachP * (3 - 2 * approachP);
-        const currentX = noseX + 12 - (smoothApp * 12);
-        
-        pizza.position.set(currentX, -0.5, 0.8);
-        cheese.position.set(currentX + 2.5, -1.5, -0.8);
-        
-        pizza2.position.set(currentX + 1.0, 1.2, -1.0);
-        cheese2.position.set(currentX + 3.5, 0.5, 1.5);
-        
-        pizza.rotation.x += delta * 0.5;
-        cheese.rotation.z += delta * 0.5;
-        pizza2.rotation.y += delta * 0.4;
-        cheese2.rotation.x -= delta * 0.6;
-      } else {
-        const bounceP = (hPhase - 0.4) / 0.6; 
-        const easeBounce = 1 - (1 - bounceP) * (1 - bounceP);
-        
-        const currentX = noseX - (easeBounce * 10); 
-        
-        pizza.position.set(currentX, -0.5 + (easeBounce * 4), 0.8 + (easeBounce * 3));
-        cheese.position.set(currentX + 2.5, -1.5 - (easeBounce * 4), -0.8 - (easeBounce * 3));
-        
-        pizza2.position.set(currentX + 1.0, 1.2 + (easeBounce * 3), -1.0 - (easeBounce * 2));
-        cheese2.position.set(currentX + 3.5, 0.5 - (easeBounce * 5), 1.5 + (easeBounce * 4));
-
-        pizza.rotation.x += delta * 1.5;
-        pizza.rotation.y += delta * 1.0;
-        cheese.rotation.y -= delta * 1.5;
-        cheese.rotation.z += delta * 1.0;
-        
-        pizza2.rotation.x -= delta * 1.2;
-        pizza2.rotation.z += delta * 0.8;
-        cheese2.rotation.x += delta * 1.5;
-        cheese2.rotation.y -= delta * 1.2;
-      }
-      
-      let scaleMult = 1;
-      if (hPhase < 0.1) {
-        scaleMult = hPhase / 0.1; 
-      } else if (hPhase > 0.9) {
-        scaleMult = 1 - (hPhase - 0.9) / 0.1; 
-      }
-      
-      pizza.scale.setScalar(basePizzaScale * scaleMult);
-      cheese.scale.setScalar(baseCheeseScale * scaleMult);
-      pizza2.scale.setScalar(basePizzaScale * scaleMult * 0.85);
-      cheese2.scale.setScalar(baseCheeseScale * scaleMult * 0.9);
-    } else {
-      pizza.visible = false;
-      cheese.visible = false;
-      pizza2.visible = false;
-      cheese2.visible = false;
-    }
+    formula.position.set(-3, 2 + Math.cos(time * 0.8) * 0.5, -1 + Math.sin(time * 0.8) * 1);
+    formula.rotation.set(0, time * 0.5, time * 0.2);
   });
 
   return (
-    <group ref={groupRef}>
-      <primitive object={apple} />
-      <primitive object={potion} />
-      <primitive object={apple2} />
-      <primitive object={potion2} />
-      <primitive object={pizza} />
-      <primitive object={cheese} />
-      <primitive object={pizza2} />
-      <primitive object={cheese2} />
+    <group>
+      <primitive object={gantela} />
+      <primitive object={basket} />
+      <primitive object={amfootball} />
+      <primitive object={formula} />
     </group>
   );
 }
@@ -538,12 +387,12 @@ function AnimatedModel() {
   });
 
   return (
-    <group ref={parallaxGroupRef}>
+<group ref={parallaxGroupRef}>
       <group ref={targetRef}>
         <Float speed={2.5} rotationIntensity={0.2} floatIntensity={0.4}>
           <primitive object={scene} scale={4} position={[0, -1, 0]} rotation={[0, 0, Math.PI / 2]} />
           <ThrusterFlames targetRef={targetRef} />
-          <FoodObstacles />
+          <SportsObstacles />
         </Float>
       </group>
     </group>
