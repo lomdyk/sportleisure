@@ -218,16 +218,16 @@ function SportsObstacles() {
     const time = state.clock.getElapsedTime();
     
     // Slow drifting and rotating around the ship
-    gantela.position.set(3, 2 + Math.sin(time * 0.8) * 0.5, -2 + Math.cos(time * 0.5) * 1);
+    gantela.position.set(1.8, 1.2 + Math.sin(time * 0.8) * 0.5, -1.2 + Math.cos(time * 0.5) * 1);
     gantela.rotation.set(time * 0.5, time * 0.2, 0);
 
-    basket.position.set(-2.5, -1.5 + Math.cos(time * 0.7) * 0.5, 1 + Math.sin(time * 0.6) * 1);
+    basket.position.set(-1.5, -0.9 + Math.cos(time * 0.7) * 0.5, 0.6 + Math.sin(time * 0.6) * 1);
     basket.rotation.set(time * 0.3, time * 0.4, 0);
 
-    amfootball.position.set(4, -1 + Math.sin(time * 0.9) * 0.5, 2 + Math.cos(time * 0.7) * 1);
+    amfootball.position.set(2.4, -0.6 + Math.sin(time * 0.9) * 0.5, 1.2 + Math.cos(time * 0.7) * 1);
     amfootball.rotation.set(time * 0.4, 0, time * 0.3);
 
-    formula.position.set(-3, 2 + Math.cos(time * 0.8) * 0.5, -1 + Math.sin(time * 0.8) * 1);
+    formula.position.set(-1.8, 1.2 + Math.cos(time * 0.8) * 0.5, -0.6 + Math.sin(time * 0.8) * 1);
     formula.rotation.set(0, time * 0.5, time * 0.2);
   });
 
