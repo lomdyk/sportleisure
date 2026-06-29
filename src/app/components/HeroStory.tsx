@@ -387,7 +387,7 @@ export const HeroStory = () => {
 
         {/* 2D Ship specifically for mobile to save battery */}
         {isMobileScreen && (
-          <div ref={mobileShipContainerRef} className="absolute inset-0 flex items-center justify-center pointer-events-none z-[5]">
+          <div ref={mobileShipContainerRef} className="absolute inset-0 flex items-start pt-[30vh] justify-center pointer-events-none z-[5]">
             <style>{`
               @keyframes float1 {
                 0%, 100% { transform: translate(0, 0) rotate(0deg); }
@@ -449,16 +449,17 @@ export const HeroStory = () => {
 
       {/* Scroll hint */}
       <div 
-        ref={scrollHintRef}
-        className="absolute left-0 w-full px-4 -translate-y-1/2 z-[30] flex flex-col items-center gap-4"
+        className="absolute left-0 w-full px-4 -translate-y-1/2 z-[30] flex justify-center pointer-events-none"
         style={{ top: "50%" }}
       >
-        <p className="text-lg sm:text-2xl text-white font-bold uppercase tracking-[0.2em] text-center leading-tight" >
-          {t("ui.scrollBegin")}
-        </p>
-        <svg className="animate-bounce" width="28" height="28" viewBox="0 0 20 20" fill="none">
-          <path d="M10 4v12m0 0l-4-4m4 4l4-4" stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <div ref={scrollHintRef} className="flex flex-col items-center gap-4">
+          <p className="text-lg sm:text-2xl text-white font-bold uppercase tracking-[0.2em] text-center leading-tight">
+            {t("ui.scrollBegin")}
+          </p>
+          <svg className="animate-bounce" width="28" height="28" viewBox="0 0 20 20" fill="none">
+            <path d="M10 4v12m0 0l-4-4m4 4l4-4" stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
       </div>
 
       {/* Admin Menu for jumping to specific animations */}
