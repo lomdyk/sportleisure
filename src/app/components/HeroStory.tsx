@@ -232,14 +232,13 @@ export const HeroStory = () => {
       },
     });
 
-    // Move the 'Scroll to begin' down and shrink it until it disappears completely
-    // This prevents it from overlapping the story text panels
+    // Move the 'Scroll to begin' down and shrink it so it stays visible as an indicator
     tl.to(scrollHintRef.current, {
-      top: "120%",
-      scale: 0.5,
-      opacity: 0,
-      duration: 0.15,
-      ease: "power2.in",
+      top: "90%",
+      scale: 0.7,
+      opacity: 0.5,
+      duration: 0.1,
+      ease: "power2.out",
     }, 0);
 
     // Story panels
@@ -355,7 +354,7 @@ export const HeroStory = () => {
         {/* Glows removed to prevent seams with next sections */}
       </div>
 
-      <div className="absolute inset-0 z-[10] flex flex-col justify-end md:justify-center items-center md:items-start px-6 md:px-14 lg:px-24 pt-16 pb-12 sm:pb-24 md:py-0 pointer-events-none">
+      <div className="absolute inset-0 z-[10] flex flex-col justify-end md:justify-center items-center md:items-start px-6 md:px-14 lg:px-24 pt-16 pb-28 sm:pb-32 md:py-0 pointer-events-none">
         {/* Text panels — bottom on mobile, left on desktop */}
         <div className="relative w-full md:w-1/2 flex items-center min-h-[200px] sm:min-h-[220px] md:min-h-0 md:h-full justify-center md:justify-start text-center md:text-left">
           {STORY_PANELS.map((panel, i) => (
