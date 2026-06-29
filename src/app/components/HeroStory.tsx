@@ -232,10 +232,12 @@ export const HeroStory = () => {
       },
     });
 
-    // Fade out 'Scroll to begin' immediately when scrolling starts
+    // Move the 'Scroll to begin' down and shrink it so it stays visible as an indicator
     tl.to(scrollHintRef.current, {
-      opacity: 0,
-      duration: 0.05,
+      top: "90%",
+      scale: 0.7,
+      opacity: 0.5,
+      duration: 0.1,
       ease: "power2.out",
     }, 0);
 
@@ -352,7 +354,7 @@ export const HeroStory = () => {
         {/* Glows removed to prevent seams with next sections */}
       </div>
 
-      <div className="absolute inset-0 z-[10] flex flex-col justify-end md:justify-center items-center md:items-start px-6 md:px-14 lg:px-24 pt-16 pb-12 sm:pb-24 md:py-0 pointer-events-none">
+      <div className="absolute inset-0 z-[10] flex flex-col justify-end md:justify-center items-center md:items-start px-6 md:px-14 lg:px-24 pt-16 pb-8 sm:pb-24 md:py-0 pointer-events-none">
         {/* Text panels — bottom on mobile, left on desktop */}
         <div className="relative w-full md:w-1/2 flex items-center min-h-[200px] sm:min-h-[220px] md:min-h-0 md:h-full justify-center md:justify-start text-center md:text-left">
           {STORY_PANELS.map((panel, i) => (
@@ -385,7 +387,7 @@ export const HeroStory = () => {
 
         {/* 2D Ship specifically for mobile to save battery */}
         {isMobileScreen && (
-          <div ref={mobileShipContainerRef} className="absolute inset-0 flex items-start pt-24 sm:pt-0 sm:items-center justify-center pointer-events-none z-[5]">
+          <div ref={mobileShipContainerRef} className="absolute inset-0 flex items-center justify-center pointer-events-none z-[5]">
             <style>{`
               @keyframes float1 {
                 0%, 100% { transform: translate(0, 0) rotate(0deg); }
@@ -446,13 +448,14 @@ export const HeroStory = () => {
       />
 
       {/* Scroll hint */}
-      <div
+      <div 
         ref={scrollHintRef}
-        className="absolute bottom-4 sm:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-[60] pointer-events-none text-slate-400"
+        className="absolute left-0 w-full px-4 -translate-y-1/2 z-[30] flex flex-col items-center gap-4"
+        style={{ top: "50%" }}
       >
-        <span className="text-[10px] tracking-[0.2em] uppercase font-semibold">
+        <p className="text-lg sm:text-2xl text-white font-bold uppercase tracking-[0.2em] text-center leading-tight" >
           {t("ui.scrollBegin")}
-        </span>
+        </p>
         <svg className="animate-bounce" width="28" height="28" viewBox="0 0 20 20" fill="none">
           <path d="M10 4v12m0 0l-4-4m4 4l4-4" stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
