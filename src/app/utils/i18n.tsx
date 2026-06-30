@@ -107,8 +107,8 @@ export const TRANSLATIONS: Dict = {
     de: "Hey Kapitän, wir sind am Stadion! Pass auf, ein Fremder aus einem anderen Team geht durch den Tunnel und stellt unangenehme Fragen zu deinem Essen.",
   },
   "m2.objective": {
-    en: "Face everyday social situations where people ask about your food. Whether you are declining a pizza or explaining your special formula, practice communicating your PKU diet proudly. Show them that your unique fuel is your advantage, not a restriction!",
-    de: "Meistere alltägliche soziale Situationen, in denen Leute nach deinem Essen fragen. Egal, ob du eine Pizza ablehnst oder deine spezielle Formel erklärst, übe, deine PKU-Diät stolz zu kommunizieren. Zeige ihnen, dass dein einzigartiger Treibstoff dein Vorteil ist, keine Einschränkung!",
+    en: "Practice handling social situations involving food. Whether declining a pizza or explaining your formula, communicate your PKU diet proudly. It is your advantage, not a restriction!",
+    de: "Übe den Umgang mit sozialen Situationen rund ums Essen. Egal ob du eine Pizza ablehnst oder deine Formel erklärst, kommuniziere deine PKU-Diät mit Stolz. Sie ist dein Vorteil, keine Einschränkung!",
   },
   "m2.cta": { en: "Meet the Team >", de: "Team treffen >" },
   "m2.warning": { en: "Wait! Someone is trying to distract us. We need to figure out what to say!", de: "Warte! Jemand versucht, uns abzulenken. Wir müssen überlegen, was wir sagen!" },
