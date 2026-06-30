@@ -58,8 +58,8 @@ export const TRANSLATIONS: Dict = {
   // ── Onboarding / HeroStory ────────────────────────────────
   "welcome.title": { en: "Welcome, Captain!", de: "Willkommen, Kapitän!" },
   "welcome.subtitle": { 
-    en: "Today is a big day! You and your sports team are preparing for a massive tournament.", 
-    de: "Heute ist ein großer Tag! Du und dein Sport-Team bereiten sich auf ein großes Turnier vor." 
+    en: "Welcome to the PKU Academy! Here you will learn how to master your diet in sports, leisure, and everyday situations. You and your sports team are preparing for a massive tournament. Through interactive missions, you will learn exactly what to pack for school, sleepovers, or training sessions, how to confidently communicate your needs to friends and strangers, and how to fuel your body for maximum physical performance. Your journey to becoming a Champion starts now!", 
+    de: "Willkommen in der PKU-Akademie! Hier lernst du, wie du deine Diät in Sport, Freizeit und Alltagssituationen meisterst. Du und dein Sportteam bereiten sich auf ein großes Turnier vor. In interaktiven Missionen lernst du, was du für die Schule, Übernachtungen oder das Training einpacken musst, wie du Freunden und Fremden deine Bedürfnisse selbstbewusst mitteilst und wie du deinen Körper für maximale körperliche Leistung mit Energie versorgst. Deine Reise zum Champion beginnt jetzt!" 
   },
   "pku.step": { en: "Step 1", de: "Schritt 1" },
   "pku.title": { en: "Preparation", de: "Vorbereitung" },
