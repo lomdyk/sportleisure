@@ -4,8 +4,8 @@ import { Download, FileText, Sparkles, Notebook } from "lucide-react";
 import { GhostButton } from "./ui/GhostButton";
 import { useLang } from "../utils/i18n";
 import { soundEngine } from "../utils/audioEngine";
-import rallyImg from "../../imports/ChatGPT_Image_Jun_3__2026__11_16_23_AM.png";
-import flightMapImg from "../../imports/image_6.png";
+import rallyImg from "../../imports/KOSMISCHE RALLYE.png";
+import flightMapImg from "../../imports/2Day Flight Map.png";
 
 interface CardProps {
   index: number;
