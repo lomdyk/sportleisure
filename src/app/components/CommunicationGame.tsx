@@ -396,15 +396,12 @@ export const CommunicationGame = ({
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-10 md:mb-14"
+        className="text-center mb-8 md:mb-12"
       >
-        <h2 className="text-2xl sm:text-3xl md:text-5xl tracking-tight mb-3 text-white"
-          style={{ fontWeight: 700, }}>
-          {copy.titleA} <span className="text-violet-400" style={{ textShadow: "0 0 24px rgba(167,139,250,0.7)" }}>{copy.titleB}</span>
+        <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-tighter mb-4 text-white"
+          style={{ fontWeight: 800, }}>
+          {copy.titleA} <span className="text-violet-400" style={{ textShadow: "0 0 32px rgba(167,139,250,0.6)" }}>{copy.titleB}</span>
         </h2>
-        <p className="text-slate-400 max-w-lg mx-auto" >
-          {copy.subtitle}
-        </p>
       </motion.div>
 
       <div className="w-full max-w-2xl">
@@ -413,75 +410,52 @@ export const CommunicationGame = ({
           {/* ── INTRO ── */}
           {phase === "intro" && (
             <motion.div key="intro" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-              className="flex flex-col items-center gap-8">
-
-              <div className="flex flex-wrap sm:flex-nowrap items-end justify-center gap-6 sm:gap-10">
-                {[
-                  { gif: lunaGif, name: "Luna", color: "#22d3ee" },
-                  { gif: boGif,   name: "Bo",   color: "#a78bfa" },
-                  { gif: elaGif,  name: "Ela",  color: "#34d399" },
-                ].map((c, i) => (
-                  <motion.div key={c.name}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.15, type: "spring", duration: 0.5, bounce: 0.2 }}
-                    className="flex flex-col items-center gap-2"
-                  >
-                    <div
-                      className="rounded-2xl overflow-hidden border-2 w-20 h-20 sm:w-28 sm:h-28 md:w-[148px] md:h-[148px]"
-                      style={{
-                        borderColor: c.color + "60",
-                        boxShadow: `0 0 32px ${c.color}30, inset 0 0 0 1px ${c.color}15`,
-                        background: "rgba(255,255,255,0.04)",
-                      }}
-                    >
-                      <GifImg src={c.gif} alt={c.name} imgKey={imgKey}
-                        className="w-full h-full object-cover object-center" />
-                    </div>
-                    <span style={{ color: c.color, fontWeight: 600, fontSize: 13 }}>
-                      {c.name}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
+              className="flex flex-col items-center gap-12 md:gap-16">
 
               <motion.div
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5, type: "spring", duration: 0.5, bounce: 0.15 }}
-                className="flex items-center gap-4 border rounded-2xl px-5 py-4 backdrop-blur-sm"
-                style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)" }}
+                transition={{ delay: 0.2, type: "spring", duration: 0.8, bounce: 0.15 }}
+                className="flex flex-col items-center gap-6"
               >
-                <div
-                  className="rounded-xl overflow-hidden border border-amber-400/40 flex-shrink-0 w-[60px] h-[70px] md:w-[76px] md:h-[88px]"
-                >
-                  <GifImg src={npcGif} alt="Nick" imgKey={imgKey}
-                    className="w-full h-full object-cover object-center" />
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-full bg-amber-400/20 blur-2xl scale-125 animate-pulse" />
+                  <div
+                    className="relative rounded-full overflow-hidden border border-amber-400/30 w-24 h-24 md:w-32 md:h-32 shadow-[0_0_40px_rgba(251,191,36,0.15)]"
+                  >
+                    <GifImg src={npcGif} alt="Nick" imgKey={imgKey}
+                      className="w-full h-full object-cover object-center" />
+                  </div>
                 </div>
-                <div>
-                  <p style={{ fontWeight: 600, fontSize: 15, color: "#fcd34d" }}>
+                
+                <div className="text-center space-y-1.5">
+                  <h3 className="text-xl md:text-2xl uppercase" style={{ fontWeight: 800, color: "#fcd34d", letterSpacing: "0.15em" }}>
                     {t("npc.name")}
-                  </p>
-                  <p style={{ fontSize: 12, color: "rgba(148,163,184,0.8)" }}>
+                  </h3>
+                  <p className="text-xs md:text-sm uppercase" style={{ color: "rgba(148,163,184,0.6)", fontWeight: 600, letterSpacing: "0.25em" }}>
                     {copy.nickRole}
                   </p>
                 </div>
               </motion.div>
 
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
-                className="text-center text-slate-300 px-4"
-                style={{ lineHeight: 1.7 }}>
-                {copy.intro1}<br />
-                <span className="text-violet-300">{copy.intro2}</span>
-              </motion.p>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
+                className="text-center max-w-xl mx-auto space-y-5 px-4">
+                <p className="text-lg md:text-xl text-slate-300" style={{ lineHeight: 1.6, fontWeight: 300, letterSpacing: "0.01em" }}>
+                  {copy.intro1}
+                </p>
+                <p className="text-lg md:text-xl text-violet-300" style={{ fontWeight: 500, letterSpacing: "0.02em" }}>
+                  {copy.intro2}
+                </p>
+              </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}
+                initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
+                className="mt-2"
               >
                 <GhostButton
                   tone="violet"
                   size="md"
-                  icon={<MessageCircle className="w-4 h-4" />}
+                  icon={<MessageCircle className="w-5 h-5" />}
                   onClick={() => { setPhase("game"); setTimeout(() => startScenario(0), 100); }}
                 >
                   {copy.start}
