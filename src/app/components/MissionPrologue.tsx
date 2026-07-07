@@ -130,7 +130,7 @@ export const MissionPrologue: React.FC<Props> = ({
         draggable={false}
         animate={{ y: [0, -15, 0] }}
         transition={{ duration: 5, ease: "easeInOut", repeat: Infinity }}
-        className="block w-full max-h-[22vh] sm:max-h-[30vh] md:h-[450px] md:max-h-none select-none drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+        className="block w-full max-h-[32vh] sm:max-h-[38vh] md:h-[450px] md:max-h-none select-none drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
         style={{ objectFit: "contain" }}
         onLoad={() => ScrollTrigger.refresh()}
       />
@@ -228,8 +228,8 @@ export const MissionPrologue: React.FC<Props> = ({
 
   return (
     <>
-      <section ref={sectionRef} className="relative w-full px-4 md:px-8 py-2 md:py-24 flex flex-col justify-center min-h-[100dvh]">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-4 md:gap-16 items-center">
+      <section ref={sectionRef} className="relative w-full px-4 md:px-8 pt-4 pb-2 md:py-24 flex flex-col justify-start md:justify-center min-h-[calc(100dvh-80px)] md:min-h-[100dvh]">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 md:gap-16 items-center">
           {imageSide === "left" ? (
             <>
               <div className="md:order-1">{Image}</div>
