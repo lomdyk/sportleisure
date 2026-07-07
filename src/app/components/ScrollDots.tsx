@@ -46,20 +46,24 @@ export const ScrollDots: React.FC = () => {
         const isActive = activeIdx === idx;
         const color = isActive ? section.color : "rgba(255, 255, 255, 0.15)";
         return (
-          <motion.button
+          <button
             key={section.id}
             onClick={() => handleClick(section.id)}
-            className="w-1.5 rounded-full cursor-pointer outline-none"
-            initial={false}
-            animate={{
-              height: isActive ? 24 : 8,
-              backgroundColor: color,
-              boxShadow: isActive ? `0 0 12px ${section.color}80` : "0 0 0px transparent",
-            }}
-            whileHover={{ scale: 1.2, backgroundColor: isActive ? color : "rgba(255, 255, 255, 0.4)" }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="p-2 -m-2 cursor-pointer outline-none flex justify-center items-center"
             aria-label={`Scroll to ${section.id}`}
-          />
+          >
+            <motion.div
+              className="w-1.5 rounded-full"
+              initial={false}
+              animate={{
+                height: isActive ? 24 : 8,
+                backgroundColor: color,
+                boxShadow: isActive ? `0 0 12px ${section.color}80` : "0 0 0px transparent",
+              }}
+              whileHover={{ scale: 1.2, backgroundColor: isActive ? color : "rgba(255, 255, 255, 0.4)" }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            />
+          </button>
         );
       })}
     </div>

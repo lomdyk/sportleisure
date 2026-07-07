@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "motion/react";
-import { Backpack, MessageCircle, Rocket, Sparkles, Download, BookOpen } from "lucide-react";
+import { Backpack, MessageCircle, Rocket, Sparkles, Download, BookOpen, Globe } from "lucide-react";
 import logoUrl from "../../assets/logo.svg";
 import { useLang } from "../utils/i18n";
 import { soundEngine } from "../utils/audioEngine";
+import { GhostButton } from "./ui/GhostButton";
 
 interface Props {
   active?: 0 | 1 | 2 | 3 | 4 | 5; 
@@ -151,33 +152,18 @@ export const TopTabBar: React.FC<Props> = () => {
         </div>
 
         {/* Language switch */}
-        <div
-          className="flex items-center rounded-full border p-0.5 shrink-0"
-          style={{
-            borderColor: "rgba(255,255,255,0.1)",
-            background: "rgba(255,255,255,0.03)",
+        <GhostButton
+          tone="cyan"
+          size="sm"
+          icon={<Globe className="w-3.5 h-3.5" />}
+          onClick={() => {
+            setLang(lang === "en" ? "de" : "en");
+            soundEngine.clickSwitch();
           }}
+          className="shrink-0"
         >
-          {(["en", "de"] as const).map((code) => {
-            const is = lang === code;
-            return (
-              <button
-                key={code}
-                onClick={() => { setLang(code); soundEngine.clickSwitch(); }}
-                onMouseEnter={() => soundEngine.hoverNote()}
-                className="px-2.5 py-1 rounded-full uppercase tracking-[0.18em] text-[10px] transition-colors"
-                style={{
-                  fontWeight: 700,
-                  color: is ? "#050a18" : "rgba(255,255,255,0.7)",
-                  background: is ? "#22d3ee" : "transparent",
-                  boxShadow: is ? "0 0 12px rgba(34,211,238,0.55)" : "none",
-                }}
-              >
-                {code}
-              </button>
-            );
-          })}
-        </div>
+          {lang === "en" ? "EN" : "DE"}
+        </GhostButton>
       </div>
     </motion.header>
   );
