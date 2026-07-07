@@ -392,7 +392,7 @@ interface Ctx {
 }
 
 const LangCtx = createContext<Ctx>({
-  lang: "en",
+  lang: "de",
   setLang: () => {},
   t: (k) => String(k),
 });
@@ -400,7 +400,7 @@ const LangCtx = createContext<Ctx>({
 export const LanguageProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLang] = useState<Lang>("de");
 
   // Dynamically update the html lang attribute for SEO and accessibility
   useEffect(() => {
