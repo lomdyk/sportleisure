@@ -66,13 +66,13 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
       onTouchMove={stopScroll}
       data-lenis-prevent="true"
     >
-      <div className="fixed inset-0 z-50 flex flex-col justify-center items-center px-4 md:px-0 py-4 md:py-8 overflow-y-auto">
-        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" />
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          className="glass-panel relative z-10 w-full max-w-xl p-4 sm:p-6 md:p-8 shadow-[0_0_50px_rgba(52,211,153,0.1)] my-auto"
-        >
+      <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" />
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        className="glass-panel relative z-10 w-full max-w-xl p-4 sm:p-6 md:p-8 shadow-[0_0_50px_rgba(52,211,153,0.1)] my-auto"
+      >
         {showSuccess ? (
           <div className="flex flex-col items-center justify-center py-10">
             <div className="w-20 h-20 bg-emerald-500/20 border border-emerald-500/50 rounded-full flex items-center justify-center text-4xl mb-6 shadow-[0_0_30px_rgba(52,211,153,0.4)]">
