@@ -67,10 +67,10 @@ const FoodItemCard = React.memo(({
       onClick={() => onSelect(item.id)}
       onMouseEnter={() => soundEngine.hoverNote()}
         className={`
-          relative flex flex-col items-center p-2 md:p-3 rounded-xl border-2 transition-colors duration-200 cursor-grab active:cursor-grabbing backdrop-blur-md
+          glass-card relative flex flex-col items-center p-2 md:p-3 transition-colors duration-200 cursor-grab active:cursor-grabbing
           ${isSelected
             ? "border-cyan-400 bg-cyan-500/10 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
-            : "border-white/[0.08] bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06]"
+            : "hover:bg-white/[0.06] hover:border-white/20"
           }
         `}
       >
@@ -410,7 +410,7 @@ export const BackpackGame = ({
 
       <div className="relative z-20 pt-2 px-2 md:px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-3 md:flex md:flex-wrap justify-center gap-2 md:gap-3 p-2 md:p-4 bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-2xl">
+          <div className="glass-panel grid grid-cols-3 md:flex md:flex-wrap justify-center gap-2 md:gap-3 p-2 md:p-4">
             <AnimatePresence>
               {items.map((item) => (
                 <FoodItemCard

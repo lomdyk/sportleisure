@@ -39,7 +39,7 @@ export const PreTestModal: React.FC<PreTestModalProps> = ({ onSubmit }) => {
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-        className="relative z-10 w-full max-w-lg bg-[#0a1128] border border-cyan-500/20 rounded-3xl p-4 sm:p-6 md:p-8 shadow-[0_0_50px_rgba(34,211,238,0.1)] my-auto"
+        className="glass-panel relative z-10 w-full max-w-lg p-4 sm:p-6 md:p-8 shadow-[0_0_50px_rgba(34,211,238,0.1)] my-auto"
       >
         <div className="absolute top-4 right-4 flex gap-1 bg-slate-900/50 p-1 rounded-lg border border-slate-700/50">
           <button 
@@ -85,10 +85,10 @@ export const PreTestModal: React.FC<PreTestModalProps> = ({ onSubmit }) => {
                   key={opt.id}
                   type="button"
                   onClick={() => setAge(opt.id)}
-                  className={`py-2 px-1 rounded-lg border text-xs font-medium transition-all duration-300 text-center ${
+                  className={`py-2 px-1 text-xs font-medium transition-all duration-300 text-center ${
                     age === opt.id
-                      ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
-                      : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
+                      ? 'border rounded-2xl border-cyan-400 bg-cyan-500/10 text-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
+                      : 'glass-button text-slate-300'
                   }`}
                 >
                   {opt.label}
@@ -112,10 +112,10 @@ export const PreTestModal: React.FC<PreTestModalProps> = ({ onSubmit }) => {
                   key={opt.id}
                   type="button"
                   onClick={() => setKnowledge(opt.id)}
-                  className={`py-2.5 px-4 rounded-xl border text-sm font-medium transition-all duration-300 text-left ${
+                  className={`py-2.5 px-4 text-sm font-medium transition-all duration-300 text-left ${
                     knowledge === opt.id
-                      ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
-                      : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
+                      ? 'border rounded-2xl border-cyan-400 bg-cyan-500/10 text-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
+                      : 'glass-button text-slate-300'
                   }`}
                 >
                   {opt.label}
@@ -138,10 +138,10 @@ export const PreTestModal: React.FC<PreTestModalProps> = ({ onSubmit }) => {
                   key={opt.id}
                   type="button"
                   onClick={() => setRestrictions(opt.id)}
-                  className={`py-2.5 px-4 rounded-xl border text-sm font-medium transition-all duration-300 text-center ${
+                  className={`py-2.5 px-4 text-sm font-medium transition-all duration-300 text-center ${
                     restrictions === opt.id
-                      ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
-                      : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
+                      ? 'border rounded-2xl border-cyan-400 bg-cyan-500/10 text-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
+                      : 'glass-button text-slate-300'
                   }`}
                 >
                   {opt.label}

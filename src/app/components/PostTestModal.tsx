@@ -66,13 +66,13 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
       onTouchMove={stopScroll}
       data-lenis-prevent="true"
     >
-      <div className="fixed inset-0 bg-[#050a18]/90 backdrop-blur-xl" />
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        className="relative z-10 w-full max-w-xl bg-[#0a1128] border border-emerald-500/20 rounded-3xl p-4 sm:p-6 md:p-8 shadow-[0_0_50px_rgba(52,211,153,0.1)] my-auto"
-      >
+      <div className="fixed inset-0 z-50 flex flex-col justify-center items-center px-4 md:px-0 py-4 md:py-8 overflow-y-auto">
+        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          className="glass-panel relative z-10 w-full max-w-xl p-4 sm:p-6 md:p-8 shadow-[0_0_50px_rgba(52,211,153,0.1)] my-auto"
+        >
         {showSuccess ? (
           <div className="flex flex-col items-center justify-center py-10">
             <div className="w-20 h-20 bg-emerald-500/20 border border-emerald-500/50 rounded-full flex items-center justify-center text-4xl mb-6 shadow-[0_0_30px_rgba(52,211,153,0.4)]">
@@ -121,10 +121,10 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
                             setUserFeelings([...userFeelings, opt.id]);
                           }
                         }}
-                        className={`py-2.5 px-4 rounded-xl border text-sm font-medium transition-all duration-300 text-left flex items-center justify-between ${
+                        className={`py-2.5 px-4 text-sm font-medium transition-all duration-300 text-left flex items-center justify-between ${
                           isSelected
-                            ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
-                            : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
+                            ? 'border rounded-2xl border-emerald-400 bg-emerald-500/10 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
+                            : 'glass-button text-slate-300'
                         }`}
                       >
                         <span>{opt.label}</span>
@@ -152,10 +152,10 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
                       key={opt.id}
                       type="button"
                       onClick={() => setBiologyCheck(opt.id)}
-                      className={`py-2 px-3 rounded-lg border text-xs font-medium transition-all duration-300 text-left ${
+                      className={`py-2.5 px-4 text-sm font-medium transition-all duration-300 text-left ${
                         biologyCheck === opt.id
-                          ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
-                          : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
+                          ? 'border rounded-2xl border-emerald-400 bg-emerald-500/10 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
+                          : 'glass-button text-slate-300'
                       }`}
                     >
                       {opt.label}
@@ -179,10 +179,10 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
                       key={opt.id}
                       type="button"
                       onClick={() => setKnowledgeCheck(opt.id)}
-                      className={`py-2 px-3 rounded-lg border text-xs font-medium transition-all duration-300 text-left ${
+                      className={`py-2.5 px-4 text-sm font-medium transition-all duration-300 text-left ${
                         knowledgeCheck === opt.id
-                          ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
-                          : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
+                          ? 'border rounded-2xl border-emerald-400 bg-emerald-500/10 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
+                          : 'glass-button text-slate-300'
                       }`}
                     >
                       {opt.label}
@@ -206,10 +206,10 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
                       key={opt.id}
                       type="button"
                       onClick={() => setFoodCheck(opt.id)}
-                      className={`py-2 px-3 rounded-lg border text-xs font-medium transition-all duration-300 text-left ${
+                      className={`py-2.5 px-4 text-sm font-medium transition-all duration-300 text-left ${
                         foodCheck === opt.id
-                          ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
-                          : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
+                          ? 'border rounded-2xl border-emerald-400 bg-emerald-500/10 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
+                          : 'glass-button text-slate-300'
                       }`}
                     >
                       {opt.label}
@@ -233,10 +233,10 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
                       key={opt.id}
                       type="button"
                       onClick={() => setSportsCheck(opt.id)}
-                      className={`py-2 px-4 rounded-lg border text-sm font-medium transition-all duration-300 text-left ${
+                      className={`py-2.5 px-4 text-sm font-medium transition-all duration-300 text-left ${
                         sportsCheck === opt.id
-                          ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
-                          : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
+                          ? 'border rounded-2xl border-emerald-400 bg-emerald-500/10 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
+                          : 'glass-button text-slate-300'
                       }`}
                     >
                       {opt.label}
@@ -260,11 +260,11 @@ export const PostTestModal: React.FC<PostTestModalProps> = ({ onSubmit, onClose 
                       key={opt.id}
                       type="button"
                       onClick={() => setLearnedNew(opt.id)}
-                      className={`py-2 px-4 rounded-lg border text-sm font-medium transition-all duration-300 text-left ${
-                        learnedNew === opt.id
-                          ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
-                          : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:bg-slate-800'
-                      }`}
+                        className={`py-2.5 px-4 text-sm font-medium transition-all duration-300 text-left ${
+                          learnedNew === opt.id
+                            ? 'border rounded-2xl border-emerald-400 bg-emerald-500/10 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]'
+                            : 'glass-button text-slate-300'
+                        }`}
                     >
                       {opt.label}
                     </button>

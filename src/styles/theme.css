@@ -190,9 +190,27 @@
 
 @layer components {
   .glass-panel {
-    @apply border rounded-[24px] backdrop-blur-[20px] transition-all duration-300;
-    background-color: rgba(5, 12, 30, 0.65);
-    border-color: rgba(255, 255, 255, 0.1);
+    @apply border rounded-[24px] backdrop-blur-md transition-all duration-300;
+    background-color: rgba(10, 15, 30, 0.7);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  .glass-card {
+    @apply border rounded-2xl backdrop-blur-sm transition-all duration-300;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-button {
+    @apply border rounded-2xl backdrop-blur-md transition-all duration-200 cursor-pointer text-left;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-button:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
   }
 }
 

@@ -501,8 +501,7 @@ export const CommunicationGame = ({
                 </div>
               </div>
 
-              <div className="border border-white/[0.07] rounded-2xl overflow-hidden backdrop-blur-md"
-                style={{ background: "rgba(8,14,32,0.88)", boxShadow: "0 0 40px rgba(0,0,0,0.5)" }}>
+              <div className="glass-panel overflow-hidden flex flex-col">
                 <div className="flex items-center gap-3 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
                   <div className="rounded-full overflow-hidden border border-amber-400/35 flex-shrink-0"
                     style={{ width: 52, height: 60 }}>
@@ -535,9 +534,9 @@ export const CommunicationGame = ({
                           <GifImg src={msg.from === "npc" ? npcGif : scenario.captainGif} alt=""
                             imgKey={imgKey} className="w-full h-full object-cover object-center" />
                         </div>
-                        <div className="max-w-[76%] px-4 py-2.5 rounded-2xl" style={{
-                          background: msg.from === "npc" ? "rgba(255,255,255,0.06)" : `${scenario.captainColor}18`,
-                          border: msg.from === "npc" ? "1px solid rgba(255,255,255,0.08)" : `1px solid ${scenario.captainColor}40`,
+                        <div className={`max-w-[76%] px-4 py-2.5 ${msg.from === 'npc' ? 'glass-card' : 'rounded-2xl border backdrop-blur-sm'}`} style={{
+                          background: msg.from === "npc" ? undefined : `${scenario.captainColor}18`,
+                          border: msg.from === "npc" ? undefined : `1px solid ${scenario.captainColor}40`,
                           borderBottomLeftRadius: msg.from === "npc" ? 6 : 16,
                           borderBottomRightRadius: msg.from === "player" ? 6 : 16,
                           fontSize: 14, lineHeight: 1.6,
@@ -557,7 +556,7 @@ export const CommunicationGame = ({
                           style={{ width: 42, height: 48 }}>
                           <GifImg src={npcGif} alt="" imgKey={imgKey} className="w-full h-full object-cover object-center" />
                         </div>
-                        <div className="bg-white/[0.06] border border-white/[0.08] rounded-2xl rounded-bl-md">
+                        <div className="glass-card px-4 py-2.5 rounded-bl-md">
                           <TypingDots />
                         </div>
                       </motion.div>
@@ -581,21 +580,25 @@ export const CommunicationGame = ({
                           transition={{ delay: displayIndex * 0.07 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleAnswer(originalIndex)}
-                          className="w-full text-left px-5 py-4 rounded-2xl border transition-all duration-200"
-                          style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)", fontSize: 14, lineHeight: 1.6, color: "rgba(226,232,240,0.85)" }}
+                          className="glass-button w-full px-5 py-4 flex items-start gap-2"
+                          style={{
+                            fontSize: 14, lineHeight: 1.6, color: "rgba(226,232,240,0.85)"
+                          }}
                           onMouseEnter={(e) => {
                             (e.currentTarget as HTMLButtonElement).style.borderColor = scenario.captainColor + "55";
                             (e.currentTarget as HTMLButtonElement).style.background = `${scenario.captainColor}09`;
+                            (e.currentTarget as HTMLButtonElement).style.boxShadow = `0 0 20px ${scenario.captainColor}20`;
                           }}
                           onMouseLeave={(e) => {
-                            (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.08)";
-                            (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.03)";
+                            (e.currentTarget as HTMLButtonElement).style.borderColor = "";
+                            (e.currentTarget as HTMLButtonElement).style.background = "";
+                            (e.currentTarget as HTMLButtonElement).style.boxShadow = "";
                           }}
                         >
-                          <span className="mr-2 opacity-40" >
+                          <span className="opacity-40 flex-shrink-0 mt-0.5" >
                             {String.fromCharCode(65 + displayIndex)})
                           </span>
-                          {opt.text}
+                          <span>{opt.text}</span>
                         </motion.button>
                       );
                     })}

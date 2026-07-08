@@ -397,11 +397,11 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         {/* HUD */}
         <div className="flex items-center justify-between gap-3 mb-3 px-1 flex-wrap">
           <div className="flex items-center gap-2 md:gap-3">
-            <div className="px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 backdrop-blur-md">
+            <div className="glass-card px-3 py-1.5 rounded-lg flex items-center justify-center">
               <span className="text-[10px] uppercase tracking-[0.18em] text-white/50 mr-2">{t("runner.distance")}</span>
               <span ref={scoreTextRef} className="text-cyan-200 tabular-nums">00000</span>
             </div>
-            <div className="px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 backdrop-blur-md flex items-center gap-1.5">
+            <div className="glass-card px-3 py-1.5 rounded-lg flex items-center gap-1.5">
               <Trophy className="w-3.5 h-3.5 text-amber-300" />
               <span className="text-[10px] uppercase tracking-[0.18em] text-white/50 mr-1">{t("runner.best")}</span>
               <span className="text-amber-200 tabular-nums">{String(best).padStart(5, "0")}</span>
