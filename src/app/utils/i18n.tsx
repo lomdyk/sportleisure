@@ -58,8 +58,8 @@ export const TRANSLATIONS: Dict = {
   // ── Onboarding / HeroStory ────────────────────────────────
   "welcome.title": { en: "Welcome, Captain!", de: "Willkommen, Kapitän!" },
   "welcome.subtitle": { 
-    en: "Your team is preparing for a massive tournament! Here you will master your PKU diet in sports, leisure, and everyday situations. Learn what to pack for school and training, how to confidently communicate your needs, and how to fuel your body for maximum performance.", 
-    de: "Dein Team bereitet sich auf ein großes Turnier vor! Hier lernst du, deine PKU-Diät in Sport, Freizeit und Alltagssituationen zu meistern. Lerne, was du für Schule und Training einpacken musst, wie du deine Bedürfnisse selbstbewusst kommunizierst und deinen Körper für maximale Leistung mit Energie versorgst." 
+    en: "Your team is preparing for a massive training! Here you will master your PKU diet in sports, leisure, and everyday situations. Learn what to pack for school and training, how to confidently communicate your needs, and how to fuel your body for maximum performance.", 
+    de: "Dein Team bereitet sich auf ein großes Training vor! Hier lernst du, deine PKU-Diät in Sport, Freizeit und Alltagssituationen zu meistern. Lerne, was du für Schule und Training einpacken musst, wie du deine Bedürfnisse selbstbewusst kommunizierst und deinen Körper für maximale Leistung mit Energie versorgst." 
   },
   "pku.step": { en: "Step 1", de: "Schritt 1" },
   "pku.title": { en: "Preparation", de: "Vorbereitung" },
@@ -145,8 +145,8 @@ export const TRANSLATIONS: Dict = {
   "crew.tag": { en: "Meet Your Crew", de: "Lerne dein Team kennen" },
   "crew.title": { en: "Your Sports Crew", de: "Dein Sport-Team" },
   "crew.sub": {
-    en: "Three teammates. One tournament. They are counting on you, Captain.",
-    de: "Drei Teamkolleg:innen. Ein Turnier. Sie zählen auf dich, Kapitän.",
+    en: "Three teammates. One training. They are counting on you, Captain.",
+    de: "Drei Teamkolleg:innen. Ein Training. Sie zählen auf dich, Kapitän.",
   },
   "crew.luna.name": { en: "Luna", de: "Luna" },
   "crew.luna.role": { en: "Quartermaster", de: "Ausrüsterin" },
@@ -182,7 +182,7 @@ export const TRANSLATIONS: Dict = {
   "game.wellDone": { en: "Well done, you did it!", de: "Gut gemacht, du hast es geschafft!" },
 
   // Backpack Game specific
-  "game.bp.title.pick": { en: "Pick an item for the match", de: "Wähle einen Gegenstand für das Spiel" },
+  "game.bp.title.pick": { en: "Pick an item to pack", de: "Wähle einen Gegenstand zum Einpacken" },
   "game.bp.title.put": { en: "Now choose where to put it", de: "Jetzt wähle, wohin damit" },
   "game.bp.sub.pick": { en: "Tap an item below to pick it up", de: "Tippe auf ein Item, um es auszuwählen" },
   "game.bp.sub.put": { en: "Tap the Sport Bag for essential gear & formula, or Trash for distractions", de: "Tippe auf die Sporttasche für wichtige Ausrüstung & Formel, oder auf den Müll für Ablenkungen" },
@@ -234,6 +234,40 @@ export const TRANSLATIONS: Dict = {
   "food.cheese.label": { en: "High protein", de: "Viel Protein" },
   "food.pizza.name": { en: "Pizza", de: "Pizza" },
   "food.pizza.label": { en: "High protein", de: "Viel Protein" },
+  "food.muffin.name": { en: "Low-Protein Muffin", de: "Eiweißarmer Muffin" },
+  "food.muffin.label": { en: "Low-Phe", de: "Wenig Phe" },
+  "food.gummies.name": { en: "Fruit Gummies", de: "Fruchtgummis" },
+  "food.gummies.label": { en: "Quick energy", de: "Schnelle Energie" },
+  "food.regular_cupcake.name": { en: "Regular Cupcake", de: "Normaler Cupcake" },
+  "food.regular_cupcake.label": { en: "High protein", de: "Viel Protein" },
+  "food.brot_mit_marmelade.name": { en: "Jam Sandwich", de: "Marmeladenbrot" },
+  "food.brot_mit_marmelade.label": { en: "Low-Phe", de: "Wenig Phe" },
+  "food.crakers.name": { en: "Crackers", de: "Cracker" },
+  "food.crakers.label": { en: "Low-Phe snack", de: "Wenig Phe Snack" },
+  "food.brot_mit_kase.name": { en: "Cheese Sandwich", de: "Käsebrot" },
+  "food.brot_mit_kase.label": { en: "High protein", de: "Viel Protein" },
+  "food.hanchen.name": { en: "Chicken", de: "Hähnchen" },
+  "food.hanchen.label": { en: "High protein", de: "Viel Protein" },
+
+  // Birthday Game specific
+  "game.birthday.table": { en: "YES PLEASE", de: "JA BITTE" },
+  "game.birthday.safe": { en: "SAFE TO EAT", de: "SICHER ZU ESSEN" },
+  "game.birthday.avoid": { en: "DON'T EAT", de: "NEIN DANKE" },
+  "game.birthday.trash": { en: "AVOID", de: "VERMEIDEN" },
+  "game.birthday.title.pick": { en: "Pick a food item", de: "Wähle ein Essen" },
+  "game.birthday.title.put": { en: "Can you eat this?", de: "Kannst du das essen?" },
+  "game.birthday.sub.pick": { en: "Tap an item below to pick it up", de: "Tippe auf ein Essen, um es auszuwählen" },
+  "game.birthday.sub.put": { en: "Tap the table if it's safe, or avoid if it has too much protein", de: "Tippe auf den Tisch, wenn es sicher ist, oder wähle 'Vermeiden', wenn es zu viel Protein hat" },
+  "game.birthday.msg.safe": { en: "looks delicious and is safe to eat!", de: "sieht lecker aus und ist sicher zu essen!" },
+  "game.birthday.msg.unsafe": { en: "Careful! That has too much protein.", de: "Vorsicht! Das hat zu viel Protein." },
+  "game.birthday.msg.safeToTrash": { en: "Wait! You can safely eat this.", de: "Warte! Das kannst du sicher essen." },
+  "game.birthday.msg.unsafeToTrash": { en: "avoided! Good job watching your protein.", de: "vermieden! Gut gemacht, auf dein Protein zu achten." },
+
+  // Bonus Scenarios Selector
+  "bonus.title": { en: "We still have time before the training! Where should we go first?", de: "Wir haben noch Zeit vor dem Training! Wohin sollen wir zuerst gehen?" },
+  "bonus.birthday": { en: "Birthday Party", de: "Geburtstagsparty" },
+  "bonus.schoolTrip": { en: "School Trip", de: "Schulausflug" },
+  "bonus.training": { en: "Straight to Training", de: "Direkt zum Training" },
 
   // Misc
   "btn.enterLocker": { en: "Enter Locker Room", de: "Umkleidekabine betreten" },
@@ -291,6 +325,7 @@ export const TRANSLATIONS: Dict = {
   "footer.mission": { en: "Mission", de: "Mission" },
   "footer.complete": { en: "Complete", de: "Abgeschlossen" },
   "footer.missionDesc": { en: "You've proven yourself as a skilled sports champion. But the journey doesn't end here — there's so much more to learn about PKU.", de: "Du hast dich als geschickter Sport-Champion bewiesen. Aber die Reise endet hier nicht — es gibt noch so viel mehr über PKU zu lernen." },
+  "footer.playBonus": { en: "Play other scenarios", de: "Andere Szenarien spielen" },
   "footer.energyTitle": { en: "Your Sports", de: "Deine Sport-" },
   "footer.energyWord": { en: "Energy", de: "Energie" },
   "footer.tapCard": { en: "Tap any card to flip it and learn more", de: "Tippe auf eine Karte, um sie umzudrehen und mehr zu erfahren" },

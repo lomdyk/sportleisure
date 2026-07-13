@@ -372,11 +372,13 @@ const LogsMarquee = () => {
 export const Footer = ({ 
   onRestart, 
   onShowPostTest,
-  isPostTestCompleted
+  isPostTestCompleted,
+  onPlayBonus
 }: { 
   onRestart?: () => void,
   onShowPostTest?: () => void,
-  isPostTestCompleted?: boolean
+  isPostTestCompleted?: boolean,
+  onPlayBonus?: () => void
 }) => {
   const { t } = useLang();
   const [showSubmitLog, setShowSubmitLog] = useState(false);
@@ -417,6 +419,25 @@ export const Footer = ({
           >
             {t("footer.missionDesc")}
           </p>
+
+          {onPlayBonus && (
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="mt-8"
+            >
+              <GhostButton
+                tone="cyan"
+                size="lg"
+                onClick={() => onPlayBonus()}
+                className="shadow-[0_0_20px_rgba(34,211,238,0.2)]"
+              >
+                {t("footer.playBonus")}
+              </GhostButton>
+            </motion.div>
+          )}
         </motion.div>
       </section>
 

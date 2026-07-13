@@ -19,6 +19,21 @@ import openedBackpackImg from "../../imports/opened.webp";
 import closedBoxImg from "../../imports/closedbox.webp";
 import openedBoxImg from "../../imports/openedbox.webp";
 
+// New food imports
+import regularCupcakeImg from "../../assets/regular_cupcake.webp";
+import brotMitKaseImg from "../../assets/brot_mit_kase.webp";
+import brotMitMarmeladeImg from "../../assets/brot_mit_marmelade.webp";
+import crakersImg from "../../assets/crakers.webp";
+import gummiesImg from "../../assets/gummies.webp";
+import muffinImg from "../../assets/muffin.webp";
+import openedBonusImg from "../../assets/opened.webp";
+import closedBonusImg from "../../assets/closed.webp";
+
+import tischImg from "../../imports/tisch.webp";
+import gutImg from "../../imports/gut.webp";
+import hanchenImg from "../../imports/hanchen.webp";
+import neinImg from "../../imports/nein.webp";
+
 type FoodType = "safe" | "unsafe";
 
 interface FoodItem {
@@ -29,14 +44,32 @@ interface FoodItem {
   label: string;
 }
 
-const INITIAL_ITEMS: FoodItem[] = [
-  { id: "apple", name: "Apple", img: appleImg, type: "safe", label: "Low-Phe fruit" },
-  { id: "water", name: "Water Bottle", img: waterbottleImg, type: "safe", label: "Hydration" },
-  { id: "nuts", name: "Nuts", img: nutsImg, type: "unsafe", label: "High protein" },
-  { id: "formula", name: "PKU Formula", img: formulaImg, type: "safe", label: "Clean energy" },
-  { id: "cheese", name: "Cheese", img: cheeseImg, type: "unsafe", label: "High protein" },
-  { id: "pizza", name: "Pizza", img: pizzaImg, type: "unsafe", label: "High protein" },
-];
+const ITEMS_POOLS = {
+  training: [
+    { id: "apple", name: "Apple", img: appleImg, type: "safe", label: "Low-Phe fruit" },
+    { id: "water", name: "Water Bottle", img: waterbottleImg, type: "safe", label: "Hydration" },
+    { id: "nuts", name: "Nuts", img: nutsImg, type: "unsafe", label: "High protein" },
+    { id: "formula", name: "PKU Formula", img: formulaImg, type: "safe", label: "Clean energy" },
+    { id: "cheese", name: "Cheese", img: cheeseImg, type: "unsafe", label: "High protein" },
+    { id: "pizza", name: "Pizza", img: pizzaImg, type: "unsafe", label: "High protein" },
+  ] as FoodItem[],
+  birthday: [
+    { id: "muffin", name: "Low-Protein Muffin", img: muffinImg, type: "safe", label: "Low-Phe" },
+    { id: "gummies", name: "Fruit Gummies", img: gummiesImg, type: "safe", label: "Quick energy" },
+    { id: "regular_cupcake", name: "Regular Cupcake", img: regularCupcakeImg, type: "unsafe", label: "High protein" },
+    { id: "pizza", name: "Pizza", img: pizzaImg, type: "unsafe", label: "High protein" },
+    { id: "hanchen", name: "Chicken", img: hanchenImg, type: "unsafe", label: "High protein" },
+    { id: "apple", name: "Apple", img: appleImg, type: "safe", label: "Low-Phe fruit" },
+  ] as FoodItem[],
+  school_trip: [
+    { id: "brot_mit_marmelade", name: "Jam Sandwich", img: brotMitMarmeladeImg, type: "safe", label: "Low-Phe" },
+    { id: "crakers", name: "Crackers", img: crakersImg, type: "safe", label: "Low-Phe snack" },
+    { id: "water", name: "Water Bottle", img: waterbottleImg, type: "safe", label: "Hydration" },
+    { id: "brot_mit_kase", name: "Cheese Sandwich", img: brotMitKaseImg, type: "unsafe", label: "High protein" },
+    { id: "nuts", name: "Nuts", img: nutsImg, type: "unsafe", label: "High protein" },
+    { id: "formula", name: "PKU Formula", img: formulaImg, type: "safe", label: "Clean energy" },
+  ] as FoodItem[]
+};
 
 const FoodItemCard = React.memo(({ 
   item, 
@@ -100,15 +133,18 @@ const FoodItemCard = React.memo(({
 export const BackpackGame = ({
   onComplete,
   onClose,
+  variant = "training",
 }: {
   onComplete: () => void;
   onClose: () => void;
+  variant?: "training" | "birthday" | "school_trip";
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const backpackRef = useRef<HTMLButtonElement>(null);
   const quarantineRef = useRef<HTMLButtonElement>(null);
   const [items, setItems] = useState<FoodItem[]>(() => {
-    const shuffled = [...INITIAL_ITEMS];
+    const pool = ITEMS_POOLS[variant] || ITEMS_POOLS.training;
+    const shuffled = [...pool];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
@@ -161,7 +197,7 @@ export const BackpackGame = ({
       soundEngine.clickBubble();
       setBackpackGlow("success");
       setScore((s) => s + 1);
-      showMessage(`${t(`food.${item.id}.name`)} ${t("game.bp.msg.safe")}`, "success");
+      showMessage(`${t(`food.${item.id}.name`)} ${variant === "birthday" ? t("game.birthday.msg.safe") : t("game.bp.msg.safe")}`, "success");
       confetti({
         particleCount: 40,
         spread: 50,
@@ -175,7 +211,7 @@ export const BackpackGame = ({
       setBackpackGlow("warning");
       setShakeBackpack(true);
       metricsActions.recordMistake('m1');
-      showMessage(t("game.bp.msg.unsafe"), "error");
+      showMessage(variant === "birthday" ? t("game.birthday.msg.unsafe") : t("game.bp.msg.unsafe"), "error");
       setTimeout(() => {
         setBackpackGlow("neutral");
         setShakeBackpack(false);
@@ -191,14 +227,14 @@ export const BackpackGame = ({
       soundEngine.clickThunk();
       setQuarantineGlow("success");
       setScore((s) => s + 1);
-      showMessage(`${t(`food.${item.id}.name`)} ${t("game.bp.msg.unsafeToTrash")}`, "success");
+      showMessage(`${t(`food.${item.id}.name`)} ${variant === "birthday" ? t("game.birthday.msg.unsafeToTrash") : t("game.bp.msg.unsafeToTrash")}`, "success");
       removeItem(item.id);
       setTimeout(() => setQuarantineGlow("neutral"), 1500);
     } else {
       soundEngine.clickWood();
       setQuarantineGlow("neutral");
       metricsActions.recordMistake('m1');
-      showMessage(t("game.bp.msg.safeToTrash"), "error");
+      showMessage(variant === "birthday" ? t("game.birthday.msg.safeToTrash") : t("game.bp.msg.safeToTrash"), "error");
     }
   }, [items, showMessage, t, removeItem]);
 
@@ -241,7 +277,8 @@ export const BackpackGame = ({
 
 
   const handleRestart = () => {
-    setItems(INITIAL_ITEMS);
+    const pool = ITEMS_POOLS[variant] || ITEMS_POOLS.training;
+    setItems(pool);
     setSelected(null);
     setMessage(null);
     setIsCompleted(false);
@@ -304,10 +341,14 @@ export const BackpackGame = ({
           className="text-center"
         >
           <h2 className="text-2xl md:text-4xl text-white font-['Space_Grotesk'] tracking-tight mb-2" style={{ fontWeight: 700 }}>
-            {selected ? t("game.bp.title.put") : t("game.bp.title.pick")}
+            {selected 
+              ? (variant === "birthday" ? t("game.birthday.title.put") : t("game.bp.title.put")) 
+              : (variant === "birthday" ? t("game.birthday.title.pick") : t("game.bp.title.pick"))}
           </h2>
-          <p className="text-slate-400 font-['Space_Grotesk'] text-sm md:text-base">
-            {selected ? t("game.bp.sub.put") : t("game.bp.sub.pick")}
+          <p className="text-slate-400 font-['Space_Grotesk'] text-sm md:text-base px-4 max-w-2xl mx-auto">
+            {selected 
+              ? (variant === "birthday" ? t("game.birthday.sub.put") : t("game.bp.sub.put")) 
+              : (variant === "birthday" ? t("game.birthday.sub.pick") : t("game.bp.sub.pick"))}
           </p>
         </motion.div>
 
@@ -336,12 +377,20 @@ export const BackpackGame = ({
             {selected && <div className="absolute -inset-2 bg-cyan-400/20 blur-xl rounded-full opacity-50 animate-pulse" />}
             <div className="absolute inset-3 rounded-xl md:rounded-2xl border border-dashed border-cyan-400/20 animate-[spin_20s_linear_infinite]" />
             <img 
-              src={backpackHovered || backpackGlow === "success" ? openedBackpackImg : closedBackpackImg} 
+              src={variant === "birthday" 
+                ? gutImg 
+                : (backpackHovered || backpackGlow === "success" 
+                  ? (variant === "training" ? openedBackpackImg : openedBonusImg)
+                  : (variant === "training" ? closedBackpackImg : closedBonusImg))} 
               alt="Backpack"
-              className={`w-20 h-20 md:w-28 md:h-28 mb-2 object-contain object-bottom transition-transform duration-300 ${backpackGlow === "success" ? "scale-110 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" : backpackGlow === "warning" ? "drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]" : ""}`}
+              className={`w-20 h-20 md:w-28 md:h-28 mb-2 object-contain object-bottom transition-transform duration-300 ${backpackGlow === "success" ? "scale-110 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" : backpackGlow === "warning" ? "drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]" : ""} ${shakeBackpack ? "animate-[shake_0.5s_ease-in-out]" : ""}`}
             />
-            <span className="font-['Space_Grotesk'] text-white text-sm md:text-base tracking-wider" style={{ fontWeight: 700 }}>{t("game.bp.backpack")}</span>
-            <span className="font-['Space_Grotesk'] text-[10px] text-cyan-300/60 mt-1 tracking-wider">{t("game.bp.cleanEnergy")}</span>
+            <span className="font-['Space_Grotesk'] text-white text-sm md:text-base tracking-wider" style={{ fontWeight: 700 }}>
+              {variant === "birthday" ? t("game.birthday.table") : t("game.bp.backpack")}
+            </span>
+            <span className="font-['Space_Grotesk'] text-[10px] text-cyan-300/60 mt-1 tracking-wider">
+              {variant === "birthday" ? t("game.birthday.safe") : t("game.bp.cleanEnergy")}
+            </span>
           </motion.button>
 
           <div className="flex flex-col items-center gap-2">
@@ -372,12 +421,18 @@ export const BackpackGame = ({
             {selected && <div className="absolute -inset-2 bg-amber-400/20 blur-xl rounded-full opacity-50 animate-pulse" />}
             <div className="absolute inset-3 rounded-xl md:rounded-2xl border border-dashed border-amber-400/20 animate-[spin_25s_linear_infinite_reverse]" />
             <img 
-              src={quarantineHovered || quarantineGlow === "success" ? openedBoxImg : closedBoxImg} 
-              alt="Trash"
-              className={`w-20 h-20 md:w-28 md:h-28 mb-2 object-contain object-bottom transition-transform duration-300 ${quarantineGlow === "success" ? "scale-110 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" : ""}`}
+              src={variant === "birthday" 
+                ? neinImg 
+                : (quarantineHovered || quarantineGlow === "success" ? openedBoxImg : closedBoxImg)} 
+              alt="Quarantine"
+              className={`w-16 h-16 md:w-24 md:h-24 mb-2 object-contain object-bottom transition-transform duration-300 ${quarantineGlow === "success" ? "scale-110 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" : ""}`}
             />
-            <span className="font-['Space_Grotesk'] text-white text-sm md:text-base tracking-wider" style={{ fontWeight: 700 }}>{t("game.bp.trash")}</span>
-            <span className="font-['Space_Grotesk'] text-[10px] text-amber-300/60 mt-1 tracking-wider">{t("game.bp.highProtein")}</span>
+            <span className="font-['Space_Grotesk'] text-white text-sm md:text-base tracking-wider" style={{ fontWeight: 700 }}>
+              {variant === "birthday" ? t("game.birthday.avoid") : t("game.bp.trash")}
+            </span>
+            <span className="font-['Space_Grotesk'] text-[10px] text-amber-500/80 mt-1 tracking-wider">
+              {variant === "birthday" ? t("game.birthday.trash") : t("game.bp.highProtein")}
+            </span>
           </motion.button>
         </div>
 

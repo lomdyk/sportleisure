@@ -43,97 +43,284 @@ interface ChatMsg {
 
 // ─── Scenarios ────────────────────────────────────────────────────────────────
 
-const SCENARIOS: Scenario[] = [
+
+const SCENARIOS_TRAINING: Scenario[] = [
   {
-    id: "A",
+    id: "T1",
     captainName: "Captain Luna",
     captainGif: lunaGif,
     captainColor: "#22d3ee",
-    context: "Pizza Pressure",
-    contextEmoji: "🍕",
+    context: "Protein Bar Offer",
+    contextEmoji: "🍫",
     npcMessages: [
-      "Hey, take a slice! It's the best meat pizza 🍕",
-      "Don't be a loser — just one bite!",
+      "Hey! Do you want some of my protein bar?",
+      "It's really good for building muscle."
     ],
     options: [
       {
-        text: "No thanks. My body needs something else so I can get strong. I brought my own food!",
+        text: "Thank you! I can't have protein bars because of my PKU, but I brought my own sports snack.",
         grade: "boss",
-        feedback: "Great! You took charge and explained that your body just needs something else.",
+        feedback: "Awesome! You politely declined and explained that you have your own special fuel."
       },
       {
-        text: "I can't eat it. I have a condition and protein is basically toxic for me.",
+        text: "No thanks, I can't eat that.",
         grade: "medium",
-        feedback: "True, but 'toxic' and 'condition' can make people uncomfortable around you. Keep it simple and confident instead. You can use these words later if they ask for more details.",
+        feedback: "This is okay, but it doesn't explain why, which might leave them confused. A little explanation helps!"
       },
       {
-        text: "Sorry... my mom said no. Please don't be mad at me.",
+        text: "No, that's disgusting.",
         grade: "wrong",
-        feedback: "Instead of saying 'mom said no', be proud of your own special food!",
-      },
+        feedback: "Yikes! Even if you can't eat it, it's better to be polite."
+      }
     ],
-    bossExplain: "Explain it simply: your body needs something different to be strong.",
+    bossExplain: "Politely declining and mentioning your own special fuel is the best way to handle food offers!"
   },
   {
-    id: "B",
+    id: "T2",
     captainName: "Captain Bo",
     captainGif: boGif,
     captainColor: "#a78bfa",
     context: "The Funky Drink",
     contextEmoji: "🧃",
     npcMessages: [
-      "Whoa, what IS that stuff? 🤢",
-      "It smells kinda funky. Is that some weird sports drink?",
+      "Whoa, what IS that drink you're having?",
+      "Is that some weird sports drink?"
     ],
     options: [
       {
-        text: "That's my magic potion! It gives me important building blocks so I can run as fast as a champion.",
+        text: "It's my protein substitute. My body needs it because I have PKU—it helps me grow and stay healthy.",
         grade: "boss",
-        feedback: "Awesome! Calling it a magic potion makes it sound cool, and it really does give you the building blocks you need!",
+        feedback: "Perfect! You explained exactly what it is and why it makes you strong."
       },
       {
-        text: "It's my medical formula. I have to drink it or I'll end up in the hospital.",
+        text: "It's my medicine.",
         grade: "medium",
-        feedback: "Too dramatic, and you don't actually go to the hospital if you miss your formula once. It makes people feel bad for asking. Just be matter-of-fact.",
+        feedback: "Calling it medicine makes it sound like you're sick. It's just special fuel your body needs!"
       },
       {
-        text: "It smells bad but I drink it because I have to.",
+        text: "You wouldn't like it.",
         grade: "wrong",
-        feedback: "Don't be ashamed of your fuel! Be proud of it.",
-      },
+        feedback: "Don't be defensive! Be proud of the fuel that makes you a champion."
+      }
     ],
-    bossExplain: "Calling it a magic potion is fun and perfectly explains how it helps you grow strong.",
+    bossExplain: "Calling it a protein substitute and explaining how it keeps you healthy is super confident!"
   },
   {
-    id: "C",
+    id: "T3",
     captainName: "Captain Ela",
     captainGif: elaGif,
     captainColor: "#34d399",
-    context: "Different Lunch",
-    contextEmoji: "🍝",
+    context: "A Curious Friend",
+    contextEmoji: "🤔",
     npcMessages: [
-      "Wait, why is YOUR food different? 👀",
-      "Are you faking it just to get special meals? That looks weird.",
+      "I was wondering... will you always have PKU?",
+      "Is it going to go away when we get older?"
     ],
     options: [
       {
-        text: "My body needs special food. That's nutritious and good to keep my body fuelled so I grow big and strong!",
+        text: "Yes, PKU is something I'll always have. I just eat different foods and take my protein substitute, so I can do all the things my friends do.",
         grade: "boss",
-        feedback: "Perfect explanation! It's easy for kids to understand and shows you know exactly how your body works.",
+        feedback: "Brilliant! You answered honestly and showed that PKU doesn't stop you from doing anything."
       },
       {
-        text: "I have Phenylketonuria. My body can't process amino acids, so I need this specific pasta.",
+        text: "Yes.",
         grade: "medium",
-        feedback: "Correct facts, but most kids will zone out at 'Phenylketonuria'. Keep the message short and fun — details only if they actually ask.",
+        feedback: "True, but a bit short! Adding that it just means eating differently helps them understand it's no big deal."
       },
       {
-        text: "I was born different and my body is broken.",
+        text: "Yes, and it's annoying.",
         grade: "wrong",
-        feedback: "You are not broken! Your tummy just works a bit differently. Focus on how your food makes you strong.",
-      },
+        feedback: "It can be annoying sometimes, but focusing on the positive helps you and your friends feel good about it!"
+      }
     ],
-    bossExplain: "Explaining that your food keeps your body fuelled is a great way to tell other kids about PKU without confusing medical words.",
+    bossExplain: "Explaining that you'll always have it, but it just means a different diet, takes away the mystery perfectly."
+  }
+];
+
+const SCENARIOS_BIRTHDAY: Scenario[] = [
+  {
+    id: "B1",
+    captainName: "Captain Luna",
+    captainGif: lunaGif,
+    captainColor: "#22d3ee",
+    context: "Birthday Cake",
+    contextEmoji: "🎂",
+    npcMessages: [
+      "Hey! Why aren't you eating the birthday cake?",
+      "It's chocolate! You have to try it."
+    ],
+    options: [
+      {
+        text: "I have PKU, so my body needs different food. I brought my own treat so I can celebrate with everyone!",
+        grade: "boss",
+        feedback: "Awesome! You explained why and showed that you're still part of the celebration."
+      },
+      {
+        text: "I have a special diet, so I brought my own cake.",
+        grade: "medium",
+        feedback: "Good, but mentioning PKU and that your body just needs different food makes it clearer!"
+      },
+      {
+        text: "I can't eat it. It's not fair.",
+        grade: "wrong",
+        feedback: "It's okay to feel sad sometimes, but you have your own yummy treat to enjoy!"
+      }
+    ],
+    bossExplain: "Being positive about your own treat shows everyone that you're just as happy to be there!"
   },
+  {
+    id: "B2",
+    captainName: "Captain Bo",
+    captainGif: boGif,
+    captainColor: "#a78bfa",
+    context: "Party Pizza",
+    contextEmoji: "🍕",
+    npcMessages: [
+      "Wow, can you really never eat normal pizza?",
+      "That must be so hard."
+    ],
+    options: [
+      {
+        text: "I can't eat regular pizza, but I can have low-protein pizza. It tastes really good!",
+        grade: "boss",
+        feedback: "Great job! You focused on what you CAN have, and that it's delicious!"
+      },
+      {
+        text: "Not the normal kind.",
+        grade: "medium",
+        feedback: "True, but telling them about your awesome low-protein pizza makes it a positive conversation."
+      },
+      {
+        text: "No! Stop asking me!",
+        grade: "wrong",
+        feedback: "They are just curious! A positive answer works much better."
+      }
+    ],
+    bossExplain: "Focusing on the yummy alternatives you CAN have is always a winning strategy."
+  },
+  {
+    id: "B3",
+    captainName: "Captain Ela",
+    captainGif: elaGif,
+    captainColor: "#34d399",
+    context: "Ice Cream Time",
+    contextEmoji: "🍦",
+    npcMessages: [
+      "Alright everyone! Who wants some ice cream?",
+      "I have vanilla and chocolate!"
+    ],
+    options: [
+      {
+        text: "I have my own low-protein ice cream, so I can join the party too!",
+        grade: "boss",
+        feedback: "Perfect! You joined the fun with your own special treat."
+      },
+      {
+        text: "I brought my own.",
+        grade: "medium",
+        feedback: "Good, but saying you brought your own 'so you can join the party' sounds much friendlier!"
+      },
+      {
+        text: "I can't have anything!",
+        grade: "wrong",
+        feedback: "Not true! You have your own awesome treats."
+      }
+    ],
+    bossExplain: "Showing that your treats let you join the fun is a great way to handle party food."
+  }
+];
+
+const SCENARIOS_SCHOOL_TRIP: Scenario[] = [
+  {
+    id: "S1",
+    captainName: "Captain Luna",
+    captainGif: lunaGif,
+    captainColor: "#22d3ee",
+    context: "Heavy Backpack",
+    contextEmoji: "🎒",
+    npcMessages: [
+      "Wow, why did you pack so much food?",
+      "We're only going for a day trip!"
+    ],
+    options: [
+      {
+        text: "I packed my own low-protein food because I have PKU. That way I have everything I need for our trip.",
+        grade: "boss",
+        feedback: "Excellent! You explained that being prepared is just part of how you handle PKU."
+      },
+      {
+        text: "I need special food.",
+        grade: "medium",
+        feedback: "True, but adding that you like to be prepared makes you sound super responsible!"
+      },
+      {
+        text: "Because I have to.",
+        grade: "wrong",
+        feedback: "This sounds a bit grumpy. Be proud that you're so well prepared!"
+      }
+    ],
+    bossExplain: "Being prepared with your own food is a superpower on school trips!"
+  },
+  {
+    id: "S2",
+    captainName: "Captain Bo",
+    captainGif: boGif,
+    captainColor: "#a78bfa",
+    context: "Different Bread",
+    contextEmoji: "🍞",
+    npcMessages: [
+      "Hey, why is your bread different from mine?",
+      "It looks unusual."
+    ],
+    options: [
+      {
+        text: "It's low-protein bread. I have PKU, so I eat different foods to stay healthy.",
+        grade: "boss",
+        feedback: "Perfect! A simple, confident explanation about how your food keeps you healthy."
+      },
+      {
+        text: "It's special bread.",
+        grade: "medium",
+        feedback: "Okay, but explaining THAT it's low-protein for your health helps them understand better."
+      },
+      {
+        text: "Because yours isn't good for me.",
+        grade: "wrong",
+        feedback: "This might sound rude. Just focus on why your bread is good for YOU."
+      }
+    ],
+    bossExplain: "Simply explaining that your special bread keeps you healthy is easy for everyone to understand."
+  },
+  {
+    id: "S3",
+    captainName: "Captain Ela",
+    captainGif: elaGif,
+    captainColor: "#34d399",
+    context: "Picnic Sharing",
+    contextEmoji: "🥪",
+    npcMessages: [
+      "Hey, I have an extra cheese sandwich.",
+      "Do you want it?"
+    ],
+    options: [
+      {
+        text: "Thank you for asking! I can't eat cheese because of my PKU, but I have my own lunch.",
+        grade: "boss",
+        feedback: "Great job! You were polite, explained why, and showed you're already set."
+      },
+      {
+        text: "No thanks.",
+        grade: "medium",
+        feedback: "Polite, but explaining why helps them know not to offer high-protein food next time."
+      },
+      {
+        text: "No, I can't eat your food.",
+        grade: "wrong",
+        feedback: "They were just being nice! A polite 'no thank you' with a small explanation is best."
+      }
+    ],
+    bossExplain: "Thanking someone for offering while explaining your diet is the kindest way to handle sharing."
+  }
 ];
 
 // ─── Grade config ─────────────────────────────────────────────────────────────
@@ -144,48 +331,133 @@ const GRADE_CONFIG = {
   wrong:  { label: "Try again",    color: "#f87171", icon: XCircle,      bg: "rgba(248,113,113,0.07)",  border: "rgba(248,113,113,0.25)" },
 };
 
-
-const localizeScenarios = (lang: "en" | "de"): Scenario[] => {
-  if (lang !== "de") return SCENARIOS;
-  return [
-    {
-      ...SCENARIOS[0],
-      captainName: "Kapitänin Luna",
-      context: "Pizza-Druck vor dem Match",
-      npcMessages: ["Hey, nimm ein Stück! Beste Fleisch-Pizza im Stadion 🍕", "Komm schon — nur ein Bissen vor dem Finale!"],
-      options: [
-        { ...SCENARIOS[0].options[0], text: "Nein danke. Mein Körper braucht was anderes, damit ich stark werde. Ich hab mein eigenes Essen dabei!", feedback: "Super! Du hast cool erklärt, dass dein Körper einfach etwas anderes braucht." },
-        { ...SCENARIOS[0].options[1], text: "Ich darf das nicht essen. Ich habe PKU und Protein ist giftig für mich.", feedback: "Sachlich richtig, aber 'giftig' kann andere erschrecken. Bleib entspannt und selbstbewusst. Du kannst diese Wörter später verwenden, wenn weiter gefragt wird." },
-        { ...SCENARIOS[0].options[2], text: "Meine Mama hat gesagt, ich darf das nicht essen. Bitte sei nicht sauer.", feedback: "Versteck dich nicht hinter deiner Mama. Sei stolz auf dein eigenes Spezial-Essen!" },
-      ],
-      bossExplain: "Erkläre einfach und selbstbewusst, dass dein Körper anderes Essen braucht, um stark zu sein.",
-    },
-    {
-      ...SCENARIOS[1],
-      captainName: "Kapitän Bo",
-      context: "Der seltsame Drink",
-      npcMessages: ["Whoa, was IST das denn? 🧃", "Riecht irgendwie komisch. Ist das so ein komischer Sport-Drink?"],
-      options: [
-        { ...SCENARIOS[1].options[0], text: "Das ist mein Zaubertrank! Er gibt mir wichtige Bausteine, damit ich so schnell rennen kann wie ein Champion.", feedback: "Genial! Zaubertrank klingt cool und es stimmt: Er gibt dir genau die Bausteine, die dir fehlen!" },
-        { ...SCENARIOS[1].options[1], text: "Das ist meine medizinische Formel. Wenn ich die nicht trinke, muss ich ins Krankenhaus.", feedback: "Zu dramatisch, außerdem musst du nicht sofort ins Krankenhaus, wenn du die Formel einmal nicht nimmst. Du musst niemanden erschrecken — erkläre es einfach ganz cool." },
-        { ...SCENARIOS[1].options[2], text: "Das ist nur Medizin, weil ich krank bin.", feedback: "Du bist nicht krank, dein Körper braucht nur einen anderen Treibstoff. Sei stolz auf deinen Zaubertrank!" },
-      ],
-      bossExplain: "Zaubertrank ist ein tolles Wort! Es erklärt super, wie die Formel dir hilft, stark zu werden.",
-    },
-    {
-      ...SCENARIOS[2],
-      captainName: "Kapitänin Ela",
-      context: "Anderes Team-Lunch",
-      npcMessages: ["Warum sieht DEIN Essen anders aus? 👀", "Tust du nur so, damit du Extra-Essen bekommst?"],
-      options: [
-        { ...SCENARIOS[2].options[0], text: "Mein Körper braucht spezielles Essen. Das ist nahrhaft und gut, um meinen Körper mit Energie zu versorgen, damit ich groß und stark werde!", feedback: "Perfekte Erklärung! Andere Kinder verstehen das sofort und sehen, dass du genau weißt, wie dein Körper funktioniert." },
-        { ...SCENARIOS[2].options[1], text: "Ich habe Phenylketonurie. Mein Körper verarbeitet Aminosäuren anders, deshalb brauche ich diese Nudeln.", feedback: "Richtig, aber für andere Kinder oft zu schwer. Nutze lieber lustige Vergleiche." },
-        { ...SCENARIOS[2].options[2], text: "Ich bin anders geboren und mein Körper ist kaputt.", feedback: "Dein Körper ist nicht kaputt! Er funktioniert nur ein bisschen anders. Zeig ihnen, wie stark dich dein Essen macht." },
-      ],
-      bossExplain: "Zu erklären, dass dein Essen deinen Körper mit Energie versorgt, ist der beste Weg, anderen Kindern PKU zu erklären, ohne schwere Arzt-Wörter zu benutzen.",
-    },
-  ];
+const localizeScenarios = (lang: "en" | "de", variant: string): Scenario[] => {
+  let baseScenarios = SCENARIOS_TRAINING;
+  if (variant === "birthday") baseScenarios = SCENARIOS_BIRTHDAY;
+  if (variant === "school_trip") baseScenarios = SCENARIOS_SCHOOL_TRIP;
+  
+  if (lang !== "de") return baseScenarios;
+  
+  if (variant === "training") {
+    return [
+      {
+        ...SCENARIOS_TRAINING[0],
+        captainName: "Kapitänin Luna",
+        context: "Proteinriegel",
+        npcMessages: ["Hey! Willst du was von meinem Proteinriegel?", "Ist super für den Muskelaufbau."],
+        options: [
+          { ...SCENARIOS_TRAINING[0].options[0], text: "Danke! Wegen meiner PKU darf ich keine Proteinriegel essen, aber ich habe meinen eigenen Snack dabei." },
+          { ...SCENARIOS_TRAINING[0].options[1], text: "Nein danke, das darf ich nicht essen." },
+          { ...SCENARIOS_TRAINING[0].options[2], text: "Nein, das ist eklig." },
+        ],
+        bossExplain: "Höflich ablehnen und das eigene Spezialessen erwähnen ist der beste Weg!"
+      },
+      {
+        ...SCENARIOS_TRAINING[1],
+        captainName: "Kapitän Bo",
+        context: "Der seltsame Drink",
+        npcMessages: ["Whoa, was IST das denn für ein Drink?", "Ist das ein komischer Sport-Drink?"],
+        options: [
+          { ...SCENARIOS_TRAINING[1].options[0], text: "Das ist meine Aminosäurenmischung. Mein Körper braucht sie wegen der PKU – sie hilft mir, gesund und stark zu bleiben." },
+          { ...SCENARIOS_TRAINING[1].options[1], text: "Das ist meine Medizin." },
+          { ...SCENARIOS_TRAINING[1].options[2], text: "Das würde dir eh nicht schmecken." },
+        ],
+        bossExplain: "Es als wichtigen Baustein für die Gesundheit zu erklären, ist super selbstbewusst!"
+      },
+      {
+        ...SCENARIOS_TRAINING[2],
+        captainName: "Kapitänin Ela",
+        context: "Ein neugieriger Freund",
+        npcMessages: ["Ich hab mich gefragt... wirst du PKU immer haben?", "Geht das weg, wenn wir älter werden?"],
+        options: [
+          { ...SCENARIOS_TRAINING[2].options[0], text: "Ja, PKU werde ich immer haben. Ich esse einfach andere Sachen und nehme meine Mischung, dann kann ich alles machen was ihr auch macht." },
+          { ...SCENARIOS_TRAINING[2].options[1], text: "Ja." },
+          { ...SCENARIOS_TRAINING[2].options[2], text: "Ja, und es nervt." },
+        ],
+        bossExplain: "Zu erklären, dass es nur eine andere Diät bedeutet, nimmt der Sache das Geheimnisvolle."
+      }
+    ];
+  } else if (variant === "birthday") {
+    return [
+      {
+        ...SCENARIOS_BIRTHDAY[0],
+        captainName: "Kapitänin Luna",
+        context: "Geburtstagskuchen",
+        npcMessages: ["Hey! Warum isst du keinen Geburtstagskuchen?", "Das ist Schoko! Du musst ihn probieren."],
+        options: [
+          { ...SCENARIOS_BIRTHDAY[0].options[0], text: "Ich habe PKU, mein Körper braucht anderes Essen. Ich hab was Eigenes dabei, so kann ich mitfeiern!" },
+          { ...SCENARIOS_BIRTHDAY[0].options[1], text: "Ich hab eine spezielle Diät und meinen eigenen Kuchen dabei." },
+          { ...SCENARIOS_BIRTHDAY[0].options[2], text: "Ich darf das nicht essen. Das ist unfair." },
+        ],
+        bossExplain: "Mit dem eigenen Essen positiv umzugehen zeigt allen, dass du genauso gerne mitfeierst!"
+      },
+      {
+        ...SCENARIOS_BIRTHDAY[1],
+        captainName: "Kapitän Bo",
+        context: "Party-Pizza",
+        npcMessages: ["Wow, darfst du wirklich nie normale Pizza essen?", "Das muss voll schwer sein."],
+        options: [
+          { ...SCENARIOS_BIRTHDAY[1].options[0], text: "Normale Pizza nicht, aber ich habe eiweißarme Pizza. Die schmeckt richtig gut!" },
+          { ...SCENARIOS_BIRTHDAY[1].options[1], text: "Nicht die normale." },
+          { ...SCENARIOS_BIRTHDAY[1].options[2], text: "Nein! Hör auf zu fragen!" },
+        ],
+        bossExplain: "Sich auf die leckeren Alternativen zu konzentrieren, ist immer eine tolle Strategie."
+      },
+      {
+        ...SCENARIOS_BIRTHDAY[2],
+        captainName: "Kapitänin Ela",
+        context: "Eiscreme-Zeit",
+        npcMessages: ["Also Leute! Wer will Eis?", "Ich habe Vanille und Schoko!"],
+        options: [
+          { ...SCENARIOS_BIRTHDAY[2].options[0], text: "Ich hab mein eigenes eiweißarmes Eis dabei, so kann ich auch mitessen!" },
+          { ...SCENARIOS_BIRTHDAY[2].options[1], text: "Ich hab mein eigenes." },
+          { ...SCENARIOS_BIRTHDAY[2].options[2], text: "Ich darf gar nichts davon!" },
+        ],
+        bossExplain: "Zu zeigen, dass du mit deinen eigenen Leckereien dabei bist, ist die beste Lösung für Party-Essen."
+      }
+    ];
+  } else {
+    return [
+      {
+        ...SCENARIOS_SCHOOL_TRIP[0],
+        captainName: "Kapitänin Luna",
+        context: "Schwerer Rucksack",
+        npcMessages: ["Wow, wieso hast du so viel Essen eingepackt?", "Wir machen doch nur einen Tagesausflug!"],
+        options: [
+          { ...SCENARIOS_SCHOOL_TRIP[0].options[0], text: "Ich hab mein eiweißarmes Essen eingepackt, weil ich PKU habe. So habe ich alles, was ich brauche." },
+          { ...SCENARIOS_SCHOOL_TRIP[0].options[1], text: "Ich brauche spezielles Essen." },
+          { ...SCENARIOS_SCHOOL_TRIP[0].options[2], text: "Weil ich muss." },
+        ],
+        bossExplain: "Mit dem eigenen Essen gut vorbereitet zu sein, ist auf Schulausflügen eine Superkraft!"
+      },
+      {
+        ...SCENARIOS_SCHOOL_TRIP[1],
+        captainName: "Kapitän Bo",
+        context: "Anderes Brot",
+        npcMessages: ["Hey, wieso sieht dein Brot anders aus als meins?", "Sieht ungewöhnlich aus."],
+        options: [
+          { ...SCENARIOS_SCHOOL_TRIP[1].options[0], text: "Das ist eiweißarmes Brot. Ich habe PKU, deshalb esse ich anderes Essen, um gesund zu bleiben." },
+          { ...SCENARIOS_SCHOOL_TRIP[1].options[1], text: "Das ist Spezialbrot." },
+          { ...SCENARIOS_SCHOOL_TRIP[1].options[2], text: "Weil deins nicht gut für mich ist." },
+        ],
+        bossExplain: "Einfach zu erklären, dass dein Spezialbrot dich gesund hält, versteht jeder."
+      },
+      {
+        ...SCENARIOS_SCHOOL_TRIP[2],
+        captainName: "Kapitänin Ela",
+        context: "Beim Picknick",
+        npcMessages: ["Hey, ich hab ein Käsebrot übrig.", "Willst du es haben?"],
+        options: [
+          { ...SCENARIOS_SCHOOL_TRIP[2].options[0], text: "Danke fürs Fragen! Wegen meiner PKU darf ich keinen Käse, aber ich habe mein eigenes Mittagessen." },
+          { ...SCENARIOS_SCHOOL_TRIP[2].options[1], text: "Nein danke." },
+          { ...SCENARIOS_SCHOOL_TRIP[2].options[2], text: "Nein, ich darf dein Essen nicht essen." },
+        ],
+        bossExplain: "Sich fürs Angebot zu bedanken und dabei die Diät zu erklären, ist die netteste Art damit umzugehen."
+      }
+    ];
+  }
 };
+
 
 // ─── Typing dots ─────────────────────────────────────────────────────────────
 
@@ -214,10 +486,12 @@ export const CommunicationGame = ({
   onComplete,
   onClose,
   imgKey = 0,
+  variant = "training"
 }: {
   onComplete: () => void;
   onClose: () => void;
   imgKey?: number;
+  variant?: "training" | "birthday" | "school_trip";
 }) => {
   const { lang, t } = useLang();
   const [phase, setPhase]           = useState<"intro" | "game" | "complete">("intro");
@@ -234,12 +508,34 @@ export const CommunicationGame = ({
 
   const localizedScenarios = React.useMemo(() => localizeScenarios(lang), [lang]);
 
+  const isBirthday = variant === "birthday";
+  const isSchoolTrip = variant === "school_trip";
+  const isTraining = variant === "training" || !variant;
+
+  const getNickRole = () => {
+    if (isBirthday) return lang === "de" ? "Unbekannter Gast - kennt PKU noch nicht" : "Stranger - does not know about PKU yet";
+    if (isSchoolTrip) return lang === "de" ? "Anderer Schüler - kennt PKU noch nicht" : "Other student - does not know about PKU yet";
+    return lang === "de" ? "Fremder Spieler - kennt PKU noch nicht" : "Stranger - does not know about PKU yet";
+  };
+
+  const getIntro1 = () => {
+    if (isBirthday) return lang === "de" ? "Jemand auf der Geburtstagsparty stellt unbequeme Fragen zu deinem Essen und der Formel." : "Someone at the birthday party will ask awkward questions about your food and formula.";
+    if (isSchoolTrip) return lang === "de" ? "Jemand auf dem Schulausflug stellt unbequeme Fragen zu deinem Essen und der Formel." : "Someone on the school trip will ask awkward questions about your food and formula.";
+    return lang === "de" ? "Jemand aus einem anderen Team stellt unbequeme Fragen zu deinem Essen, deiner Formel und dem Sporttag." : "Someone from another team will ask awkward questions about your food, formula, and training day.";
+  };
+
+  const getName = () => {
+    if (isBirthday) return lang === "de" ? "Gast" : "Guest";
+    if (isSchoolTrip) return lang === "de" ? "Schüler" : "Student";
+    return t("npc.name");
+  };
+
   const copy = {
     titleA: lang === "de" ? "Sprich wie ein" : "Talk Like a",
     titleB: lang === "de" ? "Kapitän" : "Captain",
-    subtitle: lang === "de" ? "Echte Situationen. Echte Antworten. Wähle, wie du beim Teamtraining ruhig und sicher reagieren würdest." : "Real situations. Real answers. Choose how you would respond during team training.",
-    nickRole: lang === "de" ? "Fremder Spieler - kennt PKU noch nicht" : "Stranger - does not know about PKU yet",
-    intro1: lang === "de" ? "Jemand aus einem anderen Team stellt unbequeme Fragen zu deinem Essen, deiner Formel und dem Sporttag." : "Someone from another team will ask awkward questions about your food, formula, and training day.",
+    subtitle: lang === "de" ? "Echte Situationen. Echte Antworten. Wähle, wie du ruhig und sicher reagieren würdest." : "Real situations. Real answers. Choose how you would respond.",
+    nickRole: getNickRole(),
+    intro1: getIntro1(),
     intro2: lang === "de" ? "Wähle die natürlichste und selbstbewussteste Antwort." : "Pick the most natural and confident answer.",
     start: lang === "de" ? "Kommunikations-Training starten" : "Start Communication Training",
     choose: lang === "de" ? "Wähle deine Antwort" : "Choose your response",
@@ -423,7 +719,7 @@ export const CommunicationGame = ({
                   <div
                     className="relative rounded-full overflow-hidden border border-amber-400/30 w-20 h-20 md:w-32 md:h-32 shadow-[0_0_40px_rgba(251,191,36,0.15)] bg-slate-900/50"
                   >
-                    <GifImg src={npcGif} alt="Nick" imgKey={imgKey}
+                    <GifImg src={npcGif} alt={getName()} imgKey={imgKey}
                       className="w-full h-full object-cover object-center" />
                   </div>
                 </div>

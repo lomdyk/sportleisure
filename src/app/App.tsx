@@ -12,6 +12,9 @@ import { Footer } from "./components/Footer";
 import { TopTabBar } from "./components/TopTabBar";
 import { MissionPrologue } from "./components/MissionPrologue";
 import { CrewGreeting } from "./components/CrewGreeting";
+import { BonusScenariosSelector } from "./components/BonusScenariosSelector";
+import { GroupTransition } from "./components/GroupTransition";
+import { BonusPrologue } from "./components/BonusPrologue";
 import { LanguageProvider, useLang } from "./utils/i18n";
 import { GhostButton } from "./components/ui/GhostButton";
 import { Preloader } from "./components/Preloader";
@@ -33,11 +36,14 @@ import sortingImg from "../imports/image_29.webp";
 import talkImg from "../imports/talk.webp";
 import sportImg from "../imports/sport.webp";
 import personalertImg from "../imports/personalert.webp";
+import bagOpenedImg from "../assets/opened.webp";
+import tischImg from "../imports/tisch.webp";
 
-type Scene = "main" | "backpack" | "communication" | "runner";
+type Scene = "main" | "backpack" | "communication" | "runner" | "bonus_selector" | "bonus_bp_prologue" | "bonus_backpack" | "bonus_comm_prologue" | "bonus_communication" | "bonus_transition";
 
 function AppInner() {
   const [activeScene, setActiveScene] = useState<Scene>("main");
+  const [chosenPath, setChosenPath] = useState<"training" | "birthday" | "school_trip">("training");
   const [gameKey, setGameKey] = useState(0);
   const [completed, setCompleted] = useState({ m1: false, m2: false, m3: false });
   const [scrollTarget, setScrollTarget] = useState<{ id: string; behavior: ScrollBehavior } | null>(null);
@@ -165,20 +171,37 @@ function AppInner() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const handleCloseGame = useCallback((action: "exit" | "continue" = "exit", missionId?: "m1" | "m2" | "m3") => {
+  const handleCloseGame = useCallback((action: "exit" | "continue" = "exit", missionId?: "m1" | "m2" | "m3" | "bonus_bp" | "bonus_comm") => {
     if (action === "continue" && missionId) {
-      setCompleted(prev => ({ ...prev, [missionId]: true }));
-      metricsActions.recordGameComplete(missionId);
-      
-      let target = null;
-      if (missionId === "m1") target = "mission-2";
-      else if (missionId === "m2") target = "mission-3";
-      else if (missionId === "m3") target = "downloads";
-      
-      if (target) {
-        setScrollTarget({ id: target, behavior: "smooth" });
+      if (missionId === "m1") {
+        setCompleted(prev => ({ ...prev, m1: true }));
+        metricsActions.recordGameComplete("m1");
+        setActiveScene("bonus_selector");
+        return;
+      } else if (missionId === "bonus_bp") {
+        setActiveScene("bonus_comm_prologue");
+        return;
+      } else if (missionId === "bonus_comm") {
+        setActiveScene("bonus_transition");
+        return;
+      } else if (missionId === "m2") {
+        setCompleted(prev => ({ ...prev, m2: true }));
+        metricsActions.recordGameComplete("m2");
+        setScrollTarget({ id: "mission-3", behavior: "smooth" });
+      } else if (missionId === "m3") {
+        setCompleted(prev => ({ ...prev, m3: true }));
+        metricsActions.recordGameComplete("m3");
+        setScrollTarget({ id: "downloads", behavior: "smooth" });
       }
     }
+    
+    // Default exit
+    if (action === "exit" && (missionId === "bonus_bp" || missionId === "bonus_comm" || activeScene.startsWith("bonus"))) {
+       setActiveScene("main");
+       setScrollTarget({ id: "mission-2", behavior: "smooth" });
+       return;
+    }
+    
     setActiveScene("main");
   }, [activeScene]);
 
@@ -204,11 +227,71 @@ function AppInner() {
 
   // Full-screen overlay wrapper for games
   const renderGameScene = () => {
-    let GameComponent = null;
-    if (activeScene === "backpack") {
-      GameComponent = <BackpackGame key={gameKey} onComplete={() => {}} onClose={() => handleCloseGame("continue", "m1")} />;
+    let GameComponent: React.ReactNode = null;
+    let showExitButton = true;
+    let exitAction: () => void = () => handleCloseGame("exit");
+
+    if (activeScene === "bonus_selector") {
+      showExitButton = false;
+      GameComponent = (
+        <BonusScenariosSelector onSelect={(path) => {
+          setChosenPath(path);
+          if (path === "training") {
+            setActiveScene("main");
+            setScrollTarget({ id: "mission-2", behavior: "smooth" });
+          } else {
+            setActiveScene("bonus_bp_prologue");
+          }
+        }} />
+      );
+    } else if (activeScene === "bonus_bp_prologue") {
+      const isBirthday = chosenPath === "birthday";
+      showExitButton = false;
+      GameComponent = (
+        <BonusPrologue
+          titleEn={isBirthday ? "What can I eat at the party?" : "Pack for the School Trip!"}
+          titleDe={isBirthday ? "Was kann ich auf der Party essen?" : "Packe für den Schulausflug!"}
+          descEn={isBirthday ? "We are at a birthday party! Help me choose what I can safely eat from the table, and what I should avoid." : "We are going on a school trip! Let's pack some low-protein snacks and enough water for the day."}
+          descDe={isBirthday ? "Wir sind auf einer Geburtstagsparty! Hilf mir auszuwählen, was ich sicher vom Tisch essen kann und was ich vermeiden sollte." : "Wir machen einen Schulausflug! Lass uns eiweißarme Snacks und genug Wasser für den Tag einpacken."}
+          btnEn={isBirthday ? "Choose with Luna" : "Pack with Luna"}
+          btnDe={isBirthday ? "Mit Luna auswählen" : "Mit Luna packen"}
+          image={isBirthday ? tischImg : bagOpenedImg}
+          onStart={() => setActiveScene("bonus_backpack")}
+          onClose={() => handleCloseGame("exit", "bonus_bp")}
+        />
+      );
+    } else if (activeScene === "bonus_comm_prologue") {
+      const isBirthday = chosenPath === "birthday";
+      showExitButton = false;
+      GameComponent = (
+        <BonusPrologue
+          titleEn={isBirthday ? "Party Time!" : "Trip Time!"}
+          titleDe={isBirthday ? "Partyzeit!" : "Ausflugszeit!"}
+          descEn={isBirthday ? "We made it to the party! But someone is asking questions about my food. Let's see how you handle it." : "We are on the school trip! But someone is asking questions about my food. Let's see how you handle it."}
+          descDe={isBirthday ? "Wir sind auf der Party! Aber jemand stellt Fragen zu meinem Essen. Mal sehen, wie du damit umgehst." : "Wir sind auf dem Schulausflug! Aber jemand stellt Fragen zu meinem Essen. Mal sehen, wie du damit umgehst."}
+          btnEn="Start Talking"
+          btnDe="Los geht's"
+          image={talkImg}
+          onStart={() => setActiveScene("bonus_communication")}
+          onClose={() => handleCloseGame("exit", "bonus_comm")}
+        />
+      );
+    } else if (activeScene === "bonus_transition") {
+      showExitButton = false;
+      GameComponent = (
+        <GroupTransition onContinue={() => {
+           setActiveScene("main");
+           setScrollTarget({ id: "mission-2", behavior: "smooth" });
+        }} />
+      );
+    } else if (activeScene === "backpack") {
+      GameComponent = <BackpackGame key={gameKey} onComplete={() => {}} onClose={() => handleCloseGame("continue", "m1")} variant="training" />;
+    } else if (activeScene === "bonus_backpack") {
+      GameComponent = <BackpackGame key={`bbp-${gameKey}`} onComplete={() => {}} onClose={() => handleCloseGame("continue", "bonus_bp")} variant={chosenPath} />;
     } else if (activeScene === "communication") {
-      GameComponent = <CommunicationGame key={`comm-${gameKey}`} imgKey={gameKey} onComplete={() => {}} onClose={() => handleCloseGame("continue", "m2")} />;
+      GameComponent = <CommunicationGame key={`comm-${gameKey}`} imgKey={gameKey} onComplete={() => {}} onClose={() => handleCloseGame("continue", "m2")} variant="training" />;
+    } else if (activeScene === "bonus_communication") {
+      GameComponent = <CommunicationGame key={`bcomm-${gameKey}`} imgKey={gameKey} onComplete={() => {}} onClose={() => handleCloseGame("continue", "bonus_comm")} variant={chosenPath} />;
     } else if (activeScene === "runner") {
       GameComponent = <RunnerGame key={`run-${gameKey}`} onClose={() => handleCloseGame("continue", "m3")} />;
     }
@@ -220,16 +303,18 @@ function AppInner() {
         <StarField />
         
         {/* Exit Button Container */}
-        <div className="fixed top-4 left-4 z-[60] sticky-top-button">
-          <GhostButton
-            tone="cyan"
-            size="sm"
-            icon={<X className="w-4 h-4" />}
-            onClick={() => handleCloseGame("exit")}
-          >
-            {t("btn.exit")}
-          </GhostButton>
-        </div>
+        {showExitButton && (
+          <div className="fixed top-4 left-4 z-[60] sticky-top-button">
+            <GhostButton
+              tone="cyan"
+              size="sm"
+              icon={<X className="w-4 h-4" />}
+              onClick={exitAction}
+            >
+              {t("btn.exit")}
+            </GhostButton>
+          </div>
+        )}
 
         {/* Game Content */}
         <div className="relative z-10 w-full min-h-[100dvh] flex flex-col items-center justify-start pt-14 pb-24">
@@ -364,6 +449,7 @@ function AppInner() {
               onRestart={handleRestart} 
               onShowPostTest={() => setShowPostTest(true)}
               isPostTestCompleted={session.completed}
+              onPlayBonus={() => setActiveScene("bonus_selector")}
             />
           </div>
         </main>
