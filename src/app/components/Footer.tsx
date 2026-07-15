@@ -78,7 +78,7 @@ const FlipCard = ({
         ease: [0.23, 1, 0.32, 1],
       }}
       // Height stays fixed so the card doesn't collapse
-      style={{ perspective: "800px", height: "200px" }}
+      style={{ perspective: "800px", height: "260px" }}
       className="w-full cursor-pointer"
       onClick={() => {
         if (!flipped) metricsActions.recordCardFlip();
@@ -441,41 +441,6 @@ export const Footer = ({
         </motion.div>
       </section>
 
-      {/* ═══ PKU FACTS — Interactive flip cards ══════════════════════════════ */}
-      <section className="relative z-10 py-20 px-6 border-b border-white/[0.05]">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <RevealText>
-              <h3
-                className="text-2xl md:text-4xl tracking-tight text-white mb-3"
-                style={{ fontWeight: 700, }}
-              >
-                {t("footer.energyTitle")}{" "}
-                <span className="text-cyan-400" style={{ textShadow: "0 0 20px rgba(34,211,238,0.5)" }}>
-                  {t("footer.energyWord")}
-                </span>
-              </h3>
-            </RevealText>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="text-slate-400"
-              
-            >
-              {t("footer.tapCard")}
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {PKU_FACTS.map((fact, i) => (
-              <FlipCard key={i} fact={fact} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ═══ CAPTAIN'S LOGS — sticky stacking cards ══════════════════════════ */}
       <section id="logs" className="relative z-10 py-20 border-b border-white/[0.05]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
@@ -524,6 +489,41 @@ export const Footer = ({
               {t("submitLog.openModal")}
             </GhostButton>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ═══ PKU FACTS — Interactive flip cards ══════════════════════════════ */}
+      <section className="relative z-10 py-20 px-6 border-b border-white/[0.05]">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <RevealText>
+              <h3
+                className="text-2xl md:text-4xl tracking-tight text-white mb-3"
+                style={{ fontWeight: 700, }}
+              >
+                {t("footer.energyTitle")}{" "}
+                <span className="text-cyan-400" style={{ textShadow: "0 0 20px rgba(34,211,238,0.5)" }}>
+                  {t("footer.energyWord")}
+                </span>
+              </h3>
+            </RevealText>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-slate-400"
+              
+            >
+              {t("footer.tapCard")}
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {PKU_FACTS.map((fact, i) => (
+              <FlipCard key={i} fact={fact} index={i} />
+            ))}
+          </div>
         </div>
       </section>
 
