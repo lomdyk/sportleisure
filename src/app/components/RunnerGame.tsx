@@ -11,6 +11,7 @@ import runnerGif from "../../imports/ezgif.com-crop.gif";
 import cheeseImg from "../../imports/сыр_ОНА_ДОЛЖНА_202604161846_(1).webp";
 import pizzaImg from "../../imports/Untitled_(1).webp";
 import formulaImg from "../../imports/furmula.webp";
+import appleImg from "../../imports/яблоко_plasticine-style___202604161826-removebg-preview.webp";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const GAME_HEIGHT = 440;
@@ -83,6 +84,7 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const spawnTimerRef = useRef(0);
   const pheLevelRef = useRef(0);
   const distanceRef = useRef(0);
+  const shieldTimerRef = useRef(0);
 
   useEffect(() => { stateRef.current = state; }, [state]);
 
@@ -117,6 +119,7 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     spawnTimerRef.current = 0.9;
     pheLevelRef.current = 0;
     distanceRef.current = 0;
+    shieldTimerRef.current = 0;
     lastTimeRef.current = null;
     if (scoreTextRef.current) scoreTextRef.current.innerText = "00000";
     if (pheTextRef.current) {
@@ -153,11 +156,12 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     const wantPower = Math.random() < 0.22;
     let entity: Entity;
     if (wantPower && !recentClose) {
+      const img = Math.random() < 0.5 ? formulaImg : appleImg;
       entity = {
         id, kind: "powerup",
         x: fieldW + 40,
         y: 110 + Math.random() * 50,
-        w: 54, h: 70, img: formulaImg,
+        w: 54, h: 70, img,
       };
     } else {
       const img = OBSTACLE_IMGS[Math.floor(Math.random() * OBSTACLE_IMGS.length)];
@@ -225,7 +229,11 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
       // phe increase
       let gameOver = false;
-      pheLevelRef.current = Math.min(100, pheLevelRef.current + 3 * dt);
+      if (shieldTimerRef.current > 0) {
+        shieldTimerRef.current -= dt;
+      } else {
+        pheLevelRef.current = Math.min(100, pheLevelRef.current + 3 * dt);
+      }
       if (pheLevelRef.current >= 100) {
         gameOver = true;
         metricsActions.recordMistake('m3');
@@ -244,6 +252,13 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       if (playerRef.current) {
         playerRef.current.style.transform = `translate3d(0, ${-playerYRef.current}px, 0)`;
       }
+      if (playerImgRef.current) {
+        if (shieldTimerRef.current > 0) {
+          playerImgRef.current.style.filter = "drop-shadow(0 0 20px #34d399) drop-shadow(0 0 40px #10b981)";
+        } else {
+          playerImgRef.current.style.filter = "drop-shadow(0 8px 14px rgba(0,0,0,0.6))";
+        }
+      }
 
       // update entities
       const surviving: Entity[] = [];
@@ -257,6 +272,7 @@ export const RunnerGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         if (collides(playerYRef.current, e)) {
           if (e.kind === "powerup") {
             pheLevelRef.current = Math.max(0, pheLevelRef.current - 40);
+            shieldTimerRef.current = 5.0; // 5 seconds of protection
             soundEngine.clickBubble();
             e.node?.remove();
             continue;
